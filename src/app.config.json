@@ -1,0 +1,7 @@
+
+{
+    "title": "SplitCash",
+    "description": "Splitverse",
+    "baseUrl": "https://api.spleet.cash/",
+    "baseUrlCors": ""
+}

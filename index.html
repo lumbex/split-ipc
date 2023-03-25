@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IPC Test</title>
+</head>
+<body>
+<h1>Hi there, testing IPC here</h1>
+<script>
+    window.webkit.messageHandlers.initConnection.postMessage({param1: "stuff", param2: "1000"});
+</script>
+</body>
+</html>

@@ -1,0 +1,59 @@
+{
+  "name": "splitcash",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@braid/vue-formulate": "^2.4.5",
+    "ansi-regex": "^6.0.1",
+    "axios": "^0.21.0",
+    "copy-to-clipboard": "^3.3.1",
+    "date-fns": "^2.29.3",
+    "dotenv-webpack": "^7.1.0",
+    "email-validator": "^2.0.4",
+    "eslint-plugin-prettier": "^3.2.0",
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.4",
+    "vue-router": "^3.4.8",
+    "vue2-transitions": "^0.3.0",
+    "vuex": "^3.6.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.0",
+    "@vue/cli-plugin-eslint": "^4.5.0",
+    "@vue/cli-service": "^4.5.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "autoprefixer": "^9.8.8",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^6.7.2",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-vue": "^6.2.2",
+    "postcss": "^7.0.39",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "parserOptions": {
+      "parser": "babel-eslint"
+    },
+    "rules": {}
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}
