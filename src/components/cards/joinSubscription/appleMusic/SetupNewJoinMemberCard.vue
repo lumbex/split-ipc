@@ -4,8 +4,7 @@
 
     <p class="page-title">Send an Invite</p>
     <p class="page-sub">
-      Invite new member to join your Apple Music Family subscription using their
-      email provided below on iMessage.
+      Send an iMessage invite to the Apple ID below.
     </p>
 
     <div class="space-filler"></div>

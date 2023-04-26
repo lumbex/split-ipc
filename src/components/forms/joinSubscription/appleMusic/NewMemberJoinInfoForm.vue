@@ -14,8 +14,7 @@
     <div class="app-form">
       <p class="page-title">What’s your Apple ID Email?</p>
       <p class="page-sub">
-        The subscription owner will invite you to their Apple Family via this
-        email.
+        An iMessage invite would be sent to you via this email
       </p>
       <form action="#" @submit.prevent="submit">
         <div class="form-group">
