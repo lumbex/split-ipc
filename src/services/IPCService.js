@@ -11,7 +11,7 @@ class IPCService {
       }
     }
     if (window.SPLITVERSE_IPC !== undefined) {
-      window.SPLITVERSE_IPC.postMessage(message)
+      window.SPLITVERSE_IPC.postMessage(JSON.stringify(message))
     }
   }
 }
