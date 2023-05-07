@@ -4,7 +4,7 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
 
 trigger:
-- dev
+- staging
 
 pool:
   vmImage: ubuntu-latest
@@ -25,7 +25,7 @@ steps:
   inputs:
     awsCredentials: 'AWS-S3-Connection' # Connection name for AWS credentials
     regionName: 'us-east-2'
-    bucketName: 'splitverse-ipc-dev.justsplit.cash'
+    bucketName: 'splitverse-ipc-staging.justsplit.cash'
     sourceFolder: '$(Build.ArtifactStagingDirectory)/dist'
     targetFolder: ''
   displayName: 'Upload to S3'
