@@ -22,7 +22,7 @@ steps:
 
 - task: S3Upload@1
   inputs:
-    awsCredentials: 'MyAWSConnection' # Connection name for AWS credentials
+    awsCredentials: 'AWS-S3-Connection' # Connection name for AWS credentials
     regionName: 'us-west-2'
     bucketName: 'splitverse-ipc-dev.justsplit.cash'
     sourceFolder: '$(Build.ArtifactStagingDirectory)/dist'
