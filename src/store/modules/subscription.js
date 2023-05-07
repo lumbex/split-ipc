@@ -232,6 +232,14 @@ export const actions = {
     StoreUtils.dispatch("ipc/postMessage", message);
   },
 
+  completeDefaultNewMemberJoin: ({}) => {
+    const message = {
+      messageAction: "new_member_join_info_collected",
+      messageBody: JSON.stringify({ categoryTag: StoreUtils.rootGetters("service/getCurrentServiceTag"), joinInfo: {} })
+    };
+    StoreUtils.dispatch("ipc/postMessage", message);
+  },
+
   createSpotifySubscription: ({}, createBody) => {
     const payload = {
       activeMembers: createBody.activeMembers - 1,

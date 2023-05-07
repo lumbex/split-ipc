@@ -29,7 +29,7 @@
         </div>
         <div v-if="currentSubscriptionServiceData.join_type === 'member_get_access'">
             <SubscriptionJoinFeaturesCard v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
-            <NewMemberJoinEmailForm v-if="formStage === 1" :service-tag="serviceTag" />
+<!--            <NewMemberJoinEmailForm v-if="formStage === 1" :service-tag="serviceTag" />-->
         </div>
 
       </div>
