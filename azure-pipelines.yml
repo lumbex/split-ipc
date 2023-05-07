@@ -18,6 +18,7 @@ steps:
 - script: |
     npm install
     npm run build
+    cp -r dist $(Build.ArtifactStagingDirectory)/dist
   displayName: 'npm install and build'
 
 - task: S3Upload@1
