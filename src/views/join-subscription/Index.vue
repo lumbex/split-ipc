@@ -4,7 +4,7 @@
     <div v-else class="app-page full-page">
       <ComponentLoader v-if="isLoading" />
       <div v-else class="create-subscription">
-        <div v-if="serviceTag === 'apple_music'">
+        <div v-if="serviceTag === 'apple_music'|| serviceTag === 'youtube_premium'">
           <SelectRegionForm v-if="formStage === 0" />
           <NewMemberJoinInfoForm
             v-if="formStage === 1"
