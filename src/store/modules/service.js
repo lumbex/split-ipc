@@ -55,7 +55,6 @@ export const actions = {
     };
 
     const successAction = responseData => {
-      console.log("SET_CURRENT_SUBSCRIPTION_DATA", responseData)
       StoreUtils.commit(
         "service/SET_CURRENT_SUBSCRIPTION_SERVICE_DATA",
         responseData.category
