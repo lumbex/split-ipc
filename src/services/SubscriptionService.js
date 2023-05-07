@@ -1,6 +1,26 @@
 import BaseService from "./BaseService";
 
 class SubscriptionService extends BaseService {
+  fetchSubscriptionServiceDataByTag(
+    payload,
+    successAction,
+    loaderType,
+    errorType,
+    showSuccessMessage,
+    successCondition,
+    getErrorMessage
+  ) {
+    return this.makePostRequest(
+      "/getAllSubscriptionCategoryByTag",
+      payload,
+      successAction,
+      loaderType,
+      errorType,
+      showSuccessMessage,
+      successCondition,
+      getErrorMessage
+    );
+  }
   fetchQuickAccessInfo(
     payload,
     successAction,

@@ -2,18 +2,36 @@
   <BaseLayout>
     <PreAuthCard v-if="!userAuthenticated" />
     <div v-else class="app-page full-page">
-      <ComponentLoader v-if="isLoading" />
+      <ComponentLoader v-if="componentLoaderTable" />
       <div v-else class="create-subscription">
-        <div v-if="serviceTag === 'apple_music'|| serviceTag === 'youtube_premium'">
-          <SelectRegionForm v-if="formStage === 0" />
-          <NewMemberJoinInfoForm
-            v-if="formStage === 1"
-            :service-tag="serviceTag"
-          />
+<!--          <p>availableServices: {{availableServices[0]}}</p>-->
+<!--          <p>currentSubscriptionServiceData: {{currentSubscriptionServiceData}}</p> <br />-->
+<!--          <p>userAuthenticated: {{userAuthenticated}}</p> <br />-->
+<!--          <p>serviceTag: {{serviceTag}}</p> <br />-->
+
+        <div v-if="currentSubscriptionServiceData.join_type === 'host_invite'">
+            <div v-if="serviceTag === 'apple_music'">
+                <SelectRegionForm v-if="formStage === 0" />
+                <NewMemberJoinInfoForm v-if="formStage === 1" :service-tag="serviceTag" />
+            </div>
+            <div v-else>
+                <NewMemberJoinEmailForm v-if="formStage === 0" :service-tag="serviceTag" />
+            </div>
         </div>
-        <div v-if="serviceTag === 'spotify'">
-          <MemberTermsConfirmationCard />
+
+        <div v-if="currentSubscriptionServiceData.join_type === 'instant_access'">
+            <div v-if="serviceTag === 'spotify'">
+                <MemberTermsConfirmationCard />
+            </div>
+            <div v-else>
+                <SubscriptionJoinFeaturesCard :current-subscription-service-data="currentSubscriptionServiceData" />
+            </div>
         </div>
+        <div v-if="currentSubscriptionServiceData.join_type === 'member_get_access'">
+            <SubscriptionJoinFeaturesCard v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <NewMemberJoinEmailForm v-if="formStage === 1" :service-tag="serviceTag" />
+        </div>
+
       </div>
     </div>
   </BaseLayout>
@@ -22,12 +40,22 @@
 
 <script>
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
+import JsonParserUtils from "@/utils/JsonParserUtils";
 import ComponentLoader from "@/components/loaders/ComponentLoader";
 import BaseLayout from "@/layout/BaseLayout";
-import NewMemberJoinInfoForm from "@/components/forms/joinSubscription/appleMusic/NewMemberJoinInfoForm";
+
 import PreAuthCard from "@/components/cards/PreAuthCard";
+
+
 import SelectRegionForm from "../../components/forms/joinSubscription/appleMusic/SelectRegionForm.vue";
+
+import NewMemberJoinInfoForm from "@/components/forms/joinSubscription/appleMusic/NewMemberJoinInfoForm";
+
 import MemberTermsConfirmationCard from "../../components/cards/joinSubscription/spotify/MemberTermsConfirmationCard.vue";
+
+import NewMemberJoinEmailForm from "../../components/forms/joinSubscription/default/NewMemberJoinEmailForm.vue";
+import SubscriptionJoinFeaturesCard from "@/components/cards/joinSubscription/default/SubscriptionJoinFeaturesCard.vue";
+
 
 export default {
   name: "JoinSubscription",
@@ -38,14 +66,19 @@ export default {
     };
   },
   components: {
+      SubscriptionJoinFeaturesCard,
     PreAuthCard,
     NewMemberJoinInfoForm,
     BaseLayout,
     ComponentLoader,
     SelectRegionForm,
-    MemberTermsConfirmationCard
+    MemberTermsConfirmationCard,
+    NewMemberJoinEmailForm
   },
   computed: {
+    componentLoaderTable() {
+        return StoreUtils.rootGetters("loader/getLoader", "table");
+    },
     userAuthenticated() {
       return StoreUtils.rootGetters("user/getUserAuthenticated");
     },
@@ -57,6 +90,13 @@ export default {
     },
     currentServiceTag() {
       return StoreUtils.rootGetters("service/getCurrentServiceTag");
+    },
+    currentSubscriptionServiceData() {
+      return StoreUtils.rootGetters(
+          "service/getCurrentSubscriptionServiceData");
+    },
+    currentSubscriptionServiceDataNotFetched() {
+      return JsonParserUtils.isObjectEmpty(this.currentSubscriptionServiceData)
     },
     availableServices() {
       return StoreUtils.rootGetters("service/getAvailableServices");
@@ -76,6 +116,12 @@ export default {
   },
   created() {
     StoreUtils.commit("service/SET_CURRENT_SERVICE_TAG", this.serviceTag);
+    // StoreUtils.dispatch("service/fetchSubscriptionServiceDataByTag", this.serviceTag);
+  },
+  updated() {
+    if (this.userAuthenticated && this.currentSubscriptionServiceDataNotFetched){
+        StoreUtils.dispatch("service/fetchSubscriptionServiceDataByTag", this.serviceTag);
+    }
   }
 };
 </script>
