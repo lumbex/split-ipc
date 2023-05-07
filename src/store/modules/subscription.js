@@ -171,7 +171,6 @@ export const mutations = {
     state.quickAccessInfo = payload;
   },
   SET_CURRENT_SUBSCRIPTION_TERMS(state, payload) {
-    console.log("SET_CURRENT_SUBSCRIPTION_TERMS", payload);
     state.currentSubscriptionTerms = payload;
   }
 };
@@ -191,7 +190,7 @@ export const actions = {
         .subRef
     };
 
-    // console.log("fetchQuickAccessInfo", payload);
+
 
     const successAction = responseData => {
       StoreUtils.commit(
@@ -249,7 +248,7 @@ export const actions = {
       }
     };
 
-    // console.log("create sub payload", payload);
+
 
     const successAction = responseData => {
       const message = {
@@ -321,7 +320,6 @@ export const actions = {
   fetchSuggestedDollarRate: ({}, createBody) => {
     const payload = {};
 
-    // console.log("create sub payload", payload)
 
     const successAction = responseData => {
       StoreUtils.commit(
@@ -358,7 +356,7 @@ export const actions = {
       }
     };
 
-    // console.log("create sub payload", payload)
+  
 
     const successAction = responseData => {
       const message = {
@@ -401,8 +399,6 @@ export const actions = {
         ).toFixed(2)
       }
     };
-
-    console.log("create sub payload", payload);
     const successAction = () => {
       StoreUtils.commit("form/SET_FORM_STAGE_TO", 5);
     };
@@ -427,7 +423,7 @@ export const actions = {
       }
     };
 
-    // console.log("create sub payload", payload)
+
 
     const successAction = () => {
       StoreUtils.commit("form/SET_FORM_STAGE_TO", 5);
