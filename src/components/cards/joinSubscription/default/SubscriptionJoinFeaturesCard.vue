@@ -1,6 +1,6 @@
 <template>
   <div class="app-card-full-page">
-      <img :src="currentSubscriptionServiceData.icon_url"  class="mt-10 mb-4" />
+      <img :src="currentSubscriptionServiceData.icon_url" alt="Subscription Service Logo"  class="mt-10 mb-4" />
 
 
     <p class="page-title">{{currentSubscriptionServiceData.name}}</p>
