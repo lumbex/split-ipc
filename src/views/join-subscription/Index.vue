@@ -11,11 +11,19 @@
 
         <div v-if="currentSubscriptionServiceData.join_type === 'host_invite'">
             <div v-if="serviceTag === 'apple_music'">
-                <SelectRegionForm v-if="formStage === 0" />
-                <NewMemberJoinInfoForm v-if="formStage === 1" :service-tag="serviceTag" />
+                <SubscriptionJoinFeaturesCard
+                        v-if="formStage === 0"
+                        :current-subscription-service-data="currentSubscriptionServiceData"
+                />
+                <SelectRegionForm v-if="formStage === 1" />
+                <NewMemberJoinInfoForm v-if="formStage === 2" :service-tag="serviceTag" />
             </div>
             <div v-else>
-                <NewMemberJoinEmailForm v-if="formStage === 0" :service-tag="serviceTag" />
+                <SubscriptionJoinFeaturesCard
+                        v-if="formStage === 0"
+                        :current-subscription-service-data="currentSubscriptionServiceData"
+                />
+                <NewMemberJoinEmailForm v-if="formStage === 1" :service-tag="serviceTag" />
             </div>
         </div>
 
@@ -31,7 +39,6 @@
             <SubscriptionJoinFeaturesCard v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
 <!--            <NewMemberJoinEmailForm v-if="formStage === 1" :service-tag="serviceTag" />-->
         </div>
-
       </div>
     </div>
   </BaseLayout>

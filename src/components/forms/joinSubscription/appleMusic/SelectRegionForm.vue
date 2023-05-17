@@ -108,7 +108,7 @@ export default {
         StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
       } else {
         NotificationUtils.addNotificationSlide(
-          `Only users in ${this.currentSubscriptionRegion} region can use this subsription. Besure to change your region before joining this sub.`,
+          `Only users in ${this.currentSubscriptionRegion} region can use this subscription. Be sure to change your region before joining this sub.`,
           NotificationUtils.type.WARNING
         );
       }

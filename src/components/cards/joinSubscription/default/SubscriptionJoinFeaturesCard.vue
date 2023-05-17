@@ -1,12 +1,25 @@
 <template>
-  <div class="app-card-full-page">
-      <img :src="currentSubscriptionServiceData.icon_url" alt="Subscription Service Logo"  class="mt-10 mb-4" />
+  <div class="app-card-full-page sm">
+      <img :src="currentSubscriptionServiceData.icon_url" alt="Subscription Service Logo"  class="sub-icon mt-10 mb-4" />
 
 
-    <p class="page-title">{{currentSubscriptionServiceData.name}}</p>
-    <p class="page-sub">
-      Here are the benefits:
+    <p class="page-title-sm">Shared account</p>
+    <p class="page-sub-sm">
+        You’ll be invited to join a shared plan once your  subscription payment is confirmed.
     </p>
+<!--      <p>description => {{ featureDescriptions }}</p>-->
+    <div class="sub-features-hold">
+        <h4 class="ft-title">What you enjoy</h4>
+        <div class="sub-features">
+            <ul>
+                <li v-for="(feature, i) in featureDescriptions" :key="i">
+                    <div class="icon"><img :src="feature.icon" alt="feature"></div>
+                    <div class="point">{{feature.title}}</div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
 
     <div class="space-filler"></div>
 
@@ -15,7 +28,7 @@
         @click="okGotIt"
         class="app-btn light-btn"
       >
-        Ok, Got It
+        Sweet
       </button>
     </div>
   </div>
@@ -27,7 +40,7 @@ import AppUtils from "@/utils/baseUtils/AppUtils";
 
 export default {
   name: "SubscriptionJoinFeaturesCard",
-    components: {},
+  components: {},
   props: {
       currentSubscriptionServiceData: {
           type: Object,
@@ -44,6 +57,9 @@ export default {
     componentLoader() {
       return StoreUtils.rootGetters("loader/getLoader", "component");
     },
+    featureDescriptions() {
+      return JSON.parse(this.currentSubscriptionServiceData.description)
+    },
   },
   created() {
     StoreUtils.commit("loader/SET_COMPONENT_LOADER", true);
@@ -57,11 +73,9 @@ export default {
         if (this.currentSubscriptionServiceData.join_type === 'instant_access'){
             StoreUtils.dispatch("subscription/completeDefaultNewMemberJoin");
         }
-
         if (this.currentSubscriptionServiceData.join_type === 'member_get_access'){
             StoreUtils.dispatch("subscription/completeDefaultNewMemberJoin");
         }
-
         if (this.currentSubscriptionServiceData.join_type === 'host_invite'){
             StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
         }
@@ -70,4 +84,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>
