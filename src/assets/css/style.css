@@ -33,6 +33,7 @@
     text-align: left;
     margin-top: 20px;
     margin-bottom: 20px;
+    min-height: 45%;
 }
 .ft-title{
     font-style: normal;
