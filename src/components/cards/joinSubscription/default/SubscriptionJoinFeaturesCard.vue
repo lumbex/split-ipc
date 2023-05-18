@@ -1,12 +1,15 @@
 <template>
   <div class="app-card-full-page sm">
-      <img :src="currentSubscriptionServiceData.icon_url" alt="Subscription Service Logo"  class="sub-icon mt-10 mb-4" />
+      <div>
+          <img :src="currentSubscriptionServiceData.icon_url" alt="Subscription Service Logo"  class="sub-icon mt-10 mb-4" />
 
 
-    <p class="page-title-sm">Shared account</p>
-    <p class="page-sub-sm">
-        You’ll be invited to join a shared plan once your  subscription payment is confirmed.
-    </p>
+          <p class="page-title-sm">Shared account</p>
+          <p class="page-sub-sm">
+              You’ll be invited to join a shared plan once your  subscription payment is confirmed.
+          </p>
+      </div>
+
 <!--      <p>description => {{ featureDescriptions }}</p>-->
     <div class="sub-features-hold">
         <h4 class="ft-title">What you enjoy</h4>
