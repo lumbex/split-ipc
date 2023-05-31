@@ -12,14 +12,14 @@
     </div>
 
     <div class="app-form">
-      <p class="page-title">How many people are you currently sharing with?</p>
+      <p class="page-title text-3xl text-white mb-2">How many people are you currently sharing with?</p>
       <p class="page-sub">
         How many people are currently sharing your Apple Music Family plan?
         Select one option.
       </p>
       <div class="grid-options">
         <div
-          v-for="n in serviceObject.max_capacity"
+          v-for="n in currentSubscriptionServiceData.max_capacity"
           :key="n"
           @click="selectOption(n)"
           class="option"
@@ -62,17 +62,17 @@ import StoreUtils from "@/utils/baseUtils/StoreUtils";
 export default {
   name: "ActiveMembersForm",
   components: { BackIcon },
-  props: ["serviceTag"],
+  props: {
+      currentSubscriptionServiceData: {
+          type: Object,
+          required: true
+      }
+  },
   data() {
     return { activeMembers: "", checked: false };
   },
   computed: {
-    serviceObject() {
-      return StoreUtils.rootGetters(
-        "service/getServiceObject",
-        this.serviceTag
-      )[0];
-    }
+
   },
   methods: {
     goBack() {

@@ -98,7 +98,12 @@ const isValidHttpUrl = string => {
 export default {
   name: "SpotifyAddLinkForm",
   components: { BackIcon, PadLockIcon, ArrowUpSmIcon },
-  props: ["serviceTag"],
+    props: {
+        currentSubscriptionServiceData: {
+            type: Object,
+            required: true
+        }
+    },
   data() {
     return {
       checked: false,
@@ -107,12 +112,6 @@ export default {
     };
   },
   computed: {
-    serviceObject() {
-      return StoreUtils.rootGetters(
-        "service/getServiceObject",
-        this.serviceTag
-      )[0];
-    },
     formBody() {
       return StoreUtils.rootGetters("form/getFormBody");
     }
@@ -139,7 +138,7 @@ export default {
         return true;
       } else {
         this.inputError =
-          "Invalid invite link. Make sure you're submiting the right link from your Spotify account.";
+          "Invalid invite link. Make sure you're submitting the right link from your Spotify account.";
         return false;
       }
       // return !!emailAddress.match(regex);
@@ -152,7 +151,7 @@ export default {
         StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
       } else {
         this.inputError =
-          "Invalid invite link. Make sure you're submiting the right link from your Spotify account.";
+          "Invalid invite link. Make sure you're submitting the right link from your Spotify account.";
       }
     }
   }

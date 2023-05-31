@@ -17,7 +17,7 @@
             <ul>
                 <li v-for="(feature, i) in featureDescriptions" :key="i">
                     <div class="icon"><img :src="feature.icon" alt="feature"></div>
-                    <div class="point">{{feature.title}}</div>
+                    <div class="point">{{ feature.title }}</div>
                 </li>
             </ul>
 

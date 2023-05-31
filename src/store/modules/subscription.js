@@ -38,30 +38,30 @@ export const state = {
       value: "NG",
       title: "Nigeria Store",
       iconUrl:
-        "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677328644/splitcash/images/Nigeria_ongxng.png",
+        "https://res.cloudinary.com/cloud-web-assets/image/upload/v1685444322/splitcash/images/ngn-flag_cvbnwo.png",
       recommended: false
     },
     {
       value: "US",
       title: "US Store",
       iconUrl:
-        "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677328619/splitcash/images/USA_kngjjf.png",
-      recommended: false
-    },
-    {
-      value: "UK",
-      title: "UK Store",
-      iconUrl:
-        "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677328619/splitcash/images/UK_gyfw33.png",
-      recommended: false
-    },
-    {
-      value: "CA",
-      title: "Canada Store",
-      iconUrl:
-        "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677328619/splitcash/images/Canada_wfkkjz.png",
+        "https://res.cloudinary.com/cloud-web-assets/image/upload/v1685444717/splitcash/images/usd-flag_bnqciv.png",
       recommended: false
     }
+    // {
+    //   value: "UK",
+    //   title: "UK Store",
+    //   iconUrl:
+    //     "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677328619/splitcash/images/UK_gyfw33.png",
+    //   recommended: false
+    // },
+    // {
+    //   value: "CA",
+    //   title: "Canada Store",
+    //   iconUrl:
+    //     "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677328619/splitcash/images/Canada_wfkkjz.png",
+    //   recommended: false
+    // }
   ],
   availableAppleMusicPaymentMethods: [
     // {
@@ -77,7 +77,7 @@ export const state = {
       value: "ng-card",
       title: "Naira Debit Card",
       sub:
-        "Select this if you have a Naira card you use to pay for this subscription.",
+        "I have a Naira card i pay with.",
       iconUrl:
         "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677340194/splitcash/images/Naira_Card_bmqplj.png",
       recommended: false
@@ -86,7 +86,7 @@ export const state = {
       value: "us-card",
       title: "Dollar Debit Card",
       sub:
-        "Select if you have some other dollar card you use to pay for this subscription.",
+        "I have a dollar card i pay with.",
       iconUrl:
         "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677340195/splitcash/images/other_dollar_cards_hamtph.png",
       recommended: false
@@ -131,7 +131,7 @@ export const getters = {
   getNewMemberJoinInfo: state => {
     return state.newMemberJoinInfo;
   },
-  getSugestedDollarToNairaRate: state => {
+  getSuggestedDollarToNairaRate: state => {
     return state.suggestedDollarToNairaRate;
   },
   getCurrentSubscriptionRegion: state => {
@@ -160,6 +160,9 @@ export const mutations = {
   },
   SET_NEW_SUGGESTED_DOLLAR_TO_NAIRA_RATE(state, payload) {
     state.suggestedDollarToNairaRate = payload;
+  },
+  SET_USED_DOLLAR_TO_NAIRA_RATE(state, payload) {
+    state.suggestedDollarToNairaRate.rate = payload;
   },
   SET_CURRENT_SUBSCRIPTION_REGION(state, payload) {
     state.currentSubscriptionRegion = payload;
@@ -330,10 +333,14 @@ export const actions = {
 
 
     const successAction = responseData => {
+      const rate = responseData.rate;
       StoreUtils.commit(
         "subscription/SET_NEW_SUGGESTED_DOLLAR_TO_NAIRA_RATE",
-        responseData.rate
+        rate
       );
+      console.log("rate =>", rate)
+
+      return rate
     };
 
     return subscriptionService.fetchSuggestedDollarToNairaRate(
@@ -346,6 +353,8 @@ export const actions = {
   },
 
   createAppleMusicSubscription: ({}, createBody) => {
+    console.log("createAppleMusicSubscription =>", createBody)
+
     const payload = {
       activeMembers: createBody.activeMembers - 1,
       paymentPlan: createBody.plan,
@@ -358,12 +367,11 @@ export const actions = {
         paymentMethod: createBody.paymentMethod,
         dollarPrice: (
           parseFloat(createBody.planPrice) /
-          StoreUtils.rootGetters("subscription/getSugestedDollarToNairaRate")
+          StoreUtils.rootGetters("subscription/getSuggestedDollarToNairaRate")
             .rate
         ).toFixed(2)
       }
     };
-
   
 
     const successAction = responseData => {
@@ -380,6 +388,46 @@ export const actions = {
       LoaderUtils.types.COMPONENT,
       null,
       false
+    );
+  },
+
+  createSubscriptionDefault: ({}, createBody) => {
+
+    console.log("createSubscriptionDefault =>", createBody)
+
+    const payload = {
+      activeMembers: createBody.activeMembers - 1,
+      paymentPlan: createBody.plan,
+      nextBillingDate: createBody.billingDate.slice(0, -2),
+      categoryID: createBody.id,
+      subscriptionPlan: createBody.name,
+      planPrice: createBody.planPrice,
+      extraData: {
+        invitationLink: createBody.invitationLink,
+        region: createBody.region,
+        paymentMethod: createBody.paymentMethod,
+        dollarPrice: (
+            parseFloat(createBody.planPrice) /
+            StoreUtils.rootGetters("subscription/getSuggestedDollarToNairaRate")
+                .rate
+        ).toFixed(2)
+      }
+    };
+
+    const successAction = responseData => {
+      const message = {
+        messageAction: "subscription_created",
+        messageBody: JSON.stringify(responseData.usersSubscriptions)
+      };
+      StoreUtils.dispatch("ipc/postMessage", message);
+    };
+
+    return subscriptionService.createSubscription(
+        payload,
+        successAction,
+        LoaderUtils.types.COMPONENT,
+        null,
+        false
     );
   },
 
@@ -402,7 +450,7 @@ export const actions = {
         paymentMethod: formBody.paymentMethod,
         dollarPrice: (
           parseFloat(formBody.planPrice) /
-          StoreUtils.rootGetters("subscription/getSugestedDollarToNairaRate")
+          StoreUtils.rootGetters("subscription/getSuggestedDollarToNairaRate")
             .rate
         ).toFixed(2)
       }
@@ -430,8 +478,6 @@ export const actions = {
         paymentMethod: "ng-card"
       }
     };
-
-
 
     const successAction = () => {
       StoreUtils.commit("form/SET_FORM_STAGE_TO", 5);

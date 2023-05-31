@@ -483,6 +483,7 @@ a.center-link:hover {
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
+    min-height: 40vh;
 }
 .block-options .option{
     width: 100%;
@@ -500,7 +501,7 @@ a.center-link:hover {
     cursor: pointer;
 }
 .block-options .option.big{
-    height: 90px !important;
+    height: 80px !important;
     padding: 10px .8rem !important;
 }
 
@@ -615,7 +616,16 @@ a.center-link:hover {
     text-align: left;
     margin-top: 20px;
 }
+.app-form .form-group.alt{
+    padding: 10px 0 0;
+    border-radius: 10px;
+    text-align: left;
+    margin-top: 20px;
+}
 
+.app-form .form-group .input-wrap-hold{
+    width: 90% !important;
+}
 .app-form .form-group label{
     color: #9F9FA5;
     font-size: 12px;
@@ -630,6 +640,11 @@ a.center-link:hover {
     color: #e1e1e1;
     font-size: 16px;
     box-shadow: 0 0 0 transparent!important;
+}
+
+.app-form .form-group input.alt{
+    padding: 0 0 2px;
+    width: 100%;
 }
 
 .app-form .form-group select:focus,
@@ -656,6 +671,10 @@ a.center-link:hover {
     color: rgba(235, 235, 245, 0.3);
 }
 .app-form a:hover{}
+.app-form .input-group-base{
+    background-color: #474747;
+    border-radius: 0 0 10px 10px;
+}
 .app-form .name-enquiry-result{
     font-style: normal;
     font-weight: 700;
@@ -685,6 +704,65 @@ a.center-link:hover {
     display: block
 }
 
+.rate-used{
+    margin-top: 40px;
+    min-height: 30vh;
+    display: block;
+}
+.rate-used h4{
+    color: white;
+    margin-bottom: 8px;
+    font-size: 12px;
+    line-height: 16px;
+}
+.rate-holder{
+    display: flex;
+    flex-direction: row;
+    justify-content: start;
+    background: #2C2C2E;
+    height: 44px;
+    border-radius: 10px;
+}
+.rate-holder .rate-value{
+    border-right: 1px solid rgba(255, 255, 255, 0.3);
+    width: 20%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.rate-holder .rate-input{
+    width: 65%;
+}
+.rate-holder .rate-input input{
+    background-color: transparent;
+    padding: 10px 15px;
+    border: 0 solid transparent;
+    border-radius: 4px;
+    color: rgba(235, 235, 245, 0.6);
+    font-size: 16px;
+    box-shadow: 0 0 0 transparent!important;
+    width: 100%;
+}
+.rate-holder .rate-input input:focus{
+    outline: none
+}
+.rate-holder .rate-control{
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.rate-holder .rate-control span{
+    color: #FF8585;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    /* identical to box height, or 133% */
+    text-align: right;
+    display: block;
+    cursor: pointer;
+}
 
 /*AppForm END*/
 
@@ -707,7 +785,7 @@ a.center-link:hover {
     align-items: center;
 }
 .app-card-full-page.sm{
-    padding: 1.5rem 0 0;
+    padding: 0 2%;
 }
 .app-card-full-page .space-filler{
     flex-grow: 1;

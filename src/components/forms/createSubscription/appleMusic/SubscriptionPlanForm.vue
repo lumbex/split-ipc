@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="app-form">
-      <p class="page-title">How frequently should members be charged?</p>
+      <p class="page-title text-3xl text-white mb-2">How frequently should members be charged?</p>
       <p class="page-sub">
         This is can be a one time charge, <span>yearly</span>, or every
         <span>6 months</span>. Select a plan.
@@ -50,6 +50,12 @@ import BackIcon from "@/components/icons/BackIcon";
 export default {
   name: "SubscriptionPlanForm",
   components: { BackIcon },
+    props: {
+        currentSubscriptionServiceData: {
+            type: Object,
+            required: true
+        }
+    },
   data() {
     return { selectedPlan: "" };
   },

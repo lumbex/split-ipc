@@ -3,18 +3,18 @@
     <div class="top-nav">
       <div class="go-back">
         <a @click="goBack"
-          ><span class="icon"><BackIcon /></span>Members</a
+          ><span class="icon"><BackIcon /></span>Back</a
         >
       </div>
       <div class="up-next">
-        <p>Up Next: <span>Billing Date</span></p>
+<!--        <p>Up Next: <span>Billing Date</span></p>-->
       </div>
     </div>
     <div class="app-form">
       <p class="page-title">How frequently should members be charged?</p>
       <p class="page-sub">
         This is can be a one time charge, <span>yearly</span>, or every
-        <span>3 months</span>. Select a plan.
+        <span>6 months</span>. Select a plan.
       </p>
       <div class="block-options">
         <div
@@ -48,7 +48,7 @@ import StoreUtils from "@/utils/baseUtils/StoreUtils";
 import BackIcon from "@/components/icons/BackIcon";
 
 export default {
-  name: "SpotifySubscriptionPlanForm",
+  name: "DefaultSubscriptionPlanForm",
   components: { BackIcon },
     props: {
         currentSubscriptionServiceData: {

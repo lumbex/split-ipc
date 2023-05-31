@@ -1,5 +1,6 @@
 <template>
   <ul class="breakdown-data-list divide-y divide-slate-100">
+<!--      <li>createSubscriptionBody ==> {{ createSubscriptionBody }}</li>-->
     <li>
       <article
         class="breakdown-data-card flex items-start space-x-2 p-2 text-white"
@@ -14,7 +15,7 @@
               <dt class="text-sky-500">
                 <span class="sr-only">Value</span>
                 <span class="value-span bg-[#575244] rounded-md px-4">
-                  {{ serviceObject.name }}
+                  {{ currentSubscriptionServiceData.name }}
                 </span>
               </dt>
             </div>
@@ -148,7 +149,7 @@
                 <span class="sr-only">Value</span>
                 <span class="value-span bg-[#575244] rounded-md px-4">
                   ({{ createSubscriptionBody.activeMembers }}/{{
-                    serviceObject.max_capacity
+                    currentSubscriptionServiceData.max_capacity
                   }})
                 </span>
               </dt>
@@ -211,13 +212,20 @@ import StoreUtils from "@/utils/baseUtils/StoreUtils";
 
 export default {
   name: "ReviewBreakdownList",
-  props: ["serviceTag"],
+  // props: ["serviceTag", ],
+    props: {
+        currentSubscriptionServiceData: {
+            type: Object,
+            required: true
+        },
+        serviceTag: {
+            type: String,
+            defaults: "apple_music"
+        }
+    },
   computed: {
-    serviceObject() {
-      return StoreUtils.rootGetters(
-        "service/getServiceObject",
-        this.serviceTag
-      )[0];
+    formBody() {
+        return StoreUtils.rootGetters("form/getFormBody");
     },
     createSubscriptionBody() {
       return StoreUtils.rootGetters("subscription/getCreateSubscriptionBody");

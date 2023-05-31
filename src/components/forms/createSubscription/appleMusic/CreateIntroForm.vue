@@ -2,14 +2,14 @@
   <div class="app-form-wrapper">
     <div class="app-form">
       <img
-        class="w-36 mt-0 mb-4 mx-auto"
+        class="w-24 mt-0 mb-6 mx-auto"
         src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1677350645/splitcash/images/Add_apps_perspective_matte_2_trbuyx.png"
         alt="Add your subscription to the Splitverse"
       />
-      <p class="page-title text-center">Be the Boss of your Subscription</p>
-      <p class="-text-base text-center text-grey-500">
+      <p class="page-title-sm text-center">Be the Boss of your Subscription</p>
+      <p class="text-base text-center text-grey-500 mb-8">
         You’re about to list your
-        <span class="text-white">Apple Music Family</span> subscription in the
+        <span class="text-white">{{ currentSubscriptionServiceData.name }}</span> subscription in the
         Splitverse.
       </p>
       <div class="block-options">
@@ -20,22 +20,10 @@
             alt="connect and share"
           />
           <div class="text-base text-white">
-            Connect and share the cost of this subscription with family &
+            Connect and share the cost of your subscription with family &
             friends.
           </div>
         </div>
-
-        <div class="option intro flex flex-row gap-2 p-2 h-10">
-          <img
-            class="h-auto w-10 "
-            src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1677350644/splitcash/images/Control_werhf4.png"
-            alt="connect and share"
-          />
-          <div class="text-base text-white">
-            Manage access to your subscription. You are in control.
-          </div>
-        </div>
-
         <div class="option intro flex flex-row gap-2 p-2 h-10">
           <img
             class="h-auto w-10 "
@@ -43,8 +31,18 @@
             alt="connect and share"
           />
           <div class="text-base text-white">
-            Everyone’s contributions is credited to your card monthly.
+            Everyone’s contributions is credited to you monthly.
           </div>
+        </div>
+        <div class="option intro flex flex-row gap-2 p-2 h-10">
+            <img
+                    class="h-auto w-10 "
+                    src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1677350644/splitcash/images/Control_werhf4.png"
+                    alt="connect and share"
+            />
+            <div class="text-base text-white">
+                Manage access to your subscription - you're in control.
+            </div>
         </div>
       </div>
       <div class="space-filler"></div>
@@ -64,6 +62,12 @@ import StoreUtils from "@/utils/baseUtils/StoreUtils";
 export default {
   name: "CreateIntroForm",
   components: {},
+    props: {
+        currentSubscriptionServiceData: {
+            type: Object,
+            required: true
+        }
+    },
   data() {
     return { selectedOption: "" };
   },

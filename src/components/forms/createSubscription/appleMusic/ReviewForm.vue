@@ -10,10 +10,10 @@
     </div>
     <ComponentLoader v-if="componentLoading" />
     <div v-else class="app-form">
-      <p class="page-title">Review</p>
+      <p class="page-title text-3xl text-white mb-2">Review</p>
       <p class="page-sub">Here’s a recap of all your selections.</p>
       <br />
-      <ReviewBreakdownList :service-tag="serviceTag" />
+      <ReviewBreakdownList :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
       <br />
       <div class="space-filler"></div>
 
@@ -64,7 +64,17 @@ export default {
   data() {
     return { checked: false };
   },
-  props: ["serviceTag"],
+  // props: ["serviceTag"],
+    props: {
+        currentSubscriptionServiceData: {
+            type: Object,
+            required: true
+        },
+        serviceTag: {
+            type: String,
+            defaults: "apple_music"
+        }
+    },
   computed: {
     componentLoading() {
       return StoreUtils.rootGetters("loader/getLoader", "component");
@@ -91,7 +101,7 @@ export default {
       StoreUtils.commit("form/DECREASE_FORM_STAGE_BY_ONE");
     },
     submit() {
-      const payload = { ...this.serviceObject, ...this.createSubscriptionBody };
+      const payload = { ...this.currentSubscriptionServiceData, ...this.createSubscriptionBody };
       StoreUtils.dispatch("subscription/createAppleMusicSubscription", payload);
     }
   }

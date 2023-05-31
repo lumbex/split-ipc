@@ -7,13 +7,13 @@
         >
       </div>
       <div class="up-next">
-        <p>Up Next: <span>Confirmation</span></p>
+<!--        <p>Up Next: <span>Confirmation</span></p>-->
       </div>
     </div>
     <div class="app-form">
       <p class="page-title">What’s the billing date?</p>
       <p class="page-sub">
-        Select the day of the month Apple bills your account for your
+        Select the day of the month your account is billed for this
         subscription.
       </p>
       <br />
@@ -35,7 +35,7 @@
         <div class="option">14th</div>
       </div> -->
       <br />
-      <div class="space-filler"></div>
+      <div class="space-filler" style="min-height: 30vh"></div>
 
       <div class="app-form-base">
         <button
@@ -59,6 +59,12 @@ import BackIcon from "@/components/icons/BackIcon";
 export default {
   name: "SpotifyBillingDayForm",
   components: { BackIcon },
+    props: {
+        currentSubscriptionServiceData: {
+            type: Object,
+            required: true
+        }
+    },
   data() {
     return { billingDay: "" };
   },

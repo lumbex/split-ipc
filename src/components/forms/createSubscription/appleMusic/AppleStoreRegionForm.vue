@@ -28,13 +28,13 @@
           :class="{ active: region.value === selectedOption }"
         >
           <img
-            class="h-8 w-8 rounded-full"
+            class="h-auto w-6"
             :src="region.iconUrl"
             :alt="region.title"
           />
           <div class="">{{ region.title }}</div>
 
-          <span v-if="region.recommended" class="recommended">Recomended</span>
+          <span v-if="region.recommended" class="recommended">Recommended</span>
         </div>
       </div>
       <div class="space-filler"></div>
@@ -60,6 +60,12 @@ import NotificationUtils from "../../../../utils/baseUtils/NotificationUtils";
 export default {
   name: "AppleStoreRegionForm",
   components: { BackIcon },
+    props: {
+        currentSubscriptionServiceData: {
+            type: Object,
+            required: true
+        }
+    },
   data() {
     return { selectedOption: "", regionError: "" };
   },

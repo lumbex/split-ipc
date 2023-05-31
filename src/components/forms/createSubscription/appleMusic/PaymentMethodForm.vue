@@ -21,7 +21,7 @@
           v-for="(option, index) in availableAppleMusicPaymentMethods"
           :key="index"
           @click="selectOne(option)"
-          class="option big flex flex-row gap-2 p-2 h-10"
+          class="option big flex flex-row gap-2 py-0 px-2  h-10"
           :class="{ active: option.value === selectedOption }"
         >
           <img class="h-auto w-12" :src="option.iconUrl" :alt="option.title" />
@@ -69,6 +69,12 @@ import UncheckedIcon from "@/components/icons/UncheckedIcon";
 export default {
   name: "PaymentMethodForm",
   components: { BackIcon, UncheckedIcon, CheckedIcon },
+    props: {
+        currentSubscriptionServiceData: {
+            type: Object,
+            required: true
+        }
+    },
   data() {
     return { selectedOption: "", checked: false };
   },
@@ -87,6 +93,7 @@ export default {
       this.selectedOption = option.value;
     },
     submit() {
+        console.log("jabooo =>", this.selectedOption)
       StoreUtils.commit("form/BUILD_FORM_BODY", {
         paymentMethod: this.selectedOption
       });

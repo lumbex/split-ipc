@@ -14,7 +14,7 @@
               <dt class="text-sky-500">
                 <span class="sr-only">Value</span>
                 <span class="value-span bg-[#575244] rounded-md px-4">
-                  {{ serviceObject.name }}
+                  {{ currentSubscriptionServiceData.name }}
                 </span>
               </dt>
             </div>
@@ -61,7 +61,7 @@
                 <span class="sr-only">Value</span>
                 <span class="value-span bg-[#575244] rounded-md px-4">
                   ({{ createSubscriptionBody.activeMembers }}/{{
-                    serviceObject.max_capacity
+                    currentSubscriptionServiceData.max_capacity
                   }})
                 </span>
               </dt>
@@ -193,14 +193,13 @@ import StoreUtils from "@/utils/baseUtils/StoreUtils";
 
 export default {
   name: "SpotifyReviewBreakdownList",
-  props: ["serviceTag"],
-  computed: {
-    serviceObject() {
-      return StoreUtils.rootGetters(
-        "service/getServiceObject",
-        this.serviceTag
-      )[0];
+    props: {
+        currentSubscriptionServiceData: {
+            type: Object,
+            required: true
+        }
     },
+  computed: {
     createSubscriptionBody() {
       return StoreUtils.rootGetters("subscription/getCreateSubscriptionBody");
     },

@@ -33,7 +33,7 @@
     text-align: left;
     margin-top: 20px;
     margin-bottom: 20px;
-    min-height: 45%;
+    min-height: 50%;
 }
 .ft-title{
     font-style: normal;
@@ -77,6 +77,8 @@
     color: #FFFFFF;
     margin: 0;
 }
+
+.input-group-base{}
 
 /*AppForm END*/
 

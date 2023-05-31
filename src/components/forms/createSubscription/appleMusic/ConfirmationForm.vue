@@ -11,7 +11,7 @@
       </div>
     </div>
     <div class="app-form">
-      <p class="page-title">Confirm you are only sharing Apple Music</p>
+      <p class="page-title text-3xl text-white mb-2">Confirm you are only sharing Apple Music</p>
       <p class="page-sub">
         Only Apple Music should be shared and not iCloud storage to use this
         service.

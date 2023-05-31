@@ -53,8 +53,8 @@ export const actions = {
       // console.log("Current Path:", pathName);
 
       if (pathName === "create-subscription") {
-        StoreUtils.dispatch("service/fetchAllAvailableSubscriptionServices");
-        StoreUtils.dispatch("subscription/fetchSuggestedDollarRate");
+        // StoreUtils.dispatch("service/fetchAllAvailableSubscriptionServices");
+        // StoreUtils.dispatch("subscription/fetchSuggestedDollarRate");
       }
       if (pathName === "join-subscription") {
         StoreUtils.dispatch("subscription/fetchSubscriptionRegion");
