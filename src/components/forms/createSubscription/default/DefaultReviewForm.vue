@@ -90,7 +90,7 @@ export default {
     submit() {
       const payload = { ...this.currentSubscriptionServiceData, ...this.createSubscriptionBody };
 
-      console.log("lubbar => ", payload)
+      // console.log("lubbar => ", payload)
       StoreUtils.dispatch("subscription/createSubscriptionDefault", payload);
     }
   }

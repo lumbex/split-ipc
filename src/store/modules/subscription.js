@@ -338,7 +338,7 @@ export const actions = {
         "subscription/SET_NEW_SUGGESTED_DOLLAR_TO_NAIRA_RATE",
         rate
       );
-      console.log("rate =>", rate)
+      // console.log("rate =>", rate)
 
       return rate
     };
@@ -353,7 +353,7 @@ export const actions = {
   },
 
   createAppleMusicSubscription: ({}, createBody) => {
-    console.log("createAppleMusicSubscription =>", createBody)
+    // console.log("createAppleMusicSubscription =>", createBody)
 
     const payload = {
       activeMembers: createBody.activeMembers - 1,
@@ -393,7 +393,7 @@ export const actions = {
 
   createSubscriptionDefault: ({}, createBody) => {
 
-    console.log("createSubscriptionDefault =>", createBody)
+    // console.log("createSubscriptionDefault =>", createBody)
 
     const payload = {
       activeMembers: createBody.activeMembers - 1,

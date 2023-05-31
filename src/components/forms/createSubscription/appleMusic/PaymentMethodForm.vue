@@ -93,7 +93,7 @@ export default {
       this.selectedOption = option.value;
     },
     submit() {
-        console.log("jabooo =>", this.selectedOption)
+        // console.log("jabooo =>", this.selectedOption)
       StoreUtils.commit("form/BUILD_FORM_BODY", {
         paymentMethod: this.selectedOption
       });
