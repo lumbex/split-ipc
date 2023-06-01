@@ -1,11 +1,11 @@
 <template>
   <div class="app-form-wrapper">
     <div class="app-form">
-      <img
-        class="w-24 mt-0 mb-6 mx-auto"
-        src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1677350645/splitcash/images/Add_apps_perspective_matte_2_trbuyx.png"
-        alt="Add your subscription to the Splitverse"
-      />
+        <img
+                class="w-24 mt-0 mb-6 mx-auto"
+                :src="currentSubscriptionServiceData.icon_url"
+                alt="Add your subscription to the Splitverse"
+        />
       <p class="page-title-sm text-center">Be the Boss of your Subscription</p>
       <p class="text-base text-center text-grey-500 mb-8">
         You’re about to list your

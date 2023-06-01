@@ -26,7 +26,7 @@
                                 placeholder="0.0/month"
                             />
                         </div>
-                        <div @click="swapCurrency" class="flex-shrink-0 flex">
+                        <div @click="swapCurrency" class="swap-curr flex-shrink-0 flex">
                             <SwapCurrencyIcon  class="cursor-pointer" />
                         </div>
                     </div>
