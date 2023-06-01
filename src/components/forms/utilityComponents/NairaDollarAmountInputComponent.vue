@@ -14,7 +14,7 @@
                     <label class="px-2" for="cost">Monthly Cost</label>
                     <div class="px-2 flex flex-row justify-start">
                         <div class="flex-shrink-0 flex items-center"><span>{{inputCurrency}}</span></div>
-                        <div class="input-wrap-hold flex-grow-1 flex-basis-0">
+                        <div class="input-wrap-hold w-[90%] flex-grow-1 flex-basis-0">
                             <input
                                 type="number"
                                 step=".01"
@@ -32,7 +32,7 @@
                     </div>
 
                     <div class="input-group-base text-center">
-                        <p class="m-0 text-white text-base">{{viewCurrency}}{{convertedValue | moneyFormat}}</p>
+                        <p class="m-0 text-white text-base">{{ viewCurrency }}{{ convertedValue | moneyFormat }}</p>
                     </div>
                 </div>
 

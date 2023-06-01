@@ -78,7 +78,13 @@
     margin: 0;
 }
 
-.input-group-base{}
+/*.app-form .form-group .input-wrap-hold{*/
+/*    width: 90% !important;*/
+/*}*/
+.app-form .input-group-base{
+    background-color: #474747;
+    border-radius: 0 0 10px 10px;
+}
 
 /*AppForm END*/
 
