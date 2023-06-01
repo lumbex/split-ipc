@@ -170,12 +170,7 @@
     display: block;
     cursor: pointer;
 }
-.grid-options {
-    min-height: 46vh !important;
-}
-.block-options {
-    min-height: 46vh !important;
-}
+
 
 
 /*AppForm END*/
