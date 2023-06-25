@@ -73,8 +73,8 @@
 .sub-features ul li .point{
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
+    font-size: 14px;
+    line-height: 18px;
     color: #FFFFFF;
     margin: 0;
 }
@@ -171,6 +171,9 @@
     cursor: pointer;
 }
 
+.app-form {}
+.app-form .block-steps{}
+.app-form .block-steps .how-step{}
 
 
 /*AppForm END*/

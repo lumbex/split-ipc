@@ -15,8 +15,9 @@
                         v-if="formStage === 0"
                         :current-subscription-service-data="currentSubscriptionServiceData"
                 />
-                <SelectRegionForm v-if="formStage === 1" />
-                <NewMemberJoinInfoForm v-if="formStage === 2" :service-tag="serviceTag" />
+                <SelectRegionForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
+                <ChangeRegionForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
+                <NewMemberJoinInfoForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
             </div>
             <div v-else>
                 <SubscriptionJoinFeaturesCard
@@ -62,6 +63,7 @@ import MemberTermsConfirmationCard from "../../components/cards/joinSubscription
 
 import NewMemberJoinEmailForm from "../../components/forms/joinSubscription/default/NewMemberJoinEmailForm.vue";
 import SubscriptionJoinFeaturesCard from "@/components/cards/joinSubscription/default/SubscriptionJoinFeaturesCard.vue";
+import ChangeRegionForm from "@/components/forms/joinSubscription/appleMusic/ChangeRegionForm.vue";
 
 
 export default {
@@ -73,6 +75,7 @@ export default {
     };
   },
   components: {
+      ChangeRegionForm,
       SubscriptionJoinFeaturesCard,
     PreAuthCard,
     NewMemberJoinInfoForm,

@@ -12,10 +12,12 @@
     </div>
 
     <div class="app-form">
-      <p class="page-title">What’s your Apple ID Email?</p>
+      <p v-if="currentSubscriptionServiceData.payment_method === 'merchant_account'" class="page-title">What’s your Email?</p>
+      <p v-else class="page-title">What’s your Apple ID Email?</p>
       <p class="page-sub">
         An iMessage invite would be sent to you via this email
       </p>
+
       <form action="#" @submit.prevent="submit">
         <div class="form-group">
           <label for="account-no">Email</label>
@@ -72,17 +74,16 @@ import EmailValidator from "email-validator";
 export default {
   name: "NewMemberJoinInfoForm",
   components: { UncheckedIcon, CheckedIcon, BackIcon },
-  props: ["serviceTag"],
+  props: {
+      currentSubscriptionServiceData: {
+          type: Object,
+          required: true
+      }
+  },
   data() {
     return { checked: false, email: "", emailError: "" };
   },
   computed: {
-    serviceObject() {
-      return StoreUtils.rootGetters(
-        "service/getServiceObject",
-        this.serviceTag
-      )[0];
-    },
     formBody() {
       return StoreUtils.rootGetters("form/getFormBody");
     }
