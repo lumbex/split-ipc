@@ -707,6 +707,7 @@ a.center-link:hover {
 /*CreateSubscription */
 .create-subscription{
     height: 100%;
+    position: relative;
 }
 .create-subscription>div{
     height: 100%;
@@ -972,6 +973,84 @@ a.center-link:hover {
 .notification-bar .notification-icon svg{}
 .notification-bar .notification-message {font-size: 16px;line-height: 20px;font-weight: 700;color: #ffffff;padding: 4px 0 0 10px;}
 /* Notification END */
+
+
+/* Screenshot Preview */
+.screenshot-preview {
+    display: flex;
+    flex-direction: row;
+    background-color: #2C2C2E;
+    padding: 10px;
+    border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    cursor: pointer;
+    position: relative;
+    transition: all ease-in-out .2s;
+}
+.screenshot-preview .mark{}
+.screenshot-preview .mark .title{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+}
+
+.screenshot-preview .visual{
+    display: flex;
+    flex-direction: row;
+}
+.screenshot-preview .visual .image-wrap{
+
+}
+.screenshot-preview .visual .image-wrap img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.screenshot-preview .visual .icon{
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+}
+.screenshot-preview .visual .icon svg{
+    width: 24px;
+    height: 24px;
+}
+
+.screenshot-preview.fullscreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    margin: 0;
+    display: block;
+    padding: 30px 6%;
+    overflow-y: scroll;
+}
+.screenshot-preview.fullscreen .mark{}
+.screenshot-preview.fullscreen .mark .title{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+    visibility: hidden;
+}
+
+.screenshot-preview.fullscreen .visual{display: block;}
+.screenshot-preview.fullscreen .visual .image-wrap{
+}
+.screenshot-preview.fullscreen .visual .image-wrap img{height: auto;width: 100%;border-radius: 0;margin-top: 40px;}
+.screenshot-preview.fullscreen .visual .icon{position: absolute;z-index: 99999;right: 30px;top: 30px;}
+.screenshot-preview.fullscreen .visual .icon svg{
+    width: 34px;
+    height: 34px;
+}
+/* Screenshot Preview END */
 
 
 /* App Layout*/

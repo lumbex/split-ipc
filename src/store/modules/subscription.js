@@ -490,5 +490,14 @@ export const actions = {
       null,
       false
     );
-  }
+  },
+
+  completeSubscriptionVerification: () => {
+    const message = {
+      messageAction: "open_subscription_verification_bottom_sheet",
+      messageBody: JSON.stringify({})
+    };
+    StoreUtils.dispatch("ipc/postMessage", message);
+  },
+
 };

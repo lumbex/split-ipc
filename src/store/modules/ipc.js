@@ -72,6 +72,10 @@ export const actions = {
         ipcService.postAMessage(message);
         break;
 
+      case "open_subscription_verification_bottom_sheet":
+        ipcService.postAMessage(message);
+        break;
+
       default:
       // code block
     }
@@ -119,6 +123,9 @@ export const actions = {
         );
         StoreUtils.commit("loader/SET_COMPONENT_LOADER", false);
         if (activeRoute === "quick-join-subscription") {
+          StoreUtils.dispatch("subscription/fetchQuickAccessInfo");
+        }
+        if (activeRoute === "validate-subscription") {
           StoreUtils.dispatch("subscription/fetchQuickAccessInfo");
         }
         break;

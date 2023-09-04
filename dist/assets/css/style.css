@@ -483,6 +483,7 @@ a.center-link:hover {
     padding: 1rem 0;
     display: flex;
     flex-direction: column;
+    min-height: 40vh;
 }
 .block-options .option{
     width: 100%;
@@ -500,7 +501,7 @@ a.center-link:hover {
     cursor: pointer;
 }
 .block-options .option.big{
-    height: 90px !important;
+    height: 80px !important;
     padding: 10px .8rem !important;
 }
 
@@ -615,7 +616,16 @@ a.center-link:hover {
     text-align: left;
     margin-top: 20px;
 }
+.app-form .form-group.alt{
+    padding: 10px 0 0;
+    border-radius: 10px;
+    text-align: left;
+    margin-top: 20px;
+}
 
+.app-form .form-group .input-wrap-hold{
+    width: 90% !important;
+}
 .app-form .form-group label{
     color: #9F9FA5;
     font-size: 12px;
@@ -630,6 +640,11 @@ a.center-link:hover {
     color: #e1e1e1;
     font-size: 16px;
     box-shadow: 0 0 0 transparent!important;
+}
+
+.app-form .form-group input.alt{
+    padding: 0 0 2px;
+    width: 100%;
 }
 
 .app-form .form-group select:focus,
@@ -656,6 +671,7 @@ a.center-link:hover {
     color: rgba(235, 235, 245, 0.3);
 }
 .app-form a:hover{}
+
 .app-form .name-enquiry-result{
     font-style: normal;
     font-weight: 700;
@@ -684,11 +700,14 @@ a.center-link:hover {
     margin: 0 auto;
     display: block
 }
+
+
 /*AppForm END*/
 
 /*CreateSubscription */
 .create-subscription{
     height: 100%;
+    position: relative;
 }
 .create-subscription>div{
     height: 100%;
@@ -703,6 +722,9 @@ a.center-link:hover {
     height: 100%;
     text-align: center;
     align-items: center;
+}
+.app-card-full-page.sm{
+    padding: 0 2%;
 }
 .app-card-full-page .space-filler{
     flex-grow: 1;
@@ -951,6 +973,84 @@ a.center-link:hover {
 .notification-bar .notification-icon svg{}
 .notification-bar .notification-message {font-size: 16px;line-height: 20px;font-weight: 700;color: #ffffff;padding: 4px 0 0 10px;}
 /* Notification END */
+
+
+/* Screenshot Preview */
+.screenshot-preview {
+    display: flex;
+    flex-direction: row;
+    background-color: #2C2C2E;
+    padding: 10px;
+    border-radius: 8px;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+    cursor: pointer;
+    position: relative;
+    transition: all ease-in-out .2s;
+}
+.screenshot-preview .mark{}
+.screenshot-preview .mark .title{
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+}
+
+.screenshot-preview .visual{
+    display: flex;
+    flex-direction: row;
+}
+.screenshot-preview .visual .image-wrap{
+
+}
+.screenshot-preview .visual .image-wrap img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+.screenshot-preview .visual .icon{
+    display: flex;
+    align-items: center;
+    margin-left: 6px;
+}
+.screenshot-preview .visual .icon svg{
+    width: 24px;
+    height: 24px;
+}
+
+.screenshot-preview.fullscreen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+    margin: 0;
+    display: block;
+    padding: 30px 6%;
+    overflow-y: scroll;
+}
+.screenshot-preview.fullscreen .mark{}
+.screenshot-preview.fullscreen .mark .title{
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: -0.24px;
+    visibility: hidden;
+}
+
+.screenshot-preview.fullscreen .visual{display: block;}
+.screenshot-preview.fullscreen .visual .image-wrap{
+}
+.screenshot-preview.fullscreen .visual .image-wrap img{height: auto;width: 100%;border-radius: 0;margin-top: 40px;}
+.screenshot-preview.fullscreen .visual .icon{position: absolute;z-index: 99999;right: 30px;top: 30px;}
+.screenshot-preview.fullscreen .visual .icon svg{
+    width: 34px;
+    height: 34px;
+}
+/* Screenshot Preview END */
 
 
 /* App Layout*/
