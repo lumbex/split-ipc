@@ -4,20 +4,20 @@
 
 
 
-.sub-icon{
+.sub-icon {
     height: 80px;
     width: 80px;
     margin: 0 auto;
 }
-.page-title-sm{
+.page-title-sm {
     font-style: normal;
     font-weight: 700;
     font-size: 28px;
     line-height: 34px;
     color: #FFFFFF;
-    margin-bottom: 4px;
+    margin-bottom: 12px;
 }
-.page-sub-sm{
+.page-sub-sm {
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -29,14 +29,14 @@
     font-weight: 700;
     color: #ffffff;
 }
-.sub-features-hold{
+.sub-features-hold {
     text-align: left;
     margin-top: 20px;
     margin-bottom: 20px;
     min-height: 45vh;
     width: 100%;
 }
-.ft-title{
+.ft-title {
     font-style: normal;
     font-weight: 700;
     font-size: 18px;

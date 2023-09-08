@@ -500,4 +500,12 @@ export const actions = {
     StoreUtils.dispatch("ipc/postMessage", message);
   },
 
+  contactCustomerSupport: () => {
+    const message = {
+      messageAction: "open_contact_support_bottom_sheet",
+      messageBody: JSON.stringify({})
+    };
+    StoreUtils.dispatch("ipc/postMessage", message);
+  },
+
 };

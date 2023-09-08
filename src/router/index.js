@@ -6,6 +6,7 @@ import CreateSubscription from "../views/create-subscription/Index.vue";
 import JoinSubscription from "../views/join-subscription/Index.vue";
 import SetupJoinSubscription from "../views/join-subscription/Setup.vue";
 import QuickJoinSubscription from "../views/join-subscription/QuickAccess.vue";
+import TroubleshootJoinSubscription from "../views/join-subscription/Troubleshoot.vue";
 import UpdateSubscriptionTerms from "../views/update-subscription-terms/Index.vue";
 import ValidateSubscription from "../views/validate-subscription/Index.vue";
 import StoreUtils from "../utils/baseUtils/StoreUtils";
@@ -53,6 +54,16 @@ const routes = [
     name: "quick-join-subscription",
     props: true,
     component: QuickJoinSubscription,
+    beforeEnter: (to, from, next) => {
+      StoreUtils.commit("router/SET_ACTIVE_ROUTE", to.name);
+      next();
+    }
+  },
+  {
+    path: "/join-subscription/troubleshoot/:serviceTag",
+    name: "troubleshoot-join-subscription",
+    props: true,
+    component: TroubleshootJoinSubscription,
     beforeEnter: (to, from, next) => {
       StoreUtils.commit("router/SET_ACTIVE_ROUTE", to.name);
       next();
