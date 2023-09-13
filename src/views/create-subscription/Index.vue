@@ -5,9 +5,10 @@
       <ComponentLoader v-if="componentLoaderTable" />
       <div v-else class="create-subscription">
 
-<!--          <p> join_type ==> {{ currentSubscriptionServiceData.join_type }}</p>-->
-<!--          <p> cost_currency ==> {{ currentSubscriptionServiceData.cost_currency }}</p>-->
-<!--          <p> formStage ==> {{ formStage }}</p>-->
+          <p> join_type ==> {{ currentSubscriptionServiceData.join_type }}</p>
+          <p> cost_currency ==> {{ currentSubscriptionServiceData.cost_currency }}</p>
+          <p> currentFormBody ==> {{ currentFormBody }}</p>
+          <p> formStage ==> {{ formStage }}</p>
 
 
         <div v-if="currentSubscriptionServiceData.join_type === 'host_invite' || currentSubscriptionServiceData.join_type === 'member_get_access'">
@@ -163,6 +164,9 @@ export default {
     },
     availableServices() {
       return StoreUtils.rootGetters("service/getAvailableServices");
+    },
+    currentFormBody() {
+      return StoreUtils.rootGetters("form/getFormBody");
     }
   },
   created() {

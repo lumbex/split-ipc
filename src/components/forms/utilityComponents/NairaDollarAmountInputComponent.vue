@@ -158,6 +158,13 @@ export default {
                 StoreUtils.commit("form/BUILD_FORM_BODY", {
                     planPrice: nairaAmount
                 });
+
+                // console.log("currentSubscriptionServiceData: ", this.currentSubscriptionServiceData.tag)
+                if (this.currentSubscriptionServiceData.tag === 'canva') {
+                    StoreUtils.commit("form/BUILD_FORM_BODY", {
+                        region:  "NG"
+                    });
+                }
                 StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
             } else {
                 this.costError =

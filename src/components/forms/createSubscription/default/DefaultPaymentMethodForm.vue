@@ -68,7 +68,7 @@ export default {
   data () {
     return {
         selectedOption: "",
-        tagsAllowedToSelectPaymentMethod: ["youtube_premium"],
+        tagsAllowedToSelectPaymentMethod: ["youtube_premium", "canva"],
         // tagsAllowedToSelectPaymentMethod: [""]
     }
   },

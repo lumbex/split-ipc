@@ -52,6 +52,7 @@ export default {
         StoreUtils.commit("form/BUILD_FORM_BODY", {
           paymentMethod: this.selectedOption
         });
+
         StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
       },
       setDollarCost() {
