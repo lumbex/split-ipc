@@ -76,6 +76,10 @@ export const actions = {
         ipcService.postAMessage(message);
         break;
 
+      case "open_contact_support_bottom_sheet":
+        ipcService.postAMessage(message);
+        break;
+
       default:
       // code block
     }
