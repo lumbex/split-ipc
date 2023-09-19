@@ -130,7 +130,7 @@ export const actions = {
           StoreUtils.dispatch("subscription/fetchQuickAccessInfo");
         }
         if (activeRoute === "validate-subscription") {
-          StoreUtils.dispatch("subscription/fetchQuickAccessInfo");
+          StoreUtils.dispatch("subscription/fetchCurrentSubInfo");
         }
         break;
 

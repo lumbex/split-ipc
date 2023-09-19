@@ -26,7 +26,7 @@
         <div class="visual">
             <div class="image-wrap">
                 <img
-                    src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1693514532/splitcash/images/Netflix_sample_verification_shot_ifl1dr.png"
+                    :src="imageUrl"
                     alt="Sample Screenshot" />
             </div>
 
@@ -44,6 +44,12 @@ import CloseIcon from "@/components/icons/CloseIcon.vue";
 export default {
     name: "ScreenshotPreviewCard",
     components: {CloseIcon, AnchorRightIcon },
+    props: {
+        imageUrl: {
+            type: String,
+            required: true
+        }
+    },
     data() {
         return {
             isFullscreen: false,

@@ -106,7 +106,8 @@ export const state = {
   quickAccessInfo: {},
   currentSubscriptionTerms: {
     test: "valuu"
-  }
+  },
+  currentSubscriptionInfo: {}
 };
 
 export const getters = {
@@ -145,6 +146,9 @@ export const getters = {
   },
   getCurrentSubscriptionTerms: state => {
     return state.currentSubscriptionTerms;
+  },
+  getCurrentSubscriptionInfo: state => {
+    return state.currentSubscriptionInfo;
   }
 };
 
@@ -175,6 +179,9 @@ export const mutations = {
   },
   SET_CURRENT_SUBSCRIPTION_TERMS(state, payload) {
     state.currentSubscriptionTerms = payload;
+  },
+  SET_CURRENT_SUBSCRIPTION_INFO(state, payload) {
+    state.currentSubscriptionInfo = payload;
   }
 };
 
@@ -203,6 +210,28 @@ export const actions = {
     };
 
     return subscriptionService.fetchQuickAccessInfo(
+      payload,
+      successAction,
+      LoaderUtils.types.COMPONENT,
+      null,
+      false
+    );
+  },
+
+  fetchCurrentSubInfo: () => {
+    const payload = {
+      subref: StoreUtils.rootGetters("subscription/getCurrentSubscriptionRef")
+        .subRef
+    };
+
+    const successAction = responseData => {
+      StoreUtils.commit(
+        "subscription/SET_CURRENT_SUBSCRIPTION_INFO",
+        responseData.sub
+      );
+    };
+
+    return subscriptionService.fetchSubInfo(
       payload,
       successAction,
       LoaderUtils.types.COMPONENT,

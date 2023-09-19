@@ -42,6 +42,27 @@ class SubscriptionService extends BaseService {
     );
   }
 
+  fetchSubInfo(
+      payload,
+      successAction,
+      loaderType,
+      errorType,
+      showSuccessMessage,
+      successCondition,
+      getErrorMessage
+  ) {
+    return this.makePostRequest(
+        "/getCurrentSubInfo",
+        payload,
+        successAction,
+        loaderType,
+        errorType,
+        showSuccessMessage,
+        successCondition,
+        getErrorMessage
+    );
+  }
+
   fetchSuggestedDollarToNairaRate(
     payload,
     successAction,

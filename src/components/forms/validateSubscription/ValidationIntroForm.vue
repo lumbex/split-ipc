@@ -3,7 +3,7 @@
     <div class="top-nav">
       <div class="go-back">
         <a @click="goBack"
-          ><span class="icon"><BackIcon /></span>Subscription Info</a
+          ><span class="icon"><BackIcon /></span>Back</a
         >
       </div>
       <div class="up-next">
@@ -13,23 +13,20 @@
 
     <ComponentLoader v-if="componentLoading" />
       <div class="app-form">
-          <p class="page-title">Subscription Validation</p>
-          <p class="page-sub">
-              Here is how it works...
-          </p>
-          <div class="block-options">
-
+          <div class="verification-intro">
+              <SubVerificationIcon />
+              <p class="page-lead">Subscription Verification</p>
+              <p class="page-sub">You need to provide evidence to proof your ownership of this subscription.</p>
           </div>
+
           <div class="space-filler"></div>
 
           <div class="app-form-base">
-              <ComponentLoader v-if="componentLoading" />
               <button
-                      v-else
                       @click="submit"
                       class="app-btn light-btn"
               >
-                  Begin Validation
+                  Begin Verification
               </button>
           </div>
       </div>
@@ -40,10 +37,11 @@
 import BackIcon from "@/components/icons/BackIcon.vue";
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 import ComponentLoader from "@/components/loaders/ComponentLoader.vue";
+import SubVerificationIcon from "@/components/icons/SubVerificationIcon.vue";
 
 export default {
   name: "ValidationIntroForm",
-  components: { BackIcon, ComponentLoader },
+  components: {SubVerificationIcon, BackIcon, ComponentLoader },
   props: ["serviceTag"],
   data() {
     return { checked: false, cost: "", costError: "" };
@@ -74,4 +72,6 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

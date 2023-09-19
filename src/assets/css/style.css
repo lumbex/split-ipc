@@ -25,13 +25,13 @@
     color: #98989f;
     margin-bottom: .8rem;
 }
-.page-sub-sm span{
+.page-sub-sm span {
     font-weight: 700;
     color: #ffffff;
 }
 .sub-features-hold {
     text-align: left;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 20px;
     min-height: 45vh;
     width: 100%;
@@ -44,14 +44,14 @@
     color: #FFFFFF;
     margin-bottom: 16px;
 }
-.sub-features{
+.sub-features {
     text-align: left;
 }
-.sub-features ul{
+.sub-features ul {
     margin: 0;
     padding: 0;
 }
-.sub-features ul li{
+.sub-features ul li {
     margin: 0 0 10px 0;
     padding: 0;
     display: flex;
@@ -59,17 +59,17 @@
     align-items: center;
     gap: 10px;
 }
-.sub-features ul li .icon{
+.sub-features ul li .icon {
     height: auto;
     width: 20px;
     /*padding-left: 10px;*/
 }
-.sub-features ul li .icon img{
+.sub-features ul li .icon img {
     height: auto;
     width: 20px;
     max-width: unset;
 }
-.sub-features ul li .point{
+.sub-features ul li .point {
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
@@ -77,6 +77,7 @@
     color: #FFFFFF;
     margin: 0;
 }
+
 .app-form .form-group.alt{
     padding: 10px 0 0;
     border-radius: 10px;

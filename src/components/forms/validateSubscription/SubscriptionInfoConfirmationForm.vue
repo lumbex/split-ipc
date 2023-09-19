@@ -13,15 +13,16 @@
       <p class="page-sub">
           Just to be super duper sure! kindly confirm if these details are true about your subscription.
       </p>
-      <div class="block-options">
-          <AppCheckboxGroup :items="items" @on-change="onChange" />
+      <ComponentLoader v-if="componentLoading" />
+      <div v-else class="block-options">
+<!--          <p>Sub Info fetched: {{subscriptionInfoFetched}}</p>-->
+          <AppCheckboxGroup v-if="subscriptionInfoFetched" :items="items" @on-change="onChange" />
       </div>
       <div class="space-filler"></div>
 
       <div class="app-form-base">
-        <ComponentLoader v-if="componentLoading" />
+
         <button
-          v-else
           @click="submit"
           class="app-btn light-btn"
           :disabled="!allBoxesAreChecked"
@@ -37,22 +38,13 @@
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 import ComponentLoader from "@/components/loaders/ComponentLoader.vue";
 import AppCheckboxGroup from "@/components/forms/utilityComponents/AppCheckboxGroup.vue";
+import JsonParserUtils from "@/utils/JsonParserUtils";
 
 export default {
   name: "SubscriptionInfoConfirmationForm",
   components: {AppCheckboxGroup, ComponentLoader },
   data() {
     return {
-        items: [
-            {
-                label: 'There are Only 3 members on this subscription',
-                value: '1',
-            },
-            {
-                label: 'I pay a fee of ₦7,250.00/month',
-                value: '2',
-            }
-        ],
         checkboxData: []
     };
   },
@@ -64,12 +56,27 @@ export default {
     componentLoading() {
       return StoreUtils.rootGetters("loader/getLoader", "component");
     },
-    currentSubscriptionTerms() {
-      return StoreUtils.rootGetters("subscription/getCurrentSubscriptionTerms");
+    currentSubscriptionInfo() {
+      return StoreUtils.rootGetters("subscription/getCurrentSubscriptionInfo");
     },
+      subscriptionInfoFetched() {
+        return !JsonParserUtils.isObjectEmpty(this.currentSubscriptionInfo)
+      },
     allBoxesAreChecked() {
         return this.checkboxData.every(checkbox =>  checkbox.checked === true);
     },
+      items() {
+        return [
+              {
+                  label: `There are currently only ${this.currentSubscriptionInfo.active_members} members in this subscription including myself`,
+                  value: '1',
+              },
+              {
+                  label: `I'm charged on the ${this.currentSubscriptionInfo.billing_date}th of every month for this subscription`,
+                  value: '2',
+              }
+          ]
+      },
   },
     created() {
         StoreUtils.dispatch("subscription/fetchCurrentSubscriptionRef");

@@ -2,7 +2,7 @@
   <BaseLayout>
     <PreAuthCard v-if="!userAuthenticated" />
     <div v-else class="app-page full-page">
-      <ComponentLoader v-if="isLoading" />
+      <ComponentLoader v-if="componentLoaderTable" />
       <div v-else class="create-subscription">
           <SubscriptionInfoConfirmationForm v-if="formStage === 0" :service-tag="serviceTag" />
 
@@ -27,6 +27,7 @@ import SubscriptionInfoConfirmationForm
     from "@/components/forms/validateSubscription/SubscriptionInfoConfirmationForm.vue";
 import ValidationIntroForm from "@/components/forms/validateSubscription/ValidationIntroForm.vue";
 import ValidationScreenshotStepsForm from "@/components/forms/validateSubscription/ValidationScreenshotStepsForm.vue";
+import JsonParserUtils from "@/utils/JsonParserUtils";
 
 export default {
   name: "ValidateSubscription",
@@ -45,6 +46,9 @@ export default {
     ComponentLoader
   },
   computed: {
+      componentLoaderTable() {
+          return StoreUtils.rootGetters("loader/getLoader", "table");
+      },
     userAuthenticated() {
       return StoreUtils.rootGetters("user/getUserAuthenticated");
     },
@@ -56,10 +60,23 @@ export default {
     },
     availableServices() {
       return StoreUtils.rootGetters("service/getAvailableServices");
-    }
+    },
+      currentSubscriptionServiceData() {
+          return StoreUtils.rootGetters(
+              "service/getCurrentSubscriptionServiceData");
+      },
+      currentSubscriptionServiceDataNotFetched() {
+          return JsonParserUtils.isObjectEmpty(this.currentSubscriptionServiceData)
+      },
+
   },
   created() {
     StoreUtils.commit("service/SET_CURRENT_SERVICE_TAG", this.serviceTag);
-  }
+  },
+    updated() {
+        if (this.userAuthenticated && this.currentSubscriptionServiceDataNotFetched){
+            StoreUtils.dispatch("service/fetchSubscriptionServiceDataByTag", this.serviceTag);
+        }
+    }
 };
 </script>
