@@ -48,47 +48,20 @@ export const state = {
         "https://res.cloudinary.com/cloud-web-assets/image/upload/v1685444717/splitcash/images/usd-flag_bnqciv.png",
       recommended: false
     }
-    // {
-    //   value: "UK",
-    //   title: "UK Store",
-    //   iconUrl:
-    //     "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677328619/splitcash/images/UK_gyfw33.png",
-    //   recommended: false
-    // },
-    // {
-    //   value: "CA",
-    //   title: "Canada Store",
-    //   iconUrl:
-    //     "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677328619/splitcash/images/Canada_wfkkjz.png",
-    //   recommended: false
-    // }
   ],
   availableAppleMusicPaymentMethods: [
-    // {
-    //   value: "split-card",
-    //   title: "Split Dollar Card",
-    //   sub:
-    //     "Select this to use your Split virtual dollar card to pay for this subscription.",
-    //   iconUrl:
-    //     "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677340194/splitcash/images/Split_Dollar_Card_lr9nuy.png",
-    //   recommended: true
-    // },
     {
       value: "ng-card",
       title: "Naira Debit Card",
-      sub:
-        "I have a Naira card i pay with.",
-      iconUrl:
-        "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677340194/splitcash/images/Naira_Card_bmqplj.png",
+      sub: "I have a Naira card i pay with.",
+      iconUrl: "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677340194/splitcash/images/Naira_Card_bmqplj.png",
       recommended: false
     },
     {
       value: "us-card",
       title: "Dollar Debit Card",
-      sub:
-        "I have a dollar card i pay with.",
-      iconUrl:
-        "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677340195/splitcash/images/other_dollar_cards_hamtph.png",
+      sub: "I have a dollar card i pay with.",
+      iconUrl: "https://res.cloudinary.com/cloud-web-assets/image/upload/v1677340195/splitcash/images/other_dollar_cards_hamtph.png",
       recommended: false
     }
   ],
@@ -311,8 +284,7 @@ export const actions = {
     const message = {
       messageAction: "fetch_region",
       messageBody: {
-        info:
-          "For fetching the region a subscription is in for validation in the IPC"
+        info: "For fetching the region a subscription is in for validation in the IPC"
       }
     };
     StoreUtils.dispatch("ipc/postMessage", message);
@@ -480,7 +452,7 @@ export const actions = {
         dollarPrice: (
           parseFloat(formBody.planPrice) /
           StoreUtils.rootGetters("subscription/getSuggestedDollarToNairaRate")
-            .rate
+              .rate
         ).toFixed(2)
       }
     };
@@ -535,6 +507,5 @@ export const actions = {
       messageBody: JSON.stringify({})
     };
     StoreUtils.dispatch("ipc/postMessage", message);
-  },
-
+  }
 };

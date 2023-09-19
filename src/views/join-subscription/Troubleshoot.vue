@@ -4,13 +4,7 @@
     <div v-else class="app-page full-page">
       <ComponentLoader v-if="componentLoaderTable" />
       <div v-else class="create-subscription">
-<!--          <p>availableServices: {{availableServices[0]}}</p>-->
-<!--          <p>currentSubscriptionServiceData: {{currentSubscriptionServiceData}}</p> <br />-->
-<!--          <p>userAuthenticated: {{userAuthenticated}}</p> <br />-->
-<!--          <p>serviceTag: {{serviceTag}}</p> <br />-->
-
-          <TroubleshootJoinSubscriptionCard :current-subscription-service-data="currentSubscriptionServiceData" />
-
+          <TroubleshootJoinSubscriptionCard :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
       </div>
     </div>
   </BaseLayout>

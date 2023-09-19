@@ -13,7 +13,7 @@
                   Follow these steps to resolve trouble with accessing your subscription.
               </p>
 
-              <div class="">
+              <div v-if="serviceTag === 'apple_music'" class="">
                   <div class="troubleshoot-steps">
                       <ul>
                           <li>
@@ -44,9 +44,34 @@
                   </div>
               </div>
 
+              <div v-else class="">
+                  <div class="troubleshoot-steps">
+                      <ul>
+                          <li>
+                              <div class="number"><span>1</span></div>
+                              <div class="point"><p>Check your email for the invite to join the subscription.</p></div>
+                          </li>
+                          <li>
+                              <div class="number"><span>2</span></div>
+                              <div class="point"><p>Accept the invite and join the subscription.</p></div>
+                          </li>
+                          <li>
+                              <div class="number"><span>3</span></div>
+                              <div class="point"><p>Confirm if you are a member of the subscription from the subscription family page</p></div>
+                          </li>
+                          <li>
+                              <div class="number"><span>4</span></div>
+                              <div class="point"><p>If you are still having issues accessing your subscription, contact support.</p></div>
+                          </li>
+                      </ul>
+                  </div>
+              </div>
+
               <div class="space-filler"></div>
 
               <div class="app-form-base">
+                  <br />
+                  <br />
                   <button @click="submit" class="app-btn light-btn">
                       Contact Support
                   </button>
@@ -66,6 +91,10 @@ export default {
   props: {
       currentSubscriptionServiceData: {
           type: Object,
+          required: true
+      },
+      serviceTag: {
+          type: String,
           required: true
       }
   },

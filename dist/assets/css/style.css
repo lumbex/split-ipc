@@ -975,7 +975,86 @@ a.center-link:hover {
 /* Notification END */
 
 
-/* Screenshot Preview */
+/* Sub Verification */
+.verification-intro{
+    text-align: center;
+    margin-top: 6vh;
+}
+.verification-intro svg{
+    margin: 0 auto 32px;
+}
+.verification-intro .page-lead{
+    color:  #FFF;
+    font-size: 34px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 41px; /* 120.588% */
+    letter-spacing: 0.374px;
+    margin-bottom: 16px;
+}
+.verification-intro .page-sub{
+    color: #BDBDBD;
+    text-align: center;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 22px; /* 129.412% */
+    letter-spacing: -0.408px;
+}
+
+.sub-verification-steps-hold {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    /*min-height: 45vh;*/
+    width: 100%;
+}
+.sub-verification-steps {
+    text-align: left;
+    padding: 0 10px;
+}
+.sub-verification-steps ul {
+    margin: 0;
+    padding: 0;
+    border-left: 1px dashed rgba(235, 235, 245, 0.30);
+}
+.sub-verification-steps ul li {
+    margin: 0 0 25px 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.sub-verification-steps ul li .top {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.sub-verification-steps ul li .icon {
+    margin-left: -10px;
+    margin-right: 10px;
+    height: auto;
+    width: 20px;
+}
+.sub-verification-steps ul li .icon img {
+    height: auto;
+    width: 20px;
+    max-width: unset;
+}
+.sub-verification-steps ul li .point {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+    margin: 0;
+}
+.sub-verification-steps ul li .base{
+    padding-left: 20px;
+}
+.sub-verification-steps ul li .base .screenshot-wrap{}
+
+
 .screenshot-preview {
     display: flex;
     flex-direction: row;
@@ -984,7 +1063,7 @@ a.center-link:hover {
     border-radius: 8px;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 5px;
     cursor: pointer;
     position: relative;
     transition: all ease-in-out .2s;
@@ -1050,7 +1129,7 @@ a.center-link:hover {
     width: 34px;
     height: 34px;
 }
-/* Screenshot Preview END */
+/* Sub Verification END */
 
 
 /* App Layout*/
