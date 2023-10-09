@@ -3,7 +3,8 @@
     <PreAuthCard v-if="!userAuthenticated" />
     <div v-else class="app-page full-page">
       <ComponentLoader v-if="componentLoaderTable" />
-      <div v-else class="create-subscription">
+<!--      <div v-else class="create-subscription">-->
+      <div v-else class="">
 
 <!--          <p> join_type ==> {{ currentSubscriptionServiceData.join_type }}</p>-->
 <!--          <p> cost_currency ==> {{ currentSubscriptionServiceData.cost_currency }}</p>-->
@@ -11,17 +12,64 @@
 <!--          <p> formStage ==> {{ formStage }}</p>-->
 
 
-        <div v-if="currentSubscriptionServiceData.join_type === 'host_invite' || currentSubscriptionServiceData.join_type === 'member_get_access'">
-            <div v-if="serviceTag === 'apple_music'">
-                <CreateIntroForm v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <PaymentMethodForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <AppleStoreRegionForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <SetAppleMusicPriceForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <ActiveMembersForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
-                <SubscriptionPlanForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <BillingDayForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <ConfirmationForm v-if="formStage === 7" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <ReviewForm v-if="formStage === 8" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
+        <div v-if="currentSubscriptionServiceData.join_type === 'host_invite'">
+
+            <CreateSubscriptionIntroForm v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <HowItWorksForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData"/>
+            <SubscriptionAccessTypeForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData"/>
+            <ActiveMembersForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <BillingDayForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <SetSlotPriceForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <SubscriptionPlanForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />
+
+
+<!--            Type Specific-->
+            <SelectSubscriptionRegionForm  v-if="formStage === 7" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <ConfirmationForm v-if="formStage === 8" :current-subscription-service-data="currentSubscriptionServiceData" /><!--            Type Specific-->
+<!--            Type Specific END-->
+
+            <ReviewSubscriptionForm v-if="formStage === 9" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
+
+
+
+<!--            <div v-if="serviceTag === 'apple_music'">-->
+<!--                <CreateIntroForm v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <PaymentMethodForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <AppleStoreRegionForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <SetAppleMusicPriceForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <ActiveMembersForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />-->
+<!--                <SubscriptionPlanForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <BillingDayForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <ConfirmationForm v-if="formStage === 7" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <ReviewForm v-if="formStage === 8" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />-->
+<!--            </div>-->
+
+<!--            <div v-else>-->
+<!--                <DefaultCreateIntroForm v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <DefaultPaymentMethodForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <DefaultEnterPriceForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <DefaultActiveMembersForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />-->
+<!--                <DefaultSubscriptionPlanForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <DefaultBillingDayForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />-->
+<!--                <DefaultReviewForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />-->
+<!--            </div>-->
+        </div>
+
+
+
+        <div v-if="currentSubscriptionServiceData.join_type === 'instant_access'">
+            <div v-if="serviceTag === 'spotify'">
+                <SpotifyCreateIntroForm v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
+                <SpotifyActiveMembersForm
+                        v-if="formStage === 1"
+                        :current-subscription-service-data="currentSubscriptionServiceData"
+                />
+                <SpotifyAddLinkForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
+                <SpotifyHomeAddressForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" />
+                <SpotifySubscriptionPlanForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" />
+                <SpotifyBillingDayForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />
+
+                <SpotifyReviewForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />
             </div>
 
             <div v-else>
@@ -29,40 +77,17 @@
                 <DefaultPaymentMethodForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
                 <DefaultEnterPriceForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
                 <DefaultActiveMembersForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
-                <DefaultSubscriptionPlanForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <DefaultBillingDayForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <DefaultReviewForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
+                <DefaultSubscriptionJoinLinkForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
+                <DefaultSubscriptionPlanForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />
+                <DefaultBillingDayForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />
+                <DefaultReviewForm v-if="formStage === 7" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
             </div>
         </div>
 
-          <div v-if="currentSubscriptionServiceData.join_type === 'instant_access'">
-              <div v-if="serviceTag === 'spotify'">
-                  <SpotifyCreateIntroForm v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
-                  <SpotifyActiveMembersForm
-                          v-if="formStage === 1"
-                          :current-subscription-service-data="currentSubscriptionServiceData"
-                  />
-                  <SpotifyAddLinkForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
-                  <SpotifyHomeAddressForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" />
-                  <SpotifySubscriptionPlanForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" />
-                  <SpotifyBillingDayForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />
 
-                  <SpotifyReviewForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />
-              </div>
+        <div v-if="currentSubscriptionServiceData.join_type === 'member_get_access'">
 
-              <div v-else>
-                  <DefaultCreateIntroForm v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
-                  <DefaultPaymentMethodForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
-                  <DefaultEnterPriceForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
-                  <DefaultActiveMembersForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
-                  <DefaultSubscriptionJoinLinkForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
-                  <DefaultSubscriptionPlanForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />
-                  <DefaultBillingDayForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />
-                  <DefaultReviewForm v-if="formStage === 7" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
-              </div>
-          </div>
-
-
+        </div>
 
       </div>
     </div>
@@ -77,13 +102,9 @@ import BaseLayout from "@/layout/BaseLayout";
 import ActiveMembersForm from "@/components/forms/createSubscription/appleMusic/ActiveMembersForm";
 import SubscriptionPlanForm from "@/components/forms/createSubscription/appleMusic/SubscriptionPlanForm";
 import BillingDayForm from "@/components/forms/createSubscription/appleMusic/BillingDayForm";
-import ReviewForm from "@/components/forms/createSubscription/appleMusic/ReviewForm";
+// import ReviewForm from "@/components/forms/createSubscription/appleMusic/ReviewForm";
 import ConfirmationForm from "@/components/forms/createSubscription/appleMusic/ConfirmationForm";
 import PreAuthCard from "@/components/cards/PreAuthCard";
-import AppleStoreRegionForm from "@/components/forms/createSubscription/appleMusic/AppleStoreRegionForm.vue";
-import PaymentMethodForm from "../../components/forms/createSubscription/appleMusic/PaymentMethodForm.vue";
-import CreateIntroForm from "../../components/forms/createSubscription/appleMusic/CreateIntroForm.vue";
-import SetAppleMusicPriceForm from "../../components/forms/createSubscription/appleMusic/SetAppleMusicPriceForm.vue";
 
 import SpotifyCreateIntroForm from "../../components/forms/createSubscription/spotify/SpotifyCreateIntroForm.vue";
 import SpotifyActiveMembersForm from "../../components/forms/createSubscription/spotify/SpotifyActiveMembersForm.vue";
@@ -104,6 +125,12 @@ import DefaultEnterPriceForm from "@/components/forms/createSubscription/default
 // import SpotifyReviewBreakdownList from "@/components/lists/spotify/SpotifyReviewBreakdownList.vue";
 import DefaultSubscriptionJoinLinkForm
     from "@/components/forms/createSubscription/default/DefaultSubscriptionJoinLinkForm.vue";
+import HowItWorksForm from "@/components/forms/createSubscription/HowItWorksForm.vue";
+import SubscriptionAccessTypeForm from "@/components/forms/createSubscription/SubscriptionAccessTypeForm.vue";
+import SetSlotPriceForm from "@/components/forms/createSubscription/SetSlotPriceForm.vue";
+import SelectSubscriptionRegionForm from "@/components/forms/createSubscription/SelectSubscriptionRegionForm.vue";
+import CreateSubscriptionIntroForm from "@/components/forms/createSubscription/CreateSubscriptionIntroForm.vue";
+import ReviewSubscriptionForm from "@/components/forms/createSubscription/ReviewSubscriptionForm.vue";
 
 export default {
   name: "CreateSubscription",
@@ -114,6 +141,12 @@ export default {
     };
   },
   components: {
+      ReviewSubscriptionForm,
+      CreateSubscriptionIntroForm,
+      SelectSubscriptionRegionForm,
+      SetSlotPriceForm,
+      SubscriptionAccessTypeForm,
+      HowItWorksForm,
       DefaultSubscriptionJoinLinkForm,
       DefaultEnterPriceForm,
       DefaultReviewForm,
@@ -124,16 +157,16 @@ export default {
       DefaultCreateIntroForm,
     PreAuthCard,
     ConfirmationForm,
-    ReviewForm,
+    // ReviewForm,
     BillingDayForm,
     SubscriptionPlanForm,
     ActiveMembersForm,
     BaseLayout,
     ComponentLoader,
-    AppleStoreRegionForm,
-    PaymentMethodForm,
-    CreateIntroForm,
-    SetAppleMusicPriceForm,
+    // AppleStoreRegionForm,
+    // PaymentMethodForm,
+    // CreateIntroForm,
+    // SetAppleMusicPriceForm,
     SpotifyCreateIntroForm,
     SpotifyActiveMembersForm,
     SpotifyAddLinkForm,

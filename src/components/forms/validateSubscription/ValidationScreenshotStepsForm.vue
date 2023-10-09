@@ -13,7 +13,7 @@
 
     <ComponentLoader v-if="componentLoading" />
       <div class="app-form">
-          <p class="page-title">Subscription Verification Steps</p>
+          <p class="page-title">Verification Steps</p>
           <p class="page-sub">
               Follow these steps to get the evidence required to verify your subscription.
           </p>

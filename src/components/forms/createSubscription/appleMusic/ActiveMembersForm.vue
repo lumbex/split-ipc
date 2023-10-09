@@ -12,10 +12,10 @@
     </div>
 
     <div class="app-form">
-      <p class="page-title text-3xl text-white mb-2">How many people are you currently sharing with?</p>
+      <p class="page-title text-3xl text-white mb-2">How many people are on your plan?</p>
       <p class="page-sub">
-        How many people are currently sharing your Apple Music Family plan?
-        Select one option.
+          Select the <span class="text-white">total</span> number of people sharing your <span class="text-white">{{ currentSubscriptionServiceData.name }}</span> plan currently.
+          <br /> <br /> Select one option.
       </p>
       <div class="grid-options">
         <div
@@ -26,23 +26,21 @@
           :class="{ active: n === activeMembers }"
         >
           <span v-if="n === 1">Just Me</span>
-          <span v-else-if="n === 2">1 person</span>
-          <span v-else>{{ n - 1 }} people</span>
+          <span v-else-if="n === currentSubscriptionServiceData.max_capacity">We're full</span>
+          <span v-else>{{ n  }}  of us</span>
         </div>
       </div>
       <br />
       <div class="space-filler"></div>
 
       <div class="app-form-base">
-        <!-- <div @click="checked = !checked" class="custom-checkbox">
-          <div class="question">
-            I confirm that I have an active Apple Music Family subscription
+          <div v-if="activeMembers !== ''" class="form-info-box">
+              <img
+                      src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696254382/splitcash/images/info.square.fill_xwatzk.png"
+                      alt="more info" />
+              <p> There are {{ availableSlots }} available slots in your subscription</p>
+
           </div>
-          <div class="indicator">
-            <span v-if="checked"><CheckedIcon /></span>
-            <span v-else><UncheckedIcon /></span>
-          </div>
-        </div> -->
 
         <button
           @click="submit"
@@ -72,7 +70,9 @@ export default {
     return { activeMembers: "", checked: false };
   },
   computed: {
-
+      availableSlots () {
+          return this.currentSubscriptionServiceData.max_capacity - this.activeMembers
+      }
   },
   methods: {
     goBack() {

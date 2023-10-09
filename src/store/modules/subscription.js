@@ -31,6 +31,11 @@ export const state = {
       value: "3months",
       title: "Every 3 months",
       recommended: false
+    },
+    {
+      value: "monthly",
+      title: "Every month",
+      recommended: false
     }
   ],
   availableAppleMusicRegion: [
@@ -80,7 +85,8 @@ export const state = {
   currentSubscriptionTerms: {
     test: "valuu"
   },
-  currentSubscriptionInfo: {}
+  currentSubscriptionInfo: {},
+  slotPriceInputCurrency: "", // NGN or USD
 };
 
 export const getters = {
@@ -122,6 +128,9 @@ export const getters = {
   },
   getCurrentSubscriptionInfo: state => {
     return state.currentSubscriptionInfo;
+  },
+  getSlotPriceInputCurrency: state => {
+    return state.slotPriceInputCurrency;
   }
 };
 
@@ -155,6 +164,9 @@ export const mutations = {
   },
   SET_CURRENT_SUBSCRIPTION_INFO(state, payload) {
     state.currentSubscriptionInfo = payload;
+  },
+  SET_SLOT_PRICE_INPUT_CURRENCY(state, payload) {
+    state.slotPriceInputCurrency = payload;
   }
 };
 
@@ -353,6 +365,41 @@ export const actions = {
     );
   },
 
+  createSubscription: ({}, createBody) => {
+
+
+    const payload = {
+      activeMembers: createBody.activeMembers - 1,
+      paymentPlan: createBody.plan,
+      nextBillingDate: createBody.billingDate.slice(0, -2),
+      categoryID: createBody.id,
+      subscriptionPlan: createBody.name,
+      fixed_amount: createBody.slotPrice,
+      fixed_amount_currency: createBody.slotPriceInputCurrency,
+      privacy: createBody.privacy,
+      extraData: {
+        region: createBody.region
+      }
+    };
+  
+
+    const successAction = responseData => {
+      const message = {
+        messageAction: "subscription_created",
+        messageBody: JSON.stringify(responseData.usersSubscriptions)
+      };
+      StoreUtils.dispatch("ipc/postMessage", message);
+    };
+
+    return subscriptionService.createSubscription(
+      payload,
+      successAction,
+      LoaderUtils.types.COMPONENT,
+      null,
+      false
+    );
+  },
+
   createAppleMusicSubscription: ({}, createBody) => {
     // console.log("createAppleMusicSubscription =>", createBody)
 
@@ -373,7 +420,7 @@ export const actions = {
         ).toFixed(2)
       }
     };
-  
+
 
     const successAction = responseData => {
       const message = {

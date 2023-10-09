@@ -16,6 +16,15 @@
                 <CloseIcon />
             </div>
         </div>
+
+        <div class="base">
+            <button
+                @click="closePreviewModal"
+                class="app-btn light-btn"
+            >
+                Close Preview
+            </button>
+        </div>
     </div>
 
     <div v-else @click="toggleFullscreen" class="screenshot-preview">
@@ -33,6 +42,7 @@
             <div class="icon">
                 <AnchorRightIcon />
             </div>
+
         </div>
     </div>
 </template>
@@ -58,6 +68,9 @@ export default {
     methods: {
         toggleFullscreen() {
             this.isFullscreen = !this.isFullscreen
+        },
+        closePreviewModal() {
+            this.isFullscreen = false
         }
     }
 }
