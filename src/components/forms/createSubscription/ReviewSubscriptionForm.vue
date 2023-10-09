@@ -30,8 +30,6 @@
 <script>
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 import ReviewBreakdownList from "@/components/lists/appleMusic/ReviewBreakdownList";
-import CheckedIcon from "@/components/icons/CheckedIcon";
-import UncheckedIcon from "@/components/icons/UncheckedIcon";
 import BackIcon from "@/components/icons/BackIcon";
 import ComponentLoader from "@/components/loaders/ComponentLoader";
 
@@ -40,8 +38,6 @@ export default {
   components: {
     ComponentLoader,
     BackIcon,
-    UncheckedIcon,
-    CheckedIcon,
     ReviewBreakdownList
   },
   data() {
