@@ -67,14 +67,12 @@
 </template>
 
 <script>
-import CheckedIcon from "@/components/icons/CheckedIcon.vue";
 import BackIcon from "@/components/icons/BackIcon.vue";
-import UncheckedIcon from "@/components/icons/UncheckedIcon.vue";
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 
 export default {
     name: "SubscriptionAccessTypeForm",
-    components: {UncheckedIcon, BackIcon, CheckedIcon},
+    components: { BackIcon },
     props: {
         currentSubscriptionServiceData: {
             type: Object,
