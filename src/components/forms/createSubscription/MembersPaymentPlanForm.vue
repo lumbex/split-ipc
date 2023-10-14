@@ -11,10 +11,11 @@
       </div>
     </div>
     <div class="app-form">
-      <p class="page-title text-3xl text-white mb-2">How frequently should members be charged?</p>
+      <p class="page-title text-3xl text-white mb-2">How frequently should members make payment?</p>
       <p class="page-sub">
-          This is can be a one time charge, <span>yearly</span>, <span>6 months</span>, <span>3 months</span> or every<span>months</span>.
-          <br /> <br /> Select a plan.
+          The payment plan is how often members make payment for your subscription
+<!--          - this payment is only released to you on the payday of every subscription.-->
+          <br /> <br /> Select a payment plan.
       </p>
       <div class="block-options">
         <div
@@ -36,7 +37,7 @@
           class="app-btn light-btn"
           :disabled="selectedPlan === ''"
         >
-          Continue to Billing Date
+          Continue
         </button>
       </div>
     </div>
@@ -48,7 +49,7 @@ import StoreUtils from "@/utils/baseUtils/StoreUtils";
 import BackIcon from "@/components/icons/BackIcon";
 
 export default {
-  name: "SubscriptionPlanForm",
+  name: "MembersPaymentPlanForm",
   components: { BackIcon },
     props: {
         currentSubscriptionServiceData: {

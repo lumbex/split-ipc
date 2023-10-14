@@ -3,57 +3,57 @@
         <div class="app-form">
             <p class="page-title-sm ">How It Works</p>
             <p class="text-base text-grey-500 mb-8">
-                Please read and agree to the following terms before you continue.
+                Read the following to understand how sharing your subscription works in the Splitverse.
             </p>
             <div class="block-options">
                 <div class="option intro flex flex-row gap-2 p-2 h-10">
                     <img
-                            class="h-auto w-10 "
+                            class="h-auto w-8 "
                             src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696253235/splitcash/images/List_tt1hyj.png"
                             alt="create sub"
                     />
                     <div class="text-base text-white">
-                        List your subscription - set how much each member pays monthly
+                        Tell us about your subscription and how much you want a member to pay.
                     </div>
                 </div>
                 <div class="option intro flex flex-row gap-2 p-2 h-10">
                     <img
-                            class="h-auto w-10 "
+                            class="h-auto w-8 "
                             src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696253230/splitcash/images/verify_gz9ava.png"
                             alt="verify your sub"
                     />
                     <div class="text-base text-white">
-                        Verify your subscription and it becomes available in the Splitverse
+                        Next, we verify that your subscription is valid before it enters the Splitverse
                     </div>
                 </div>
                 <div class="option intro flex flex-row gap-2 p-2 h-10">
                     <img
-                            class="h-auto w-10 "
+                            class="h-auto w-8 "
                             src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696253226/splitcash/images/Control_mhnzfl.png"
                             alt="Control access"
                     />
                     <div class="text-base text-white">
-                        As the owner, you’re responsible for managing access and payment
+                        As the owner, you’re responsible for managing the subscription
                     </div>
                 </div>
                 <div class="option intro flex flex-row gap-2 p-2 h-10">
                     <img
-                            class="h-auto w-10 "
+                            class="h-auto w-8 "
                             src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696253332/splitcash/images/banknote_pfdqtr.png"
                             alt="monthly settlement"
                     />
                     <div class="text-base text-white">
-                        You’re credited members contribution  called Monthly Settlements
+                        You get members payments every month as <span class="font-bold">Settlements</span>
                     </div>
                 </div>
                 <div class="option intro flex flex-row gap-2 p-2 h-10">
                     <img
-                            class="h-auto w-10 "
+                            class="h-auto w-8 "
                             src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696253214/splitcash/images/Percentage_ydjgve.png"
                             alt="host charge"
                     />
                     <div class="text-base text-white">
-                        SplitCash takes a 10% charge on your monthly settlements
+                        A 10% fee applies to all members payments
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@
             <div class="app-form-base">
                 <div @click="checked = !checked" class="custom-checkbox">
                     <div class="question">
-                        I've read and I understand the terms of hosting my subscription in the Splitverse
+                        I've read and I understand how subscription sharing works.
                     </div>
                     <div class="indicator">
                         <span v-if="checked"><CheckedIcon /></span>

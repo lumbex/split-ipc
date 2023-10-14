@@ -40,7 +40,7 @@
 
       <div class="app-form-base">
           <div class="form-info-box">
-              <img src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696254382/splitcash/images/info.square.fill_xwatzk.png"
+              <img src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1697057849/info.square.fill.grey_mg7mdm.png"
                    alt="more info" />
               <p> All members must be in the same region to share this Subscription.</p>
           </div>

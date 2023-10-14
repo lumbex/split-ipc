@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import SubscriptionUpdateSuccessCard from "@/components/cards/updateSubscriptionTerms/SubscriptionUpdateSuccessCard";
+import SubscriptionUpdateSuccessCard from "@/components/cards/updateSubscriptionTerms/SubscriptionUpdateSuccessCard.vue";
 
 export default {
   name: "UpdateTermsSuccessForm",

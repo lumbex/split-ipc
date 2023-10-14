@@ -2,12 +2,12 @@
   <div class="app-form-wrapper">
     <div class="top-nav">
       <div class="go-back">
-        <a @click="goBack"
-          ><span class="icon"><BackIcon /></span>Back</a
-        >
+        <a @click="goBack">
+            <span class="icon"><BackIcon /></span> Back
+        </a>
       </div>
       <div class="up-next">
-        <a @click="changeInputCurrency()" class="change-input-ccy-btn">Change Currency</a>
+        <a @click="changeInputCurrency()" class="change-input-ccy-btn">Swap Currency</a>
       </div>
     </div>
 
@@ -18,7 +18,7 @@
 <!--          <p>currentSubscriptionServiceData =>> {{currentSubscriptionServiceData}}</p>-->
 
           <p class="page-title text-3xl text-white mb-2">
-              How much will each member pay monthly?
+              Change how much will each member pay monthly?
           </p>
 
           <ComponentLoader v-if="componentLoader" />
@@ -204,7 +204,7 @@ import {th} from "date-fns/locale";
 import AppCurrencyReaderComponent from "@/components/forms/utilityComponents/AppCurrencyReaderComponent.vue";
 
 export default {
-  name: "SetSlotPriceForm",
+  name: "UpdateSlotPriceForm",
   components: {
       AppCurrencyReaderComponent,
       IncreaseSlotPriceIcon,
@@ -241,6 +241,11 @@ export default {
       componentLoader() {
           return StoreUtils.rootGetters("loader/getLoader", "component");
       },
+      currentSubscriptionTerms() {
+          return StoreUtils.rootGetters(
+              "subscription/getCurrentSubscriptionTerms"
+          );
+      },
       slotPriceInputCurrency() {
           return StoreUtils.rootGetters("subscription/getSlotPriceInputCurrency");
       },
@@ -248,7 +253,7 @@ export default {
           return StoreUtils.rootGetters("subscription/getSuggestedDollarToNairaRate");
       },
       availableSlots() {
-          return this.currentSubscriptionServiceData.max_capacity - this.formBody.activeMembers;
+          return this.currentSubscriptionTerms.sharingSlots;
       },
       totalSlotPriceCalculated() {
           return this.slotPrice * this.availableSlots;
@@ -265,13 +270,12 @@ export default {
           StoreUtils.commit("form/DECREASE_FORM_STAGE_BY_ONE");
       },
       initializeSlotPrice() {
-          const maxSlotPrice = parseFloat(this.currentSubscriptionServiceData.max_price)
-          const tenPercentOfMaxSlotPrice = ((10 / 100) * parseFloat(this.currentSubscriptionServiceData.max_price))
+          const currentSlotFixedPrice = parseFloat(this.currentSubscriptionTerms.currentSlotFixedPrice)
 
-          this.slotPrice = (maxSlotPrice - tenPercentOfMaxSlotPrice).toFixed(2)
+          this.slotPrice = currentSlotFixedPrice.toFixed(2)
       },
       initializeSlotPriceInputCurrency() {
-          StoreUtils.commit("subscription/SET_SLOT_PRICE_INPUT_CURRENCY", this.currentSubscriptionServiceData.currency)
+          StoreUtils.commit("subscription/SET_SLOT_PRICE_INPUT_CURRENCY", this.currentSubscriptionTerms.currentSlotFixedPriceCurrency)
       },
       initializeSlotPriceLimiters() {
           const minPriceLimit = parseFloat(this.currentSubscriptionServiceData.min_price_limit)
@@ -344,19 +348,6 @@ export default {
           const maxPriceLimit = parseFloat(this.maxPriceLimit)
           const condition = slotPrice >= minPriceLimit && slotPrice <= maxPriceLimit
 
-          // console.log("<===== isValidAmount =======>")
-          // console.log("typeof.slotPrice =>", typeof slotPrice)
-          // console.log("this.slotPrice =>", slotPrice)
-          // console.log("typeof.minPriceLimit =>", typeof minPriceLimit)
-          // console.log("this.minPriceLimit =>", minPriceLimit)
-          // console.log("typeof.slotPrice =>", typeof minPriceLimit)
-          // console.log("this.minPriceLimit =>", minPriceLimit)
-          // console.log("typeof.maxPriceLimit =>", typeof maxPriceLimit)
-          // console.log("this.maxPriceLimit =>", maxPriceLimit)
-          // console.log("this.condition =>", condition)
-          // console.log("this.conditionPt1 =>", conditionPt1)
-          // console.log("this.conditionPt2 =>", conditionPt2)
-          // console.log("<============>")
 
           if (condition) {
               this.slotPriceError = "";
@@ -376,13 +367,9 @@ export default {
                   availableSlots: this.availableSlots,
                   fees: this.feesCalculated,
                   totalSettlement: this.totalSettlementCalculated,
+                  plan: this.currentSubscriptionTerms.plan
               });
 
-              if (this.currentSubscriptionServiceData.tag === 'canva') {
-                  StoreUtils.commit("form/BUILD_FORM_BODY", {
-                      region:  "NG"
-                  });
-              }
               StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
           } else {
               this.costError =

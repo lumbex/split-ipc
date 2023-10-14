@@ -2,20 +2,16 @@
   <BaseLayout>
     <PreAuthCard v-if="!userAuthenticated" />
     <div v-else class="app-page full-page">
-      <ComponentLoader v-if="isLoading" />
-      <div v-else class="create-subscription">
-        <UpdateSubscriptionPlanForm
-          v-if="formStage === 0"
-          :service-tag="serviceTag"
-        />
-        <UpdatePaymentMethodForm v-if="formStage === 1" />
+<!--      <ComponentLoader v-if="isLoading" />-->
+      <div class="create-subscription">
+<!--          <p>formStage => {{ formStage }}</p>-->
+<!--          <p>currentSubscriptionTerms => {{ currentSubscriptionTerms }}</p>-->
+          <UpdateSubscriptionIntroForm v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
+          <UpdateMembersPaymentPlanForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
+          <UpdateSlotPriceForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
+          <ReviewSubscriptionUpdateForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" />
+          <UpdateTermsSuccessForm v-if="formStage === 4"  />
 
-        <UpdateAppleMusicPriceForm v-if="formStage === 2" />
-
-        <UpdateTermsSuccessForm
-          v-if="formStage === 5"
-          :service-tag="serviceTag"
-        />
 
         <!-- <div v-if="serviceTag === 'spotify'"></div> -->
       </div>
@@ -26,14 +22,15 @@
 
 <script>
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
-import ComponentLoader from "@/components/loaders/ComponentLoader";
 import BaseLayout from "@/layout/BaseLayout";
 import PreAuthCard from "@/components/cards/PreAuthCard";
 
-import UpdateSubscriptionPlanForm from "@/components/forms/updateSubscriptionTerms/appleMusic/UpdateSubscriptionPlanForm";
-import UpdatePaymentMethodForm from "../../components/forms/updateSubscriptionTerms/appleMusic/UpdatePaymentMethodForm.vue";
-import UpdateAppleMusicPriceForm from "../../components/forms/updateSubscriptionTerms/appleMusic/UpdateAppleMusicPriceForm.vue";
-import UpdateTermsSuccessForm from "@/components/forms/updateSubscriptionTerms/appleMusic/UpdateTermsSuccessForm";
+import UpdateTermsSuccessForm from "@/components/forms/updateSubscriptionTerms/UpdateTermsSuccessForm.vue";
+import UpdateMembersPaymentPlanForm from "@/components/forms/updateSubscriptionTerms/UpdateMembersPaymentPlanForm.vue";
+import UpdateSubscriptionIntroForm from "@/components/forms/updateSubscriptionTerms/UpdateSubscriptionIntroForm.vue";
+import UpdateSlotPriceForm from "@/components/forms/updateSubscriptionTerms/UpdateSlotPriceForm.vue";
+import JsonParserUtils from "@/utils/JsonParserUtils";
+import ReviewSubscriptionUpdateForm from "@/components/forms/updateSubscriptionTerms/ReviewSubscriptionUpdateForm.vue";
 
 export default {
   name: "UpdateSubscriptionTerms",
@@ -44,13 +41,13 @@ export default {
     };
   },
   components: {
+      ReviewSubscriptionUpdateForm,
+      UpdateTermsSuccessForm,
+      UpdateSlotPriceForm,
+      UpdateSubscriptionIntroForm,
+      UpdateMembersPaymentPlanForm,
     PreAuthCard,
-    UpdatePaymentMethodForm,
-    UpdateAppleMusicPriceForm,
-    UpdateTermsSuccessForm,
-    UpdateSubscriptionPlanForm,
     BaseLayout,
-    ComponentLoader
   },
   computed: {
     userAuthenticated() {
@@ -62,12 +59,24 @@ export default {
     currentServiceTag() {
       return StoreUtils.rootGetters("service/getCurrentServiceTag");
     },
-    availableServices() {
-      return StoreUtils.rootGetters("service/getAvailableServices");
+      currentSubscriptionServiceData() {
+          return StoreUtils.rootGetters(
+              "service/getCurrentSubscriptionServiceData");
+      },
+      currentSubscriptionServiceDataNotFetched() {
+          return JsonParserUtils.isObjectEmpty(this.currentSubscriptionServiceData)
+      },
+      currentSubscriptionTerms() {
+      return StoreUtils.rootGetters("subscription/getCurrentSubscriptionTerms");
     }
   },
   created() {
     StoreUtils.commit("service/SET_CURRENT_SERVICE_TAG", this.serviceTag);
-  }
+  },
+    updated() {
+        if (this.userAuthenticated && this.currentSubscriptionServiceDataNotFetched){
+            StoreUtils.dispatch("service/fetchSubscriptionServiceDataByTag", this.serviceTag);
+        }
+    }
 };
 </script>

@@ -37,6 +37,12 @@ class Utils {
   static generateNineRandomNumbers() {
     return Math.floor(100000000 + Math.random() * 900000000);
   }
+
+
+
+  static roundUp(value, decimals) {
+    return Number(Math.round(value + 'e' + decimals) + 'e-' + decimals).toFixed(decimals);
+  }
   
 }
 export default Utils;

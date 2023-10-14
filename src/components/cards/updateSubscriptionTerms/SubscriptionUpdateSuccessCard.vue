@@ -44,7 +44,7 @@ export default {
   },
   methods: {
     finish() {
-      StoreUtils.dispatch("subscription/completeSubscriptionTermsUpadate");
+      StoreUtils.dispatch("subscription/completeSubscriptionTermsUpdate");
     }
   }
 };

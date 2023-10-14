@@ -20,7 +20,7 @@ export const state = {
     {
       value: "yearly",
       title: "Once a year",
-      recommended: true
+      recommended: false
     },
     {
       value: "6months",
@@ -30,7 +30,7 @@ export const state = {
     {
       value: "3months",
       title: "Every 3 months",
-      recommended: false
+      recommended: true
     },
     {
       value: "monthly",
@@ -367,7 +367,6 @@ export const actions = {
 
   createSubscription: ({}, createBody) => {
 
-
     const payload = {
       activeMembers: createBody.activeMembers - 1,
       paymentPlan: createBody.plan,
@@ -378,7 +377,11 @@ export const actions = {
       fixed_amount_currency: createBody.slotPriceInputCurrency,
       privacy: createBody.privacy,
       extraData: {
-        region: createBody.region
+        region: createBody.region,
+        invitationLink: createBody.invitationLink,
+        address: createBody.address,
+        hostContact: createBody.hostContact,
+        hostContactExtension: createBody.hostContactExtension
       }
     };
   
@@ -479,13 +482,42 @@ export const actions = {
     );
   },
 
-  completeSubscriptionTermsUpadate: () => {
+
+  updateSubscriptionTerms: ({}, createBody) => {
+
+    // console.log("updateSubscriptionTerms =>", createBody)
+
+    const payload = {
+      subRef: StoreUtils.rootGetters("subscription/getCurrentSubscriptionTerms")
+          .subRef,
+      paymentPlan: createBody.plan,
+      fixed_amount: createBody.slotPrice,
+      fixed_amount_currency: createBody.slotPriceInputCurrency,
+    };
+
+
+    const successAction= () => {
+      StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
+    };
+
+
+    return subscriptionService.updateSubscriptionTerms(
+        payload,
+        successAction,
+        LoaderUtils.types.COMPONENT,
+        null,
+        false
+    );
+  },
+
+  completeSubscriptionTermsUpdate: () => {
     const message = {
       messageAction: "subscription_terms_updated",
       messageBody: JSON.stringify({})
     };
     StoreUtils.dispatch("ipc/postMessage", message);
   },
+
 
   updateAppleMusicSubscriptionTerms: () => {
     const formBody = StoreUtils.rootGetters("form/getFormBody");

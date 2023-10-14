@@ -11,10 +11,10 @@
       </div>
     </div>
     <div class="app-form">
-      <p class="page-title text-3xl text-white mb-2">How frequently should members be charged?</p>
+      <p class="page-title text-3xl text-white mb-2">Change members payment plan</p>
       <p class="page-sub">
-          This is can be a one time charge, <span>yearly</span>, <span>6 months</span>, <span>3 months</span> or every<span>months</span>.
-          <br /> <br /> Select a plan.
+          The payment plan is how often members make payment for your subscription
+          <br /> <br /> Choose a payment plan.
       </p>
       <div class="block-options">
         <div
@@ -24,8 +24,10 @@
           class="option"
           :class="{ active: plan.value === selectedPlan }"
         >
-          {{ plan.title }}
-          <span v-if="plan.recommended" class="recommended">Most Popular</span>
+            {{ plan.title }}
+            <span v-if="plan.value === currentSubscriptionTerms.plan" class="recommended">
+                Current Plan
+            </span>
         </div>
       </div>
       <div class="space-filler"></div>
@@ -36,7 +38,7 @@
           class="app-btn light-btn"
           :disabled="selectedPlan === ''"
         >
-          Continue to Billing Date
+          Continue
         </button>
       </div>
     </div>
@@ -48,7 +50,7 @@ import StoreUtils from "@/utils/baseUtils/StoreUtils";
 import BackIcon from "@/components/icons/BackIcon";
 
 export default {
-  name: "SubscriptionPlanForm",
+  name: "UpdateMembersPaymentPlanForm",
   components: { BackIcon },
     props: {
         currentSubscriptionServiceData: {
@@ -62,19 +64,27 @@ export default {
   computed: {
     availablePlanOptions() {
       return StoreUtils.rootGetters("subscription/getAvailablePlans");
-    }
+    },
+      currentSubscriptionTerms() {
+          return StoreUtils.rootGetters(
+              "subscription/getCurrentSubscriptionTerms"
+          );
+      }
   },
-  methods: {
-    goBack() {
-      StoreUtils.commit("form/DECREASE_FORM_STAGE_BY_ONE");
+    created() {
+      this.selectedPlan = this.currentSubscriptionTerms.plan
     },
-    selectPlan(plan) {
-      this.selectedPlan = plan.value;
-    },
-    submit() {
-      StoreUtils.commit("form/BUILD_FORM_BODY", { plan: this.selectedPlan });
-      StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
-    }
+    methods: {
+      goBack() {
+          StoreUtils.commit("form/DECREASE_FORM_STAGE_BY_ONE");
+      },
+      selectPlan(plan) {
+          this.selectedPlan = plan.value;
+      },
+      submit() {
+        StoreUtils.commit("form/BUILD_FORM_BODY", { plan: this.selectedPlan });
+        StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
+      }
   }
 };
 </script>

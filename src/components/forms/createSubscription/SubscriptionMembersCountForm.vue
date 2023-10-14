@@ -58,7 +58,7 @@
 import BackIcon from "@/components/icons/BackIcon";
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 export default {
-  name: "ActiveMembersForm",
+  name: "SubscriptionMembersCountForm",
   components: { BackIcon },
   props: {
       currentSubscriptionServiceData: {

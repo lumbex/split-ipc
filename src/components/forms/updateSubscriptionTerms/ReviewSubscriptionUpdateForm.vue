@@ -19,7 +19,7 @@
 
       <div class="app-form-base">
         <button @click="submit" class="app-btn">
-          Share my Subscription
+          Change Subscription Terms
         </button>
       </div>
     </div>
@@ -33,7 +33,7 @@ import BackIcon from "@/components/icons/BackIcon";
 import ComponentLoader from "@/components/loaders/ComponentLoader";
 
 export default {
-  name: "ReviewSubscriptionForm",
+  name: "ReviewSubscriptionUpdateForm",
   components: {
     ComponentLoader,
     BackIcon,
@@ -57,30 +57,17 @@ export default {
     componentLoading() {
       return StoreUtils.rootGetters("loader/getLoader", "component");
     },
-    serviceObject() {
-      return StoreUtils.rootGetters(
-        "service/getServiceObject",
-        this.serviceTag
-      )[0];
-    },
     formBody() {
       return StoreUtils.rootGetters("form/getFormBody");
     }
   },
   methods: {
-    openUrlInBrowser(url) {
-      const message = {
-        messageAction: "open_url_in_browser",
-        messageBody: JSON.stringify({ url: url })
-      };
-      StoreUtils.dispatch("ipc/postMessage", message);
-    },
     goBack() {
       StoreUtils.commit("form/DECREASE_FORM_STAGE_BY_ONE");
     },
     submit() {
       const payload = { ...this.currentSubscriptionServiceData, ...this.formBody };
-      StoreUtils.dispatch("subscription/createSubscription", payload);
+      StoreUtils.dispatch("subscription/updateSubscriptionTerms", payload);
     }
   }
 };

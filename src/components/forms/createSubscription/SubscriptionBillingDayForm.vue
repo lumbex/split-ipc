@@ -1,14 +1,15 @@
 <template>
   <div class="app-form-wrapper">
     <div class="top-nav">
-      <div class="go-back"><a @click="goBack"><span class="icon"><BackIcon /></span>Plan</a></div>
-      <div class="up-next"><p>Up Next: <span>Confirmation</span></p></div>
+      <div class="go-back"><a @click="goBack"><span class="icon"><BackIcon /></span>Back</a></div>
+      <div class="up-next">
+<!--          <p>Up Next: <span>Confirmation</span></p>-->
+      </div>
     </div>
     <div class="app-form">
       <p class="page-title text-3xl text-white mb-2">What’s the billing date?</p>
       <p class="page-sub">
           Select the day of the month your account gets billed for this Apple Music subscription.
-          Select the day of the month Apple bills your account for your subscription.
       </p>
       <br />
       <p class="page-question">I’m billed every month on the:</p>
@@ -53,7 +54,7 @@ import StoreUtils from "@/utils/baseUtils/StoreUtils";
 import BackIcon from "@/components/icons/BackIcon";
 
 export default {
-  name: "BillingDayForm",
+  name: "SubscriptionBillingDayForm",
   components: {BackIcon},
     props: {
         currentSubscriptionServiceData: {

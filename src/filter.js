@@ -33,6 +33,11 @@ Vue.filter("trimLastReturn", value => {
   return value.replace(/^\s+|\s+$/g, "");
 });
 
+Vue.filter("roundUpToTwoDecimalPlace", value => {
+  if (!value) return "0.00";
+  return value.toFixed(2);
+});
+
 Vue.filter("moneyFormat", value => {
   if (value && value !== 0 && value !== "") {
     value = value.toString().replace(/,/g, "");

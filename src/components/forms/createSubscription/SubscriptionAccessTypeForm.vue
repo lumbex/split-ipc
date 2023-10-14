@@ -3,17 +3,18 @@
         <div class="top-nav">
             <div class="go-back">
                 <a @click="goBack"
-                ><span class="icon"><BackIcon /></span>Terms</a
+                ><span class="icon"><BackIcon /></span>Back</a
                 >
             </div>
             <div class="up-next">
-                <p>Up Next: <span>Accessibility</span></p>
+<!--                <p>Up Next: <span>Accessibility</span></p>-->
             </div>
         </div>
         <div class="app-form">
             <p class="page-title">How will members join your subscription?</p>
             <p class="page-sub">
                 Select how you want members to join your subscription.
+                <br /> <br /> Select one option.
             </p>
             <div class="block-options">
                 <div
@@ -36,7 +37,7 @@
                     <img class="h-auto w-12" src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696254452/splitcash/images/open-access_e5djtz.png" alt="public" />
                     <div class="flex flex-col text-white">
                         <div class="text-l leading-6 mb-1">Open Sesame!</div>
-                        <div class="text-sm leading-4">Your subscription is open for anyone in the Splitverse to join</div>
+                        <div class="text-sm leading-4">Your subscription is open for anyone in the Splitverse to join.</div>
                     </div>
 
                     <span class="recommended text-[#F05151]">Recommended</span>
@@ -48,9 +49,9 @@
 
                 <div class="form-info-box">
                     <img
-                        src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696254382/splitcash/images/info.square.fill_xwatzk.png"
+                        src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1697057849/info.square.fill.grey_mg7mdm.png"
                         alt="more info" />
-                    <p> You can always change this later</p>
+                    <p> You can always change this later in the subscription settings</p>
 
                 </div>
 
