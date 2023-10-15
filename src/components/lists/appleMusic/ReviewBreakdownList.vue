@@ -81,7 +81,7 @@
       </article>
     </li>
 
-      <li>
+      <li v-if="formBody.billingDate">
           <article
                   class="breakdown-data-card flex items-start space-x-2 p-2 text-white"
           >
