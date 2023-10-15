@@ -717,7 +717,7 @@ a.center-link:hover {
     font-weight: 400;
     line-height: 18px;
     letter-spacing: -0.078px;
-    background: #2C2D2E;
+    background: rgba(44, 45, 46, 12%);
     text-align: left;
     margin-bottom: 20px;
 }
@@ -750,7 +750,7 @@ a.center-link:hover {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 0;
     margin-top: 54px;
 }
 .price-data .min-price{}
@@ -769,6 +769,11 @@ a.center-link:hover {
     align-items: center;
     gap: 8px;
 }
+.price-data .max-price .price-data-base{
+    justify-content: end;
+}
+
+
 .price-data .svg{}
 .price-data .price-data-value{
     font-size: 13px;
@@ -812,7 +817,7 @@ a.center-link:hover {
     font-weight: 400;
     line-height: 18px;
     letter-spacing: -0.078px;
-    margin: 0;
+    margin: 4px 0 0 0;
 }
 
 

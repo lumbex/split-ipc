@@ -348,6 +348,20 @@ export default {
           const maxPriceLimit = parseFloat(this.maxPriceLimit)
           const condition = slotPrice >= minPriceLimit && slotPrice <= maxPriceLimit
 
+          // console.log("<===== isValidAmount =======>")
+          // console.log("typeof.slotPrice =>", typeof slotPrice)
+          // console.log("this.slotPrice =>", slotPrice)
+          // console.log("typeof.minPriceLimit =>", typeof minPriceLimit)
+          // console.log("this.minPriceLimit =>", minPriceLimit)
+          // console.log("typeof.slotPrice =>", typeof minPriceLimit)
+          // console.log("this.minPriceLimit =>", minPriceLimit)
+          // console.log("typeof.maxPriceLimit =>", typeof maxPriceLimit)
+          // console.log("this.maxPriceLimit =>", maxPriceLimit)
+          // console.log("this.condition =>", condition)
+          // console.log("this.conditionPt1 =>", conditionPt1)
+          // console.log("this.conditionPt2 =>", conditionPt2)
+          // console.log("<============>")
+
 
           if (condition) {
               this.slotPriceError = "";
@@ -367,7 +381,7 @@ export default {
                   availableSlots: this.availableSlots,
                   fees: this.feesCalculated,
                   totalSettlement: this.totalSettlementCalculated,
-                  plan: this.currentSubscriptionTerms.plan
+                  // plan: this.currentSubscriptionTerms.plan
               });
 
               StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
