@@ -9,7 +9,9 @@
     <div class="app-form">
       <p class="page-title text-3xl text-white mb-2">What’s the billing date?</p>
       <p class="page-sub">
-          Select the day of the month your account gets billed for this Apple Music subscription.
+          Select the day of the month your account gets billed for this 
+          <span class="text-white">{{ currentSubscriptionServiceData.name | firstCaseCapital }}</span>  
+          subscription.
       </p>
       <br />
       <p class="page-question">I’m billed every month on the:</p>

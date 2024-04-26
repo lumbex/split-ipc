@@ -18,16 +18,23 @@
             <SubscriptionAccessTypeForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData"/>
             <SubscriptionMembersCountForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" />
             <SubscriptionBillingDayForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" />
-            <SetSlotPriceForm v-if="formStage === 5" :current-subscription-service-data="currentSubscriptionServiceData" />
-            <MembersPaymentPlanForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />
+            
+            <BillingDateIsTooCloseForm v-if="formStage === 5"  :current-subscription-service-data="currentSubscriptionServiceData" />
+
+            <SetSlotPriceForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <AboutYourSettlementForm v-if="formStage === 7" :current-subscription-service-data="currentSubscriptionServiceData" />
+            
+            <MembersPaymentPlanForm v-if="formStage === 8" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <HostContactForm v-if="formStage === 9" :current-subscription-service-data="currentSubscriptionServiceData" />
 
 
 <!--            Type Specific-->
-            <TypeSpecificInputFormOne v-if="formStage === 7" :current-subscription-service-data="currentSubscriptionServiceData" />
-            <TypeSpecificInputFormTwo v-if="formStage === 8" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <TypeSpecificInputFormOne v-if="formStage === 10" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <TypeSpecificInputFormTwo v-if="formStage === 11" :current-subscription-service-data="currentSubscriptionServiceData" />
 <!--            Type Specific END-->
 
-            <ReviewSubscriptionForm v-if="formStage === 9" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
+            <SharingGuidelinesForm v-if="formStage === 12" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
+            <ReviewSubscriptionForm v-if="formStage === 13" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
 
         </div>
       </div>
@@ -48,6 +55,9 @@ import JsonParserUtils from "@/utils/JsonParserUtils";
 import HowItWorksForm from "@/components/forms/createSubscription/HowItWorksForm.vue";
 import SubscriptionAccessTypeForm from "@/components/forms/createSubscription/SubscriptionAccessTypeForm.vue";
 import SetSlotPriceForm from "@/components/forms/createSubscription/SetSlotPriceForm.vue";
+import AboutYourSettlementForm from "@/components/forms/createSubscription/AboutYourSettlementForm.vue";
+import HostContactForm from "@/components/forms/createSubscription/HostContactForm.vue";
+import SharingGuidelinesForm from "@/components/forms/createSubscription/SharingGuidelinesForm.vue";
 
 import CreateSubscriptionIntroForm from "@/components/forms/createSubscription/CreateSubscriptionIntroForm.vue";
 import ReviewSubscriptionForm from "@/components/forms/createSubscription/ReviewSubscriptionForm.vue";
@@ -56,7 +66,7 @@ import TypeSpecificInputFormTwo from "@/components/forms/createSubscription/util
 import MembersPaymentPlanForm from "@/components/forms/createSubscription/MembersPaymentPlanForm.vue";
 import SubscriptionBillingDayForm from "@/components/forms/createSubscription/SubscriptionBillingDayForm.vue";
 import SubscriptionMembersCountForm from "@/components/forms/createSubscription/SubscriptionMembersCountForm.vue";
-
+import BillingDateIsTooCloseForm from "@/components/forms/createSubscription/BillingDateIsTooCloseForm.vue";
 export default {
   name: "CreateSubscription",
   props: ["serviceTag"],
@@ -66,20 +76,24 @@ export default {
     };
   },
   components: {
-      SubscriptionMembersCountForm,
-      SubscriptionBillingDayForm,
-      MembersPaymentPlanForm,
-      TypeSpecificInputFormTwo,
-      TypeSpecificInputFormOne,
-      ReviewSubscriptionForm,
-      CreateSubscriptionIntroForm,
-      SetSlotPriceForm,
-      SubscriptionAccessTypeForm,
-      HowItWorksForm,
-      PreAuthCard,
-      BaseLayout,
-      ComponentLoader,
-  },
+    SubscriptionMembersCountForm,
+    SubscriptionBillingDayForm,
+    MembersPaymentPlanForm,
+    TypeSpecificInputFormTwo,
+    TypeSpecificInputFormOne,
+    ReviewSubscriptionForm,
+    CreateSubscriptionIntroForm,
+    SetSlotPriceForm,
+    AboutYourSettlementForm,
+    SubscriptionAccessTypeForm,
+    HowItWorksForm,
+    PreAuthCard,
+    BaseLayout,
+    ComponentLoader,
+    BillingDateIsTooCloseForm,
+    HostContactForm,
+    SharingGuidelinesForm
+},
   computed: {
     userAuthenticated() {
       return StoreUtils.rootGetters("user/getUserAuthenticated");

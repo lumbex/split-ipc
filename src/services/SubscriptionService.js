@@ -146,6 +146,29 @@ class SubscriptionService extends BaseService {
       getErrorMessage
     );
   }
+
+
+  checkBillingDate(
+    payload,
+    successAction,
+    loaderType,
+    errorType,
+    showSuccessMessage,
+    successCondition,
+    getErrorMessage
+  ) {
+    return this.makePostRequest(
+      "/checkBillingDate",
+      payload,
+      successAction,
+      loaderType,
+      errorType,
+      showSuccessMessage,
+      successCondition,
+      getErrorMessage
+    );
+  }
+
 }
 
 export default SubscriptionService;

@@ -4,19 +4,20 @@
 
       <SubscriptionJoinLinkForm v-if="currentSubscriptionServiceData.join_type === 'instant_access'" :current-subscription-service-data="currentSubscriptionServiceData" />
 
-       <HostContactForm v-if="currentSubscriptionServiceData.join_type === 'member_get_access'" :current-subscription-service-data="currentSubscriptionServiceData" />
+       <SubscriptionCredentialsForm v-if="currentSubscriptionServiceData.join_type === 'member_get_access'" :current-subscription-service-data="currentSubscriptionServiceData" />
+       
   </div>
 </template>
 
 <script>
 import ConfirmationForm from "@/components/forms/createSubscription/SubscriptionConfirmationForm.vue";
 import SubscriptionJoinLinkForm from "@/components/forms/createSubscription/SubscriptionJoinLinkForm.vue";
-import HostContactForm from "@/components/forms/createSubscription/HostContactForm.vue";
+import SubscriptionCredentialsForm from "@/components/forms/createSubscription/SubscriptionCredentialsForm.vue";
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 
 export default {
     name: "TypeSpecificInputFormOne",
-    components: { HostContactForm, SubscriptionJoinLinkForm, ConfirmationForm },
+    components: { SubscriptionCredentialsForm, SubscriptionJoinLinkForm, ConfirmationForm },
     props: {
         currentSubscriptionServiceData: {
             type: Object,

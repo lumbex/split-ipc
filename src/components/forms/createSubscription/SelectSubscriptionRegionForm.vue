@@ -13,9 +13,11 @@
     <div class="app-form">
       <p class="page-title">What’s the Region of Your Subscription?</p>
       <p class="page-sub">
-          Select the region of your <span class="text-white">{{ currentSubscriptionServiceData.name }}</span> subscription. <br />
-        <br />
-        Select a region.
+          Select the region of your 
+          <span class="text-white">{{ currentSubscriptionServiceData.name | firstCaseCapital }}</span> 
+          subscription. 
+          <br /><br />
+          Select a region.
       </p>
 
       <div class="block-options">

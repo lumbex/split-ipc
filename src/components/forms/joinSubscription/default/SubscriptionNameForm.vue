@@ -13,48 +13,32 @@
       <div class="app-form">
 
           <p class="page-title text-3xl text-white mb-2">
-              What’s your WhatsApp number?
+            Identify yourself
           </p>
           <p class="page-sub">
-            From time to time members might need help with your subscription - be nice.
-              <!-- Make sure your number is available on <span class="text-white font-bold">WhatsApp</span> so members can easily reach you for access to this subscription -->
+            Please provide your 
+            <span class="text-white font-bold">{{ currentSubscriptionServiceData.name }} name/username</span>
+            exactly as it is on your profle or settings page.
           </p>
 
           <form action="#" @submit.prevent="submit">
               <div class="">
-                  <div class="form-group alt no-pad">
+                <div class="form-group">
+                    <label for="pageInput">Subscription name/username</label>
+                    <input
+                      type="text"
+                      v-model="subscriptionName"
+                      v-on:change="isValidInput"
+                      required
+                      id="subscriptionName"
+                      placeholder="Bexx Adeniyi"
+                      autocomplete="none"
+                    />
+                </div>
 
-                      <div class="flex flex-row justify-start">
-                          <div class="number-currency-input flex-shrink-0 flex items-center">
-                              <span>+234</span>
-                          </div>
-
-                          <div class="input-wrap-hold w-[90%] flex-grow-1 flex-basis-0">
-                              <div class="">
-                                  <label class="px-2" for="cost">Whatsapp Number</label>
-                              </div>
-
-                              <div class="flex flex-row items-center">
-                                  <input
-                                      type="text"
-                                      class="alt"
-                                      v-model="whatsappNumber"
-                                      v-on:change="isValidInput"
-                                      required
-                                      id="host-contact"
-                                      placeholder="8031342069"
-                                  />
-                              </div>
-
-                          </div>
-                      </div>
-                  </div>
-
-
-                  <p v-if="inputError.length > 0" class="form-group-error">
-                      {{ inputError }}
-                  </p>
-
+                <p v-if="inputError.length > 0" class="form-group-error">
+                    {{ inputError }}
+                </p>
 
               </div>
 
@@ -64,7 +48,7 @@
                   <button
                       type="submit"
                       class="app-btn light-btn"
-                      :disabled="inputError !== ''"
+                      :disabled="inputError !== '' || subscriptionName === ''"
                   >
                       Continue
                   </button>
@@ -79,7 +63,7 @@ import BackIcon from "@/components/icons/BackIcon";
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 
 export default {
-  name: "HostContactForm",
+  name: "SubscriptionNameForm",
   components: {
       BackIcon },
     props: {
@@ -91,7 +75,7 @@ export default {
   data() {
     return {
         checked: false,
-        whatsappNumber: "",
+        subscriptionName: "",
         inputError: ""
     };
   },
@@ -109,13 +93,13 @@ export default {
       },
       isValidInput() {
           // const slotPrice = parseFloat(this.slotPrice)
-          const condition = this.whatsappNumber.length >= 10 && this.whatsappNumber.length <= 11
+          const condition = this.subscriptionName.length >= 3
 
           if (condition) {
               this.inputError = "";
               return true;
           } else {
-              this.inputError = "Please enter a valid phone number";
+              this.inputError = "Please enter a valid name";
               return false;
           }
       },
@@ -123,11 +107,11 @@ export default {
           if (this.inputError === '') {
 
               StoreUtils.commit("form/BUILD_FORM_BODY", {
-                  hostContact: this.whatsappNumber,
-                  hostContactExtension: "+234",
+                subscriptionName: this.subscriptionName,
               });
+              
+              StoreUtils.dispatch("subscription/completeDefaultNewMemberJoin");
 
-              StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
           }
       }
   }

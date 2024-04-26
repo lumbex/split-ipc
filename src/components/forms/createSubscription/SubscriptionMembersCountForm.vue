@@ -14,7 +14,9 @@
     <div class="app-form">
       <p class="page-title text-3xl text-white mb-2">How many people are on your plan?</p>
       <p class="page-sub">
-          Select the <span class="text-white">total</span> number of people sharing your <span class="text-white">{{ currentSubscriptionServiceData.name }}</span> plan currently.
+          Select the <span class="text-white">total</span> number of people sharing your 
+          <span class="text-white">{{ currentSubscriptionServiceData.name | firstCaseCapital }}</span>  
+          plan currently.
           <br /> <br /> Select one option.
       </p>
       <div class="grid-options">

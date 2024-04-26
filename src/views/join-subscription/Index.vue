@@ -32,12 +32,22 @@
 
         <div v-if="currentSubscriptionServiceData.join_type === 'instant_access'">
             <div v-if="serviceTag === 'spotify'">
-                <MemberTermsConfirmationCard />
+              
+              <SubscriptionJoinFeaturesCard v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
+
+              <MemberTermsConfirmationCard v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
+
+              <SubscriptionNameForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
             </div>
             <div v-else>
-                <SubscriptionJoinFeaturesCard :current-subscription-service-data="currentSubscriptionServiceData" />
+
+              <SubscriptionJoinFeaturesCard v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
+
+              <SubscriptionNameForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
+            
             </div>
         </div>
+
         <div v-if="currentSubscriptionServiceData.join_type === 'member_get_access'">
             <SubscriptionJoinFeaturesCard v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
 <!--            <NewMemberJoinEmailForm v-if="formStage === 1" :service-tag="serviceTag" />-->
@@ -68,6 +78,8 @@ import SubscriptionJoinFeaturesCard from "@/components/cards/joinSubscription/de
 import ChangeRegionForm from "@/components/forms/joinSubscription/appleMusic/ChangeRegionForm.vue";
 import RegionCautionForm from "@/components/forms/joinSubscription/appleMusic/RegionCautionForm.vue";
 
+import SubscriptionNameForm from "@/components/forms/joinSubscription/default/SubscriptionNameForm.vue";
+
 
 export default {
   name: "JoinSubscription",
@@ -87,7 +99,8 @@ export default {
     ComponentLoader,
     SelectRegionForm,
     MemberTermsConfirmationCard,
-    NewMemberJoinEmailForm
+    NewMemberJoinEmailForm,
+    SubscriptionNameForm
   },
   computed: {
     componentLoaderTable() {

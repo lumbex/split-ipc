@@ -87,9 +87,17 @@ export const state = {
   },
   currentSubscriptionInfo: {},
   slotPriceInputCurrency: "", // NGN or USD
+  subscriptionBillingDateCheckedStatus: false,
+  subscriptionBillingData: {}
 };
 
 export const getters = {
+  getSubscriptionBillingDateCheckedStatus: state => {
+    return state.subscriptionBillingDateCheckedStatus;
+  },
+  getSubscriptionBillingData: state => {
+    return state.subscriptionBillingData;
+  },
   getCreateSubscriptionBody: state => {
     return state.createSubscriptionBody;
   },
@@ -167,10 +175,39 @@ export const mutations = {
   },
   SET_SLOT_PRICE_INPUT_CURRENCY(state, payload) {
     state.slotPriceInputCurrency = payload;
+  },
+  SET_SUBSCRIPTION_BILLING_DATE_CHECKED_STATUS(state, payload) {
+    state.subscriptionBillingDateCheckedStatus = payload;
+  },
+  SET_SUBSCRIPTION_BILLING_DATA(state, payload) {
+    state.subscriptionBillingData = payload;
   }
 };
 
 export const actions = {
+  checkBillingDate: ({}, createBody) => {
+    // { "": "23", "": "monthly" }
+    const payload = {
+      billingDate: createBody.billingDate.slice(0, -2),
+      frequency: "3months"
+    };
+  
+
+    const successAction = responseData => {
+      StoreUtils.commit("subscription/SET_SUBSCRIPTION_BILLING_DATE_CHECKED_STATUS", true);
+      
+      StoreUtils.commit("subscription/SET_SUBSCRIPTION_BILLING_DATA", responseData);
+    };
+
+    return subscriptionService.checkBillingDate(
+      payload,
+      successAction,
+      LoaderUtils.types.COMPONENT,
+      null,
+      false
+    );
+  },
+
   completeSpotifyQuickAccess: ({}) => {
     const message = {
       messageAction: "new_member_instant_access_complete",
@@ -244,7 +281,10 @@ export const actions = {
   completeSpotifyNewMemberJoin: ({}) => {
     const message = {
       messageAction: "new_member_join_info_collected",
-      messageBody: JSON.stringify({ categoryTag: "spotify", joinInfo: {} })
+      messageBody: JSON.stringify({ 
+        categoryTag: "spotify", 
+        joinInfo: { member_id: StoreUtils.rootGetters("form/getFormBody").subscriptionName } 
+      })
     };
     StoreUtils.dispatch("ipc/postMessage", message);
   },
@@ -252,7 +292,10 @@ export const actions = {
   completeDefaultNewMemberJoin: ({}) => {
     const message = {
       messageAction: "new_member_join_info_collected",
-      messageBody: JSON.stringify({ categoryTag: StoreUtils.rootGetters("service/getCurrentServiceTag"), joinInfo: {} })
+      messageBody: JSON.stringify({ 
+        categoryTag: StoreUtils.rootGetters("service/getCurrentServiceTag"), 
+        joinInfo: { member_id: StoreUtils.rootGetters("form/getFormBody").subscriptionName } 
+      })
     };
     StoreUtils.dispatch("ipc/postMessage", message);
   },
@@ -380,8 +423,10 @@ export const actions = {
         region: createBody.region,
         invitationLink: createBody.invitationLink,
         address: createBody.address,
-        hostContact: createBody.hostContact,
-        hostContactExtension: createBody.hostContactExtension
+        contactNumber: createBody.hostContact,
+        contactCountryCode: createBody.hostContactExtension,
+        sub_username: createBody.subscriptionUsername,
+        sub_password: createBody.subscriptionPassword
       }
     };
   

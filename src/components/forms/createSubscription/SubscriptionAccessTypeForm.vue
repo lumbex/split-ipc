@@ -18,18 +18,6 @@
             </p>
             <div class="block-options">
                 <div
-                        @click="selectOne('private')"
-                        class="option big flex flex-row gap-2 py-0 px-2  h-10"
-                        :class="{ active: selectedOption === 'private' }"
-                >
-                    <img class="h-auto w-12" src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696254452/splitcash/images/close-access_htwz5r.png" alt="private" />
-                    <div class="flex flex-col text-white">
-                        <div class="text-l leading-6 mb-1">Private Party</div>
-                        <div class="text-sm leading-4">Only people you share your subscription invite link with can join your subscription</div>
-                    </div>
-                </div>
-
-                <div
                         @click="selectOne('public')"
                         class="option big flex flex-row gap-2 py-0 px-2  h-10"
                         :class="{ active: selectedOption === 'public' }"
@@ -41,6 +29,18 @@
                     </div>
 
                     <span class="recommended text-[#F05151]">Recommended</span>
+                </div>
+
+                <div
+                        @click="selectOne('private')"
+                        class="option big flex flex-row gap-2 py-0 px-2  h-10"
+                        :class="{ active: selectedOption === 'private' }"
+                >
+                    <img class="h-auto w-12" src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1696254452/splitcash/images/close-access_htwz5r.png" alt="private" />
+                    <div class="flex flex-col text-white">
+                        <div class="text-l leading-6 mb-1">Private Party</div>
+                        <div class="text-sm leading-4">Only people you share your subscription invite link with can join your subscription</div>
+                    </div>
                 </div>
             </div>
             <div class="space-filler"></div>

@@ -25,11 +25,11 @@
         </div>
       </div>
       <button
-        @click="inviteSent"
+        @click="submit"
         :disabled="checked === false"
         class="app-btn light-btn"
       >
-        Make Payment
+        Continue
       </button>
     </div>
   </div>
@@ -67,12 +67,13 @@ export default {
     StoreUtils.commit("loader/SET_COMPONENT_LOADER", true);
   },
   methods: {
-    copyToClipboard(data) {
-      AppUtils.copyToClipBoard(data);
-      this.copied = true;
-    },
-    inviteSent() {
-      StoreUtils.dispatch("subscription/completeSpotifyNewMemberJoin");
+    // copyToClipboard(data) {
+    //   AppUtils.copyToClipBoard(data);
+    //   this.copied = true;
+    // },
+    submit() {
+      // StoreUtils.dispatch("subscription/completeSpotifyNewMemberJoin");
+      StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
     }
   }
 };

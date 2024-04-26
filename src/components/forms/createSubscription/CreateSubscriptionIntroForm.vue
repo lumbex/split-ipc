@@ -8,7 +8,9 @@
         />
       <p class="page-title-sm text-center">Elevate your subscription game</p>
       <p class="text-base text-center text-grey-500 mb-8">
-          Earn cash monthly by sharing <span class="text-white">your {{ currentSubscriptionServiceData.name }}</span> subscription with friends in the Splitverse.
+          Earn cash monthly by sharing your
+          <span class="text-white">{{ currentSubscriptionServiceData.name | firstCaseCapital }}</span> 
+          subscription with friends in the Splitverse.
       </p>
       <div class="space-filler"></div>
 

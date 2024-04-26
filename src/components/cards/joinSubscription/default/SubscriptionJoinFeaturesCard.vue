@@ -74,13 +74,14 @@ export default {
     },
     okGotIt() {
         if (this.currentSubscriptionServiceData.join_type === 'instant_access'){
-            StoreUtils.dispatch("subscription/completeDefaultNewMemberJoin");
+            // StoreUtils.dispatch("subscription/completeDefaultNewMemberJoin");
+            StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE"); 
         }
         if (this.currentSubscriptionServiceData.join_type === 'member_get_access'){
             StoreUtils.dispatch("subscription/completeDefaultNewMemberJoin");
         }
         if (this.currentSubscriptionServiceData.join_type === 'host_invite'){
-            StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
+            StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE"); 
         }
     }
   }
