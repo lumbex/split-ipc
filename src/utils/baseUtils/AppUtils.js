@@ -221,7 +221,7 @@ class AppUtils {
         notification
       );
 
-      console.log(error);
+      // console.log(error);
       return error;
     }
   }
