@@ -22,7 +22,7 @@ export const mutations = {
 
 export const actions = {
   postMessage({}, message) {
-    console.log("Post Message Action!", message);
+    // console.log("Post Message Action!", message);
 
     // ipcService.postAMessage("subscription_created", payload)
 
@@ -85,7 +85,7 @@ export const actions = {
     }
   },
   receiveMessageHandler({ commit }, payload) {
-    console.log("Receive Message Action!", payload);
+    // console.log("Receive Message Action!", payload);
 
     const messageAction = payload.messageAction;
     const messageBody = payload.messageBody;

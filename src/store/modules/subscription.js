@@ -304,24 +304,11 @@ export const actions = {
 
 
     const successAction = responseData => {
-      
-      
-      const dummyResponse = { 
-        "responseCode": "200", "responseMessage": "Success", 
-        "data": { "subscriptionAccess": 
-        { "isSet":true, "lastUpdated":"", "userCredentials":
-         {"username" : "", password:""},"joinLink": "", "address" : "" },
-          "subscriptionPrice": 
-          { "currentPrice": "19.99", "currentCurrency": "USD", 
-          "pendingPrice": null, "pendingCurrency": null, "lastUpdated":
-           "2023-05-01T10:00:00Z" }, "subscriptionContactNumber": 
-           { "phoneNumber": "123456789", 
-           "countryCode": "1", "lastUpdated": "2023-05-01T10:00:00Z" } } }
 
-           console.log("responseData", responseData)
+          //  console.log("responseData", responseData)
            StoreUtils.commit(
             "subscription/SET_EDIT_SUBSCRIPTION_INFO",
-            dummyResponse
+            responseData
           );
     };
 

@@ -3,7 +3,7 @@ import StoreUtils from "../../../utils/baseUtils/StoreUtils";
 export const namespaced = true;
 
 export const state = {
-  stage: 1,
+  stage: 0,
   formBody: {}
 };
 
