@@ -11,42 +11,29 @@
 
     <div class="app-form">
       <p class="page-title text-3xl text-white mb-2">
-        What’s your WhatsApp number?
+        What’s your New Email?
       </p>
       <p class="page-sub">
-        From time to time members might need help with your subscription - be
-        nice.
-        <!-- Make sure your number is available on <span class="text-white font-bold">WhatsApp</span> so members can easily reach you for access to this subscription -->
+        Kindly provide the
+        <span class="text-white font-bold">Email or Username</span> to your
+        <span class="text-white font-bold">{{
+          currentSubscriptionServiceData.name
+        }}</span>
+        subscription - make sure its accurate for smooth sailing.
       </p>
 
       <form action="#" @submit.prevent="submit">
         <div class="">
-          <div class="form-group alt no-pad">
-            <div class="flex flex-row justify-start">
-              <div
-                class="number-currency-input flex-shrink-0 flex items-center"
-              >
-                <span>+234</span>
-              </div>
-
-              <div class="input-wrap-hold w-[90%] flex-grow-1 flex-basis-0">
-                <div class="">
-                  <label class="px-2" for="cost">Whatsapp Number</label>
-                </div>
-
-                <div class="flex flex-row items-center">
-                  <input
-                    type="text"
-                    class="alt"
-                    v-model="whatsappNumber"
-                    v-on:change="isValidInput"
-                    required
-                    id="host-contact"
-                    placeholder="8031342069"
-                  />
-                </div>
-              </div>
-            </div>
+          <div class="form-group">
+            <label for="pageInput">New Email or Username</label>
+            <input
+              type="text"
+              v-model="newEmail"
+              required
+              v-on:change="isValidInput"
+              id="pageInput"
+              placeholder="Shalli@pluto.com"
+            />
           </div>
 
           <p v-if="inputError.length > 0" class="form-group-error">
@@ -57,12 +44,23 @@
         <div class="space-filler"></div>
 
         <div class="app-form-base">
+          <div class="form-info-box">
+            <img
+              src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1714034423/splitcash/images/Shield_ydygge.png"
+              alt="more info"
+            />
+            <p>
+              Your data is completely safe and only shared with active members
+              of your subscription
+            </p>
+          </div>
+
           <button
             type="submit"
             class="app-btn light-btn"
             :disabled="inputError !== ''"
           >
-            Continue
+            Confirm
           </button>
         </div>
       </form>
@@ -75,7 +73,7 @@ import BackIcon from "@/components/icons/BackIcon";
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 
 export default {
-  name: "HostContactForm",
+  name: "ChangeCredentialEmailForm",
   components: {
     BackIcon
   },
@@ -88,7 +86,7 @@ export default {
   data() {
     return {
       checked: false,
-      whatsappNumber: "",
+      newEmail: "",
       inputError: ""
     };
   },
@@ -106,25 +104,23 @@ export default {
     },
     isValidInput() {
       // const slotPrice = parseFloat(this.slotPrice)
-      const condition =
-        this.whatsappNumber.length >= 10 && this.whatsappNumber.length <= 11;
+      const condition = this.newEmail.length >= 3;
 
       if (condition) {
         this.inputError = "";
         return true;
       } else {
-        this.inputError = "Please enter a valid phone number";
+        this.inputError = "Please enter a valid username or email";
         return false;
       }
     },
     submit() {
       if (this.inputError === "") {
         StoreUtils.commit("form/BUILD_FORM_BODY", {
-          hostContact: this.whatsappNumber,
-          hostContactExtension: "+234"
+          newEmail: this.newEmail
         });
 
-        StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
+        StoreUtils.commit("form/DECREASE_FORM_STAGE_BY_ONE");
       }
     }
   }

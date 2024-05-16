@@ -3,7 +3,7 @@ import StoreUtils from "../../../utils/baseUtils/StoreUtils";
 export const namespaced = true;
 
 export const state = {
-  stage: 0,
+  stage: 1,
   formBody: {}
 };
 
@@ -22,6 +22,12 @@ export const mutations = {
   },
   DECREASE_FORM_STAGE_BY_ONE(state) {
     state.stage -= 1;
+  },
+  INCREASE_FORM_STAGE_BY_TWO(state) {
+    state.stage += 2;
+  },
+  DECREASE_FORM_STAGE_BY_TWO(state) {
+    state.stage -= 2;
   },
   SET_FORM_STAGE_TO(state, payload) {
     state.stage = parseInt(payload);

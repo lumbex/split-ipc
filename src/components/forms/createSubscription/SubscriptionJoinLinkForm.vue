@@ -7,16 +7,17 @@
         >
       </div>
       <div class="up-next">
-<!--        <p>Up Next: <span>Address</span></p>-->
+        <!--        <p>Up Next: <span>Address</span></p>-->
       </div>
     </div>
 
     <div class="app-form">
       <p class="page-title">
-        Add your {{ currentSubscriptionServiceData.name | firstCaseCapital }} invite link
+        Add your
+        {{ currentSubscriptionServiceData.name | firstCaseCapital }} invite link
       </p>
       <p class="page-sub">
-          New members use this link to join your subscription after making payment
+        New members use this link to join your subscription after making payment
       </p>
 
       <form action="#" @submit.prevent="submit">
@@ -40,12 +41,16 @@
             {{ inputError }}
           </p>
 
-          <div v-if="urlToGetInviteLink !== ''" class="flex justify-center mt-4 mb-4">
+          <div
+            v-if="urlToGetInviteLink !== ''"
+            class="flex justify-center mt-4 mb-4"
+          >
             <a
               class="flex flex-row text-grey justify-center items-center rounded-lg bg-white text-sm py-1 pl-1 pr-2 fill-grey"
               @click="openUrlInBrowser(urlToGetInviteLink)"
             >
-              <ArrowUpSmIcon /> Open {{ currentSubscriptionServiceData.name }} Web
+              <ArrowUpSmIcon /> Open
+              {{ currentSubscriptionServiceData.name }} Web
             </a>
           </div>
         </div>
@@ -58,8 +63,8 @@
               <span><PadLockIcon /></span>
             </div>
             <div class="text-sm">
-              Your data is safe and is only shared with
-              members joining this subscription.
+              Your data is safe and is only shared with members joining this
+              subscription.
             </div>
           </div>
 
@@ -95,12 +100,12 @@ const isValidHttpUrl = string => {
 export default {
   name: "SubscriptionJoinLinkForm",
   components: { BackIcon, PadLockIcon, ArrowUpSmIcon },
-    props: {
-        currentSubscriptionServiceData: {
-            type: Object,
-            required: true
-        }
-    },
+  props: {
+    currentSubscriptionServiceData: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       checked: false,
@@ -112,19 +117,20 @@ export default {
     formBody() {
       return StoreUtils.rootGetters("form/getFormBody");
     },
-      inviteLinkPlaceholder() {
-        return `https://www.${this.currentSubscriptionServiceData.name.toLowerCase()}.com/…`
-      },
-      urlToGetInviteLink() {
-        let sampleUrl = "";
+    inviteLinkPlaceholder() {
+      return `https://www.${this.currentSubscriptionServiceData.name.toLowerCase()}.com/…`;
+    },
+    urlToGetInviteLink() {
+      let sampleUrl = "";
 
-        if (this.currentSubscriptionServiceData.name.toLowerCase() === 'spotify'){
-            sampleUrl = "https://www.spotify.com/ph-en/account/family"
-        }
+      if (
+        this.currentSubscriptionServiceData.name.toLowerCase() === "spotify"
+      ) {
+        sampleUrl = "https://www.spotify.com/ph-en/account/family";
+      }
 
-        return sampleUrl
-      },
-
+      return sampleUrl;
+    }
   },
   methods: {
     openUrlInBrowser(url) {
@@ -147,8 +153,7 @@ export default {
         this.inputError = "";
         return true;
       } else {
-        this.inputError =
-            `Invalid invite link. Make sure you're submitting the right link from your ${this.currentSubscriptionServiceData.name} account.`;
+        this.inputError = `Invalid invite link. Make sure you're submitting the right link from your ${this.currentSubscriptionServiceData.name} account.`;
         return false;
       }
       // return !!emailAddress.match(regex);
@@ -160,8 +165,7 @@ export default {
         });
         StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
       } else {
-        this.inputError =
-            `Invalid invite link. Make sure you're submitting the right link from your ${this.currentSubscriptionServiceData.name} account.`;
+        this.inputError = `Invalid invite link. Make sure you're submitting the right link from your ${this.currentSubscriptionServiceData.name} account.`;
       }
     }
   }

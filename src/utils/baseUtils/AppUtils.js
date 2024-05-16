@@ -199,6 +199,33 @@ class AppUtils {
     return "0";
   }
 
+  static async grabTextFromClipboard() {
+    try {
+      const clipboardText = await navigator.clipboard.readText();
+      const notification = {
+        type: "success",
+        message: `Pasted!`
+      };
+      StoreUtils.dispatch(
+        StoreUtils.actions.notification.addNotificationSlide,
+        notification
+      );
+      return clipboardText;
+    } catch (error) {
+      const notification = {
+        type: "error",
+        message: `Failed!`
+      };
+      StoreUtils.dispatch(
+        StoreUtils.actions.notification.addNotificationSlide,
+        notification
+      );
+
+      console.log(error);
+      return error;
+    }
+  }
+
   static copyToClipBoard(textToCopy) {
     copy(textToCopy);
 

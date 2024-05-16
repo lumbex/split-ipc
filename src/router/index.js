@@ -2,6 +2,12 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 
 import Home from "../views/Home.vue";
+import EditSubscription from "../views/edit-subscription/Index.vue";
+import EditSubscriptionCredentials from "../views/edit-subscription/ChangeCredentials.vue";
+import EditSubscriptionLink from "../views/edit-subscription/ChangeLink.vue";
+import EditSubscriptionPrice from "../views/edit-subscription/ChangeSlotPrice.vue";
+import EditSubscriptionContact from "../views/edit-subscription/ChangeContactNumber.vue";
+
 import CreateSubscription from "../views/create-subscription/Index.vue";
 import JoinSubscription from "../views/join-subscription/Index.vue";
 import SetupJoinSubscription from "../views/join-subscription/Setup.vue";
@@ -14,6 +20,56 @@ import StoreUtils from "../utils/baseUtils/StoreUtils";
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: "/edit-subscription/contact/:serviceTag",
+    name: "edit-subscription-contact",
+    props: true,
+    component: EditSubscriptionContact,
+    beforeEnter: (to, from, next) => {
+      StoreUtils.commit("router/SET_ACTIVE_ROUTE", to.name);
+      next();
+    }
+  },
+  {
+    path: "/edit-subscription/price/:serviceTag",
+    name: "edit-subscription-price",
+    props: true,
+    component: EditSubscriptionPrice,
+    beforeEnter: (to, from, next) => {
+      StoreUtils.commit("router/SET_ACTIVE_ROUTE", to.name);
+      next();
+    }
+  },
+  {
+    path: "/edit-subscription/join-link/:serviceTag",
+    name: "edit-subscription-link",
+    props: true,
+    component: EditSubscriptionLink,
+    beforeEnter: (to, from, next) => {
+      StoreUtils.commit("router/SET_ACTIVE_ROUTE", to.name);
+      next();
+    }
+  },
+  {
+    path: "/edit-subscription/credentials/:serviceTag",
+    name: "edit-subscription-credentials",
+    props: true,
+    component: EditSubscriptionCredentials,
+    beforeEnter: (to, from, next) => {
+      StoreUtils.commit("router/SET_ACTIVE_ROUTE", to.name);
+      next();
+    }
+  },
+  {
+    path: "/edit-subscription/:serviceTag",
+    name: "edit-subscription",
+    props: true,
+    component: EditSubscription,
+    beforeEnter: (to, from, next) => {
+      StoreUtils.commit("router/SET_ACTIVE_ROUTE", to.name);
+      next();
+    }
+  },
   {
     path: "/",
     name: "home",

@@ -13,7 +13,10 @@
       <p class="page-title text-3xl text-white mb-2">Review</p>
       <p class="page-sub">Here’s a recap of all your selections.</p>
       <br />
-      <ReviewBreakdownList :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
+      <ReviewBreakdownList
+        :current-subscription-service-data="currentSubscriptionServiceData"
+        :service-tag="serviceTag"
+      />
       <br />
       <div class="space-filler"></div>
 
@@ -43,16 +46,16 @@ export default {
     return { checked: false };
   },
   // props: ["serviceTag"],
-    props: {
-        currentSubscriptionServiceData: {
-            type: Object,
-            required: true
-        },
-        serviceTag: {
-            type: String,
-            defaults: "apple_music"
-        }
+  props: {
+    currentSubscriptionServiceData: {
+      type: Object,
+      required: true
     },
+    serviceTag: {
+      type: String,
+      defaults: "apple_music"
+    }
+  },
   computed: {
     componentLoading() {
       return StoreUtils.rootGetters("loader/getLoader", "component");
@@ -79,7 +82,10 @@ export default {
       StoreUtils.commit("form/DECREASE_FORM_STAGE_BY_ONE");
     },
     submit() {
-      const payload = { ...this.currentSubscriptionServiceData, ...this.formBody };
+      const payload = {
+        ...this.currentSubscriptionServiceData,
+        ...this.formBody
+      };
       StoreUtils.dispatch("subscription/createSubscription", payload);
     }
   }

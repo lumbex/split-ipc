@@ -2,11 +2,11 @@
   <div class="app-form-wrapper">
     <div class="top-nav">
       <div class="go-back">
-          <a @click="goBack"
+        <a @click="goBack"
           ><span class="icon"><BackIcon /></span>Back</a
-          >
+        >
       </div>
-      <div class="up-next">      </div>
+      <div class="up-next"></div>
     </div>
     <!-- <p>subscriptionBillingDateCheckedStatus => {{ subscriptionBillingDateCheckedStatus }}</p> -->
     <!-- <p>subscriptionBillingData => {{ subscriptionBillingData }}</p> -->
@@ -24,9 +24,9 @@
         <p class="text-base text-center text-grey-500 mb-8">
           Members will only be able to join after your next renewal.
         </p>
-       
+
         <div class="space-filler"></div>
-  
+
         <div class="app-form-base">
           <div @click="checked = !checked" class="custom-checkbox">
             <div class="question">
@@ -35,11 +35,11 @@
                 <span class="text-white font-bold">
                   {{ subscriptionBillingData.subscriptionStartDate }}
                 </span>
-              </p>              
+              </p>
             </div>
             <div class="indicator">
-                <span v-if="checked"><CheckedIcon /></span>
-                <span v-else><UncheckedIcon /></span>
+              <span v-if="checked"><CheckedIcon /></span>
+              <span v-else><UncheckedIcon /></span>
             </div>
           </div>
           <!-- <div class="form-info-box">
@@ -52,14 +52,19 @@
               
             </p>
           </div> -->
-  
-          <button :disabled="!checked" @click="submit" class="app-btn light-btn">Continue</button>
-  
+
+          <button
+            :disabled="!checked"
+            @click="submit"
+            class="app-btn light-btn"
+          >
+            Continue
+          </button>
+
           <!-- <button @click="submit" class="app-btn light-btn">Cancel, create later</button> -->
         </div>
       </div>
     </div>
-    
   </div>
 </template>
 
@@ -71,43 +76,44 @@ import BackIcon from "@/components/icons/BackIcon.vue";
 import CheckedIcon from "@/components/icons/CheckedIcon.vue";
 import UncheckedIcon from "@/components/icons/UncheckedIcon.vue";
 
-
-
 export default {
   name: "BillingDateIsTooCloseForm",
   components: { ComponentLoader, BackIcon, CheckedIcon, UncheckedIcon },
   props: {
     currentSubscriptionServiceData: {
       type: Object,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return { selectedOption: "", checked: false };
   },
   created() {
-    this.checkBillingDate();    
+    this.checkBillingDate();
   },
   computed: {
     formBody() {
       return StoreUtils.rootGetters("form/getFormBody");
     },
     componentLoader() {
-          return StoreUtils.rootGetters("loader/getLoader", "component");
+      return StoreUtils.rootGetters("loader/getLoader", "component");
     },
     subscriptionBillingDateCheckedStatus() {
-      return StoreUtils.rootGetters("subscription/getSubscriptionBillingDateCheckedStatus");
+      return StoreUtils.rootGetters(
+        "subscription/getSubscriptionBillingDateCheckedStatus"
+      );
     },
     subscriptionBillingData() {
       return StoreUtils.rootGetters("subscription/getSubscriptionBillingData");
     },
     availableAppleMusicPaymentMethods() {
-      return StoreUtils.rootGetters("subscription/getAvailableAppleMusicPaymentMethods");
-    },
-
+      return StoreUtils.rootGetters(
+        "subscription/getAvailableAppleMusicPaymentMethods"
+      );
+    }
   },
   updated() {
-    this.checkIfBillingDateIsNotCloseResult();    
+    this.checkIfBillingDateIsNotCloseResult();
   },
   methods: {
     goBack() {
@@ -117,19 +123,22 @@ export default {
       const payload = {
         billingDate: this.formBody.billingDate,
         frequency: this.formBody.plan
-      }
+      };
 
-      StoreUtils.dispatch("subscription/checkBillingDate", payload)
+      StoreUtils.dispatch("subscription/checkBillingDate", payload);
     },
     checkIfBillingDateIsNotCloseResult() {
-      if (this.subscriptionBillingDateCheckedStatus === true && this.subscriptionBillingData.isToClose ===  false) {
+      if (
+        this.subscriptionBillingDateCheckedStatus === true &&
+        this.subscriptionBillingData.isToClose === false
+      ) {
         this.submit();
       }
     },
     submit() {
       StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
-    },
-  },
+    }
+  }
 };
 </script>
 

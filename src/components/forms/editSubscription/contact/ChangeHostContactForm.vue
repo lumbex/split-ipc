@@ -56,7 +56,8 @@
 
         <div class="space-filler"></div>
 
-        <div class="app-form-base">
+        <ComponentLoader v-if="componentLoader" />
+        <div v-else class="app-form-base">
           <button
             type="submit"
             class="app-btn light-btn"
@@ -73,11 +74,13 @@
 <script>
 import BackIcon from "@/components/icons/BackIcon";
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
+import ComponentLoader from "@/components/loaders/ComponentLoader";
 
 export default {
-  name: "HostContactForm",
+  name: "ChangeHostContactForm",
   components: {
-    BackIcon
+    BackIcon,
+    ComponentLoader
   },
   props: {
     currentSubscriptionServiceData: {
@@ -124,7 +127,7 @@ export default {
           hostContactExtension: "+234"
         });
 
-        StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
+        StoreUtils.dispatch("subscription/editSubscriptionContactNumber");
       }
     }
   }

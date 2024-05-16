@@ -7,17 +7,19 @@
         >
       </div>
       <div class="up-next">
-<!--        <p>Up Next: <span>Cost</span></p>-->
+        <!--        <p>Up Next: <span>Cost</span></p>-->
       </div>
     </div>
     <div class="app-form">
       <p class="page-title">What’s the Region of Your Subscription?</p>
       <p class="page-sub">
-          Select the region of your 
-          <span class="text-white">{{ currentSubscriptionServiceData.name | firstCaseCapital }}</span> 
-          subscription. 
-          <br /><br />
-          Select a region.
+        Select the region of your
+        <span class="text-white">{{
+          currentSubscriptionServiceData.name | firstCaseCapital
+        }}</span>
+        subscription.
+        <br /><br />
+        Select a region.
       </p>
 
       <div class="block-options">
@@ -28,11 +30,7 @@
           class="option flex flex-row gap-2 p-2"
           :class="{ active: region.value === selectedOption }"
         >
-          <img
-            class="h-auto w-6"
-            :src="region.iconUrl"
-            :alt="region.title"
-          />
+          <img class="h-auto w-6" :src="region.iconUrl" :alt="region.title" />
           <div class="">{{ region.title }}</div>
 
           <span v-if="region.recommended" class="recommended">Recommended</span>
@@ -41,11 +39,15 @@
       <div class="space-filler"></div>
 
       <div class="app-form-base">
-          <div class="form-info-box">
-              <img src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1697057849/info.square.fill.grey_mg7mdm.png"
-                   alt="more info" />
-              <p> All members must be in the same region to share this Subscription.</p>
-          </div>
+        <div class="form-info-box">
+          <img
+            src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1697057849/info.square.fill.grey_mg7mdm.png"
+            alt="more info"
+          />
+          <p>
+            All members must be in the same region to share this Subscription.
+          </p>
+        </div>
 
         <button
           @click="submit"
@@ -67,12 +69,12 @@ import NotificationUtils from "@/utils/baseUtils/NotificationUtils";
 export default {
   name: "SelectSubscriptionRegionForm",
   components: { BackIcon },
-    props: {
-        currentSubscriptionServiceData: {
-            type: Object,
-            required: true
-        }
-    },
+  props: {
+    currentSubscriptionServiceData: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return { selectedOption: "", regionError: "" };
   },
@@ -103,8 +105,10 @@ export default {
       this.selectedOption = region.value;
     },
     submit() {
-        StoreUtils.commit("form/BUILD_FORM_BODY", { region: this.selectedOption });
-        StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
+      StoreUtils.commit("form/BUILD_FORM_BODY", {
+        region: this.selectedOption
+      });
+      StoreUtils.commit("form/INCREASE_FORM_STAGE_BY_ONE");
     }
   }
 };

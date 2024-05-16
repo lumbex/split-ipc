@@ -4,7 +4,10 @@
     <div v-else class="app-page full-page">
       <ComponentLoader v-if="componentLoaderTable" />
       <div v-else class="create-subscription">
-          <TroubleshootJoinSubscriptionCard :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
+        <TroubleshootJoinSubscriptionCard
+          :current-subscription-service-data="currentSubscriptionServiceData"
+          :service-tag="serviceTag"
+        />
       </div>
     </div>
   </BaseLayout>
@@ -19,9 +22,7 @@ import BaseLayout from "@/layout/BaseLayout";
 
 import PreAuthCard from "@/components/cards/PreAuthCard";
 
-import TroubleshootJoinSubscriptionCard
-    from "@/components/cards/joinSubscription/default/TroubleshootJoinSubscriptionCard.vue";
-
+import TroubleshootJoinSubscriptionCard from "@/components/cards/joinSubscription/default/TroubleshootJoinSubscriptionCard.vue";
 
 export default {
   name: "Troubleshoot",
@@ -32,14 +33,14 @@ export default {
     };
   },
   components: {
-      TroubleshootJoinSubscriptionCard,
-      PreAuthCard,
-      BaseLayout,
-      ComponentLoader,
+    TroubleshootJoinSubscriptionCard,
+    PreAuthCard,
+    BaseLayout,
+    ComponentLoader
   },
   computed: {
     componentLoaderTable() {
-        return StoreUtils.rootGetters("loader/getLoader", "table");
+      return StoreUtils.rootGetters("loader/getLoader", "table");
     },
     userAuthenticated() {
       return StoreUtils.rootGetters("user/getUserAuthenticated");
@@ -55,10 +56,11 @@ export default {
     },
     currentSubscriptionServiceData() {
       return StoreUtils.rootGetters(
-          "service/getCurrentSubscriptionServiceData");
+        "service/getCurrentSubscriptionServiceData"
+      );
     },
     currentSubscriptionServiceDataNotFetched() {
-      return JsonParserUtils.isObjectEmpty(this.currentSubscriptionServiceData)
+      return JsonParserUtils.isObjectEmpty(this.currentSubscriptionServiceData);
     },
     availableServices() {
       return StoreUtils.rootGetters("service/getAvailableServices");
@@ -81,8 +83,14 @@ export default {
     // StoreUtils.dispatch("service/fetchSubscriptionServiceDataByTag", this.serviceTag);
   },
   updated() {
-    if (this.userAuthenticated && this.currentSubscriptionServiceDataNotFetched){
-        StoreUtils.dispatch("service/fetchSubscriptionServiceDataByTag", this.serviceTag);
+    if (
+      this.userAuthenticated &&
+      this.currentSubscriptionServiceDataNotFetched
+    ) {
+      StoreUtils.dispatch(
+        "service/fetchSubscriptionServiceDataByTag",
+        this.serviceTag
+      );
     }
   }
 };

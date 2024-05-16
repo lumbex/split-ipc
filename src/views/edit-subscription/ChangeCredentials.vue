@@ -3,13 +3,28 @@
     <PreAuthCard v-if="!userAuthenticated" />
     <div v-else class="app-page full-page">
       <ComponentLoader v-if="componentLoaderTable" />
-      <div v-else class="create-subscription">
-        <div v-if="serviceTag === 'spotify'">
-          <QuickAccessJoinCard :service-tag="serviceTag"></QuickAccessJoinCard>
-        </div>
-        <div v-else>
-          <DefaultQuickAccessJoinCard
-            :service-tag="serviceTag"
+      <!--      <div v-else class="create-subscription">-->
+      <div v-else class="">
+        <!--          <p> join_type ==> {{ currentSubscriptionServiceData.join_type }}</p>-->
+        <!--          <p> cost_currency ==> {{ currentSubscriptionServiceData.cost_currency }}</p>-->
+        <!--          <p> currentFormBody ==> {{ currentFormBody }}</p>-->
+        <!--          <p> formStage ==> {{ formStage }}</p>-->
+
+        <div>
+          <ChangeCredentialsIntroForm
+            v-if="formStage === 0"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <ChangeCredentialEmailForm
+            v-if="formStage === 1"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <ChangeCredentialPasswordForm
+            v-if="formStage === 2"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <ChangeCredentialSuccessForm
+            v-if="formStage === 3"
             :current-subscription-service-data="currentSubscriptionServiceData"
           />
         </div>
@@ -23,14 +38,18 @@
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 import ComponentLoader from "@/components/loaders/ComponentLoader";
 import BaseLayout from "@/layout/BaseLayout";
-import QuickAccessJoinCard from "@/components/cards/joinSubscription/spotify/QuickAccessJoinCard";
-import DefaultQuickAccessJoinCard from "@/components/cards/joinSubscription/default/DefaultQuickAccessJoinCard";
 
 import PreAuthCard from "@/components/cards/PreAuthCard";
+
 import JsonParserUtils from "@/utils/JsonParserUtils";
 
+import ChangeCredentialsIntroForm from "@/components/forms/editSubscription/credentials/ChangeCredentialsIntroForm.vue";
+import ChangeCredentialEmailForm from "@/components/forms/editSubscription/credentials/ChangeCredentialEmailForm.vue";
+import ChangeCredentialPasswordForm from "@/components/forms/editSubscription/credentials/ChangeCredentialPasswordForm.vue";
+import ChangeCredentialSuccessForm from "@/components/forms/editSubscription/credentials/ChangeCredentialSuccessForm.vue";
+
 export default {
-  name: "SetupJoinSubscription",
+  name: "ChangeCredentials",
   props: ["serviceTag"],
   data() {
     return {
@@ -38,24 +57,23 @@ export default {
     };
   },
   components: {
+    ChangeCredentialsIntroForm,
+    ChangeCredentialEmailForm,
+    ChangeCredentialPasswordForm,
+    ChangeCredentialSuccessForm,
     PreAuthCard,
-    QuickAccessJoinCard,
-    DefaultQuickAccessJoinCard,
     BaseLayout,
     ComponentLoader
   },
   computed: {
-    componentLoaderTable() {
-      return StoreUtils.rootGetters("loader/getLoader", "table");
-    },
     userAuthenticated() {
       return StoreUtils.rootGetters("user/getUserAuthenticated");
     },
+    componentLoaderTable() {
+      return StoreUtils.rootGetters("loader/getLoader", "table");
+    },
     formStage() {
       return StoreUtils.rootGetters("form/getFormStage");
-    },
-    firstMessageReceived() {
-      return StoreUtils.rootGetters("ipc/getFirstMessageReceived");
     },
     currentServiceTag() {
       return StoreUtils.rootGetters("service/getCurrentServiceTag");
@@ -70,25 +88,12 @@ export default {
     },
     availableServices() {
       return StoreUtils.rootGetters("service/getAvailableServices");
-    },
-    serviceObject() {
-      return StoreUtils.rootGetters(
-        "service/getServiceObject",
-        this.serviceTag
-      )[0];
-    },
-    authToken() {
-      return StoreUtils.rootGetters("user/getAuthToken");
-    },
-    userInfo() {
-      return StoreUtils.rootGetters("user/getUserInfo");
     }
   },
   created() {
     StoreUtils.commit("service/SET_CURRENT_SERVICE_TAG", this.serviceTag);
   },
   updated() {
-    // if (this.userAuthenticated && this.serviceTag !== 'spotify' && this.currentSubscriptionServiceDataNotFetched){
     if (
       this.userAuthenticated &&
       this.currentSubscriptionServiceDataNotFetched

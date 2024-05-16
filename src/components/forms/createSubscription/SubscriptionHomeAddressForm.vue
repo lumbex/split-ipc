@@ -7,7 +7,7 @@
         >
       </div>
       <div class="up-next">
-<!--        <p>Up Next: <span>Plan</span></p>-->
+        <!--        <p>Up Next: <span>Plan</span></p>-->
       </div>
     </div>
 
@@ -29,7 +29,7 @@
               v-model="pageInput"
               required
               id="pageInput"
-              placeholder="Exactly as it is on Spotify."
+              :placeholder="addressInputPlaceholder"
             />
           </div>
           <!-- <p class="form-group-info">
@@ -59,8 +59,8 @@
               <span><PadLockIcon /></span>
             </div>
             <div class="text-sm">
-              Your data is safe and only shared with
-              members when joining your subscription.
+              Your data is safe and only shared with members when joining your
+              subscription.
             </div>
           </div>
 
@@ -85,12 +85,12 @@ import ArrowUpSmIcon from "../../icons/ArrowUpSmIcon.vue";
 export default {
   name: "SubscriptionHomeAddressForm",
   components: { BackIcon, PadLockIcon, ArrowUpSmIcon },
-    props: {
-        currentSubscriptionServiceData: {
-            type: Object,
-            required: true
-        }
-    },
+  props: {
+    currentSubscriptionServiceData: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return {
       checked: false,
@@ -101,6 +101,9 @@ export default {
   computed: {
     formBody() {
       return StoreUtils.rootGetters("form/getFormBody");
+    },
+    addressInputPlaceholder() {
+      return `Exactly as it is on ${this.currentSubscriptionServiceData.name}.`;
     }
   },
   methods: {
@@ -119,8 +122,7 @@ export default {
         this.inputError = "";
         return true;
       } else {
-        this.inputError =
-          "Address is invalid. Be sure to enter your address exactly how it is on Spotify";
+        this.inputError = `Address is invalid. Be sure to enter your address exactly how it is on ${this.currentSubscriptionServiceData.name}`;
         return false;
       }
     },

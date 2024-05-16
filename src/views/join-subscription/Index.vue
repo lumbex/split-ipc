@@ -4,53 +4,112 @@
     <div v-else class="app-page full-page">
       <ComponentLoader v-if="componentLoaderTable" />
       <div v-else class="create-subscription">
-<!--          <p>availableServices: {{availableServices[0]}}</p>-->
-<!--          <p>currentSubscriptionServiceData: {{currentSubscriptionServiceData}}</p> <br />-->
-<!--          <p>userAuthenticated: {{userAuthenticated}}</p> <br />-->
-<!--          <p>serviceTag: {{serviceTag}}</p> <br />-->
+        <!--          <p>availableServices: {{availableServices[0]}}</p>-->
+        <!--          <p>currentSubscriptionServiceData: {{currentSubscriptionServiceData}}</p> <br />-->
+        <!--          <p>userAuthenticated: {{userAuthenticated}}</p> <br />-->
+        <!--          <p>serviceTag: {{serviceTag}}</p> <br />-->
 
         <div v-if="currentSubscriptionServiceData.join_type === 'host_invite'">
-            <div v-if="serviceTag === 'apple_music'">
-                <SubscriptionJoinFeaturesCard
-                        v-if="formStage === 0"
-                        :current-subscription-service-data="currentSubscriptionServiceData"
-                />
-                <SelectRegionForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <ChangeRegionForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
-                <RegionCautionForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" />
+          <div v-if="serviceTag === 'apple_music'">
+            <SubscriptionJoinFeaturesCard
+              v-if="formStage === 0"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
+            <SelectRegionForm
+              v-if="formStage === 1"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
+            <ChangeRegionForm
+              v-if="formStage === 2"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
+            <RegionCautionForm
+              v-if="formStage === 3"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
 
-                <NewMemberJoinInfoForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
-            </div>
-            <div v-else>
-                <SubscriptionJoinFeaturesCard
-                        v-if="formStage === 0"
-                        :current-subscription-service-data="currentSubscriptionServiceData"
-                />
-                <NewMemberJoinEmailForm v-if="formStage === 1" :service-tag="serviceTag" />
-            </div>
+            <NewMemberJoinInfoForm
+              v-if="formStage === 4"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+              :service-tag="serviceTag"
+            />
+          </div>
+          <div v-else>
+            <SubscriptionJoinFeaturesCard
+              v-if="formStage === 0"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
+            <NewMemberJoinEmailForm
+              v-if="formStage === 1"
+              :service-tag="serviceTag"
+            />
+          </div>
         </div>
 
-        <div v-if="currentSubscriptionServiceData.join_type === 'instant_access'">
-            <div v-if="serviceTag === 'spotify'">
-              
-              <SubscriptionJoinFeaturesCard v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
+        <div
+          v-if="currentSubscriptionServiceData.join_type === 'instant_access'"
+        >
+          <div v-if="serviceTag === 'spotify'">
+            <SubscriptionJoinFeaturesCard
+              v-if="formStage === 0"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
 
-              <MemberTermsConfirmationCard v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
+            <MemberTermsConfirmationCard
+              v-if="formStage === 1"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
 
-              <SubscriptionNameForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData" />
-            </div>
-            <div v-else>
+            <SubscriptionNameForm
+              v-if="formStage === 2"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
+          </div>
+          <div v-else>
+            <SubscriptionJoinFeaturesCard
+              v-if="formStage === 0"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
 
-              <SubscriptionJoinFeaturesCard v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
-
-              <SubscriptionNameForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData" />
-            
-            </div>
+            <SubscriptionNameForm
+              v-if="formStage === 1"
+              :current-subscription-service-data="
+                currentSubscriptionServiceData
+              "
+            />
+          </div>
         </div>
 
-        <div v-if="currentSubscriptionServiceData.join_type === 'member_get_access'">
-            <SubscriptionJoinFeaturesCard v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
-<!--            <NewMemberJoinEmailForm v-if="formStage === 1" :service-tag="serviceTag" />-->
+        <div
+          v-if="
+            currentSubscriptionServiceData.join_type === 'member_get_access'
+          "
+        >
+          <SubscriptionJoinFeaturesCard
+            v-if="formStage === 0"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <!--            <NewMemberJoinEmailForm v-if="formStage === 1" :service-tag="serviceTag" />-->
         </div>
       </div>
     </div>
@@ -66,7 +125,6 @@ import BaseLayout from "@/layout/BaseLayout";
 
 import PreAuthCard from "@/components/cards/PreAuthCard";
 
-
 import SelectRegionForm from "../../components/forms/joinSubscription/appleMusic/SelectRegionForm.vue";
 
 import NewMemberJoinInfoForm from "@/components/forms/joinSubscription/appleMusic/NewMemberJoinInfoForm";
@@ -80,7 +138,6 @@ import RegionCautionForm from "@/components/forms/joinSubscription/appleMusic/Re
 
 import SubscriptionNameForm from "@/components/forms/joinSubscription/default/SubscriptionNameForm.vue";
 
-
 export default {
   name: "JoinSubscription",
   props: ["serviceTag"],
@@ -90,9 +147,9 @@ export default {
     };
   },
   components: {
-      RegionCautionForm,
-      ChangeRegionForm,
-      SubscriptionJoinFeaturesCard,
+    RegionCautionForm,
+    ChangeRegionForm,
+    SubscriptionJoinFeaturesCard,
     PreAuthCard,
     NewMemberJoinInfoForm,
     BaseLayout,
@@ -104,7 +161,7 @@ export default {
   },
   computed: {
     componentLoaderTable() {
-        return StoreUtils.rootGetters("loader/getLoader", "table");
+      return StoreUtils.rootGetters("loader/getLoader", "table");
     },
     userAuthenticated() {
       return StoreUtils.rootGetters("user/getUserAuthenticated");
@@ -120,10 +177,11 @@ export default {
     },
     currentSubscriptionServiceData() {
       return StoreUtils.rootGetters(
-          "service/getCurrentSubscriptionServiceData");
+        "service/getCurrentSubscriptionServiceData"
+      );
     },
     currentSubscriptionServiceDataNotFetched() {
-      return JsonParserUtils.isObjectEmpty(this.currentSubscriptionServiceData)
+      return JsonParserUtils.isObjectEmpty(this.currentSubscriptionServiceData);
     },
     availableServices() {
       return StoreUtils.rootGetters("service/getAvailableServices");
@@ -146,8 +204,14 @@ export default {
     // StoreUtils.dispatch("service/fetchSubscriptionServiceDataByTag", this.serviceTag);
   },
   updated() {
-    if (this.userAuthenticated && this.currentSubscriptionServiceDataNotFetched){
-        StoreUtils.dispatch("service/fetchSubscriptionServiceDataByTag", this.serviceTag);
+    if (
+      this.userAuthenticated &&
+      this.currentSubscriptionServiceDataNotFetched
+    ) {
+      StoreUtils.dispatch(
+        "service/fetchSubscriptionServiceDataByTag",
+        this.serviceTag
+      );
     }
   }
 };

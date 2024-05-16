@@ -7,17 +7,24 @@
         >
       </div>
       <div class="up-next">
-<!--        <p>Up Next: <span>Plan</span></p>-->
+        <!--        <p>Up Next: <span>Plan</span></p>-->
       </div>
     </div>
 
     <div class="app-form">
-      <p class="page-title text-3xl text-white mb-2">How many people are on your plan?</p>
+      <p class="page-title text-3xl text-white mb-2">
+        How many people are on your plan?
+      </p>
       <p class="page-sub">
-          Select the <span class="text-white">total</span> number of people sharing your 
-          <span class="text-white">{{ currentSubscriptionServiceData.name | firstCaseCapital }}</span>  
-          plan currently.
-          <br /> <br /> Select one option.
+        Select the <span class="text-white">total</span> number of people
+        sharing your
+        <span class="text-white">{{
+          currentSubscriptionServiceData.name | firstCaseCapital
+        }}</span>
+        plan currently.
+        <br />
+        <br />
+        Select one option.
       </p>
       <div class="grid-options">
         <div
@@ -28,21 +35,25 @@
           :class="{ active: n === activeMembers }"
         >
           <span v-if="n === 1">Just Me</span>
-          <span v-else-if="n === currentSubscriptionServiceData.max_capacity">We're full</span>
-          <span v-else>{{ n  }}  of us</span>
+          <span v-else-if="n === currentSubscriptionServiceData.max_capacity"
+            >We're full</span
+          >
+          <span v-else>{{ n }} of us</span>
         </div>
       </div>
       <br />
       <div class="space-filler"></div>
 
       <div class="app-form-base">
-          <div v-if="activeMembers !== ''" class="form-info-box">
-              <img
-                      src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1697057849/info.square.fill.grey_mg7mdm.png"
-                      alt="more info" />
-              <p> There are {{ availableSlots }} available slots in your subscription</p>
-
-          </div>
+        <div v-if="activeMembers !== ''" class="form-info-box">
+          <img
+            src="https://res.cloudinary.com/cloud-web-assets/image/upload/v1697057849/info.square.fill.grey_mg7mdm.png"
+            alt="more info"
+          />
+          <p>
+            There are {{ availableSlots }} available slots in your subscription
+          </p>
+        </div>
 
         <button
           @click="submit"
@@ -63,18 +74,20 @@ export default {
   name: "SubscriptionMembersCountForm",
   components: { BackIcon },
   props: {
-      currentSubscriptionServiceData: {
-          type: Object,
-          required: true
-      }
+    currentSubscriptionServiceData: {
+      type: Object,
+      required: true
+    }
   },
   data() {
     return { activeMembers: "", checked: false };
   },
   computed: {
-      availableSlots () {
-          return this.currentSubscriptionServiceData.max_capacity - this.activeMembers
-      }
+    availableSlots() {
+      return (
+        this.currentSubscriptionServiceData.max_capacity - this.activeMembers
+      );
+    }
   },
   methods: {
     goBack() {

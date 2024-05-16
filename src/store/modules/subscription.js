@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import SubscriptionService from "../../services/SubscriptionService";
 import StoreUtils from "@/utils/baseUtils/StoreUtils";
 import LoaderUtils from "@/utils/baseUtils/LoaderUtils";
@@ -88,10 +89,38 @@ export const state = {
   currentSubscriptionInfo: {},
   slotPriceInputCurrency: "", // NGN or USD
   subscriptionBillingDateCheckedStatus: false,
-  subscriptionBillingData: {}
+  subscriptionBillingData: {},
+  editSubscriptionInfo: { 
+    "responseCode": "200", 
+    "responseMessage": "Success", 
+    "data": { 
+      "subscriptionAccess": { 
+        "isSet":true, 
+        "lastUpdated":"", 
+        "userCredentials": { "username" : "bexxthagoat", password:"" }, 
+        "joinLink": "https//",
+        "address" : "lagos Nigeria" 
+      },
+      "subscriptionPrice": { 
+        "currentPrice": "19.99", 
+        "currentCurrency": "USD", 
+        "pendingPrice": null, 
+        "pendingCurrency": null, 
+        "lastUpdated": "2023-05-01T10:00:00Z" 
+      }, 
+      "subscriptionContactNumber": { 
+        "phoneNumber": "123456789", 
+        "countryCode": "1", 
+        "lastUpdated": "2023-05-01T10:00:00Z" 
+      } 
+    } 
+  }
 };
 
 export const getters = {
+  getEditSubscriptionInfo: state => {
+    return state.editSubscriptionInfo;
+  },
   getSubscriptionBillingDateCheckedStatus: state => {
     return state.subscriptionBillingDateCheckedStatus;
   },
@@ -181,11 +210,131 @@ export const mutations = {
   },
   SET_SUBSCRIPTION_BILLING_DATA(state, payload) {
     state.subscriptionBillingData = payload;
+  },
+  SET_EDIT_SUBSCRIPTION_INFO(state, payload) {
+    state.editSubscriptionInfo = payload;
   }
 };
 
 export const actions = {
-  checkBillingDate: ({}, createBody) => {
+ 
+  editSubscriptionContactNumber: ({}, createBody) => {
+    const formBody = StoreUtils.rootGetters("form/getFormBody");
+    const subRef = StoreUtils.rootGetters("subscription/getCurrentSubscriptionRef").subRef
+
+    const payload = { 
+      "subref": subRef, 
+      "phoneNumber": formBody.hostContact, 
+      "countryCode": formBody.hostContactExtension 
+    };
+
+    const successAction = responseData => {
+      
+      StoreUtils.commit("form/SET_FORM_STAGE_TO", 1);      
+    };
+
+    return subscriptionService.editSubscriptionContactNumber(
+      payload,
+      successAction,
+      LoaderUtils.types.COMPONENT,
+      null,
+      false
+    );
+  },
+ 
+ 
+  editSubscriptionPrice: ({}) => {
+    const formBody = StoreUtils.rootGetters("form/getFormBody");
+    const subRef = StoreUtils.rootGetters("subscription/getCurrentSubscriptionRef").subRef
+
+    const payload = { 
+      "subref": subRef, 
+      "subscriptionPrice": formBody.slotPrice, 
+      "subscriptionCurrency": formBody.slotPriceInputCurrency 
+    };
+
+
+    const successAction = responseData => {
+      StoreUtils.commit("form/SET_FORM_STAGE_TO", 3);      
+    };
+
+    return subscriptionService.editSubscriptionPrice(
+      payload,
+      successAction,
+      LoaderUtils.types.COMPONENT,
+      null,
+      false
+    );
+  },
+ 
+  editSubscriptionCredentials: ({}) => {
+
+    const formBody = StoreUtils.rootGetters("form/getFormBody");
+    const subRef = StoreUtils.rootGetters("subscription/getCurrentSubscriptionRef").subRef
+
+    const payload = { 
+      subref: subRef, 
+      username: formBody.newEmail, 
+      password: formBody.newPassword, 
+      joinLink: formBody.newJoinLink, 
+      address: formBody.newAddress 
+    };
+
+
+    const successAction = responseData => {
+
+      StoreUtils.commit("form/SET_FORM_STAGE_TO", 3);
+      
+    };
+
+    return subscriptionService.editSubscriptionCredentials(
+      payload,
+      successAction,
+      LoaderUtils.types.COMPONENT,
+      null,
+      false
+    );
+  },
+ 
+  fetchEditSubscriptionInfo: () => {
+
+    const payload = { 
+      subref: StoreUtils.rootGetters("subscription/getCurrentSubscriptionRef")
+    .subRef };
+
+
+    const successAction = responseData => {
+      
+      
+      const dummyResponse = { 
+        "responseCode": "200", "responseMessage": "Success", 
+        "data": { "subscriptionAccess": 
+        { "isSet":true, "lastUpdated":"", "userCredentials":
+         {"username" : "", password:""},"joinLink": "", "address" : "" },
+          "subscriptionPrice": 
+          { "currentPrice": "19.99", "currentCurrency": "USD", 
+          "pendingPrice": null, "pendingCurrency": null, "lastUpdated":
+           "2023-05-01T10:00:00Z" }, "subscriptionContactNumber": 
+           { "phoneNumber": "123456789", 
+           "countryCode": "1", "lastUpdated": "2023-05-01T10:00:00Z" } } }
+
+           console.log("responseData", responseData)
+           StoreUtils.commit(
+            "subscription/SET_EDIT_SUBSCRIPTION_INFO",
+            dummyResponse
+          );
+    };
+
+    return subscriptionService.fetchEditSubscriptionInfo(
+      payload,
+      successAction,
+      LoaderUtils.types.COMPONENT,
+      null,
+      false
+    );
+  },
+
+ checkBillingDate: ({}, createBody) => {
     // { "": "23", "": "monthly" }
     const payload = {
       billingDate: createBody.billingDate.slice(0, -2),
@@ -294,7 +443,9 @@ export const actions = {
       messageAction: "new_member_join_info_collected",
       messageBody: JSON.stringify({ 
         categoryTag: StoreUtils.rootGetters("service/getCurrentServiceTag"), 
-        joinInfo: { member_id: StoreUtils.rootGetters("form/getFormBody").subscriptionName } 
+        joinInfo: {
+          member_id: StoreUtils.rootGetters("form/getFormBody").subscriptionName
+        }
       })
     };
     StoreUtils.dispatch("ipc/postMessage", message);

@@ -3,39 +3,79 @@
     <PreAuthCard v-if="!userAuthenticated" />
     <div v-else class="app-page full-page">
       <ComponentLoader v-if="componentLoaderTable" />
-<!--      <div v-else class="create-subscription">-->
+      <!--      <div v-else class="create-subscription">-->
       <div v-else class="">
-
-<!--          <p> join_type ==> {{ currentSubscriptionServiceData.join_type }}</p>-->
-<!--          <p> cost_currency ==> {{ currentSubscriptionServiceData.cost_currency }}</p>-->
-<!--          <p> currentFormBody ==> {{ currentFormBody }}</p>-->
-<!--          <p> formStage ==> {{ formStage }}</p>-->
+        <!--          <p> join_type ==> {{ currentSubscriptionServiceData.join_type }}</p>-->
+        <!--          <p> cost_currency ==> {{ currentSubscriptionServiceData.cost_currency }}</p>-->
+        <!--          <p> currentFormBody ==> {{ currentFormBody }}</p>-->
+        <!--          <p> formStage ==> {{ formStage }}</p>-->
 
         <div>
+          <CreateSubscriptionIntroForm
+            v-if="formStage === 0"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <HowItWorksForm
+            v-if="formStage === 1"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <SubscriptionAccessTypeForm
+            v-if="formStage === 2"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <SubscriptionMembersCountForm
+            v-if="formStage === 3"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <SubscriptionBillingDayForm
+            v-if="formStage === 4"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
 
-            <CreateSubscriptionIntroForm v-if="formStage === 0" :current-subscription-service-data="currentSubscriptionServiceData" />
-            <HowItWorksForm v-if="formStage === 1" :current-subscription-service-data="currentSubscriptionServiceData"/>
-            <SubscriptionAccessTypeForm v-if="formStage === 2" :current-subscription-service-data="currentSubscriptionServiceData"/>
-            <SubscriptionMembersCountForm v-if="formStage === 3" :current-subscription-service-data="currentSubscriptionServiceData" />
-            <SubscriptionBillingDayForm v-if="formStage === 4" :current-subscription-service-data="currentSubscriptionServiceData" />
-            
-            <BillingDateIsTooCloseForm v-if="formStage === 5"  :current-subscription-service-data="currentSubscriptionServiceData" />
+          <BillingDateIsTooCloseForm
+            v-if="formStage === 5"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
 
-            <SetSlotPriceForm v-if="formStage === 6" :current-subscription-service-data="currentSubscriptionServiceData" />
-            <AboutYourSettlementForm v-if="formStage === 7" :current-subscription-service-data="currentSubscriptionServiceData" />
-            
-            <MembersPaymentPlanForm v-if="formStage === 8" :current-subscription-service-data="currentSubscriptionServiceData" />
-            <HostContactForm v-if="formStage === 9" :current-subscription-service-data="currentSubscriptionServiceData" />
+          <SetSlotPriceForm
+            v-if="formStage === 6"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <AboutYourSettlementForm
+            v-if="formStage === 7"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
 
+          <MembersPaymentPlanForm
+            v-if="formStage === 8"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <HostContactForm
+            v-if="formStage === 9"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
 
-<!--            Type Specific-->
-            <TypeSpecificInputFormOne v-if="formStage === 10" :current-subscription-service-data="currentSubscriptionServiceData" />
-            <TypeSpecificInputFormTwo v-if="formStage === 11" :current-subscription-service-data="currentSubscriptionServiceData" />
-<!--            Type Specific END-->
+          <!--            Type Specific-->
+          <TypeSpecificInputFormOne
+            v-if="formStage === 10"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <TypeSpecificInputFormTwo
+            v-if="formStage === 11"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+          />
+          <!--            Type Specific END-->
 
-            <SharingGuidelinesForm v-if="formStage === 12" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
-            <ReviewSubscriptionForm v-if="formStage === 13" :current-subscription-service-data="currentSubscriptionServiceData" :service-tag="serviceTag" />
-
+          <SharingGuidelinesForm
+            v-if="formStage === 12"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+            :service-tag="serviceTag"
+          />
+          <ReviewSubscriptionForm
+            v-if="formStage === 13"
+            :current-subscription-service-data="currentSubscriptionServiceData"
+            :service-tag="serviceTag"
+          />
         </div>
       </div>
     </div>
@@ -93,13 +133,13 @@ export default {
     BillingDateIsTooCloseForm,
     HostContactForm,
     SharingGuidelinesForm
-},
+  },
   computed: {
     userAuthenticated() {
       return StoreUtils.rootGetters("user/getUserAuthenticated");
     },
     componentLoaderTable() {
-        return StoreUtils.rootGetters("loader/getLoader", "table");
+      return StoreUtils.rootGetters("loader/getLoader", "table");
     },
     formStage() {
       return StoreUtils.rootGetters("form/getFormStage");
@@ -108,11 +148,12 @@ export default {
       return StoreUtils.rootGetters("service/getCurrentServiceTag");
     },
     currentSubscriptionServiceData() {
-        return StoreUtils.rootGetters(
-            "service/getCurrentSubscriptionServiceData");
+      return StoreUtils.rootGetters(
+        "service/getCurrentSubscriptionServiceData"
+      );
     },
     currentSubscriptionServiceDataNotFetched() {
-        return JsonParserUtils.isObjectEmpty(this.currentSubscriptionServiceData)
+      return JsonParserUtils.isObjectEmpty(this.currentSubscriptionServiceData);
     },
     availableServices() {
       return StoreUtils.rootGetters("service/getAvailableServices");
@@ -122,9 +163,15 @@ export default {
     StoreUtils.commit("service/SET_CURRENT_SERVICE_TAG", this.serviceTag);
   },
   updated() {
-      if (this.userAuthenticated && this.currentSubscriptionServiceDataNotFetched){
-          StoreUtils.dispatch("service/fetchSubscriptionServiceDataByTag", this.serviceTag);
-      }
+    if (
+      this.userAuthenticated &&
+      this.currentSubscriptionServiceDataNotFetched
+    ) {
+      StoreUtils.dispatch(
+        "service/fetchSubscriptionServiceDataByTag",
+        this.serviceTag
+      );
+    }
   }
 };
 </script>

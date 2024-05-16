@@ -7,15 +7,19 @@
         >
       </div>
       <div class="up-next">
-<!--        <p>Up Next: <span>Billing Date</span></p>-->
+        <!--        <p>Up Next: <span>Billing Date</span></p>-->
       </div>
     </div>
     <div class="app-form">
-      <p class="page-title text-3xl text-white mb-2">How frequently should members make payment?</p>
+      <p class="page-title text-3xl text-white mb-2">
+        How frequently should members make payment?
+      </p>
       <p class="page-sub">
-          The payment plan is how often members make payment for your subscription
-<!--          - this payment is only released to you on the payday of every subscription.-->
-          <br /> <br /> Select a payment plan.
+        The payment plan is how often members make payment for your subscription
+        <!--          - this payment is only released to you on the payday of every subscription.-->
+        <br />
+        <br />
+        Select a payment plan.
       </p>
       <div class="block-options">
         <div
@@ -51,12 +55,12 @@ import BackIcon from "@/components/icons/BackIcon";
 export default {
   name: "MembersPaymentPlanForm",
   components: { BackIcon },
-    props: {
-        currentSubscriptionServiceData: {
-            type: Object,
-            required: true
-        }
-    },
+  props: {
+    currentSubscriptionServiceData: {
+      type: Object,
+      required: true
+    }
+  },
   data() {
     return { selectedPlan: "" };
   },

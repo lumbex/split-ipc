@@ -396,6 +396,152 @@ a.center-link:hover {
 
 /*AppList END*/
 
+/*AppActionableList*/
+.app-actionable-list {
+    background-color: #2A2A2B;
+    border-radius: 16px;
+    padding: 10px 2px;
+}
+.app-actionable-list ul{}
+.app-actionable-list ul li{
+    display: flex;
+    cursor: pointer;
+}
+.app-actionable-list .icon{
+    width: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.app-actionable-list .icon img{
+    width: 36px;
+    height: 36px;
+}
+.app-actionable-list .value{
+    display: flex;
+    width: calc(100% - 64px);
+    justify-content: space-between;
+}
+
+.app-actionable-list .value{}
+.app-actionable-list .value .info{
+    padding: 12px 0;
+}
+.app-actionable-list .value .title{
+    color: #FFFFFF;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 4px 0;
+    font-weight: 400;
+}
+.app-actionable-list .value .sub{
+    color: #9A9A9A;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    letter-spacing: -0.408px;
+    text-transform: none;
+    margin: 0;
+}
+.app-actionable-list .value .sub span{
+    color: #FFFFFF;
+}
+.app-actionable-list .value .carret {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.app-actionable-list .value .carret img{
+    width: 44px;
+    height: 44px;
+}
+
+
+.app-actionable-list ul li .value{
+    border-bottom: 1px solid #38383A;
+}
+.app-actionable-list ul li:last-child .value{
+    border-bottom: none;
+
+}
+
+
+.app-actionable-list {}
+/*AppActionableList END*/
+
+/*SubCredentials */
+.sub-credential-hold {
+    margin-top: 20px;
+}
+.sub-credential {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+    position: relative;
+}
+.sub-credential .value{}
+.sub-credential .value .tit{
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.374px;
+    margin-bottom: 4px;
+    color: #FFFFFF;
+}
+.sub-credential .value .subb{
+    font-size: 14px;
+    line-height: 20px;
+}
+.sub-credential .value .edited{
+    color: #00C2D1;
+    position: absolute;
+    right: 5px;
+    bottom: -20px;
+    font-size: 14px;
+}
+.sub-credential .icon{
+    width: 75px;
+    cursor: pointer;
+}
+.sub-credential .icon img{}
+/*SubCredentials END*/
+
+/*PendingPrice*/
+.pending-price {display: flex;align-items: center;margin: 4vh 6% 0;}
+.pending-price .icon {margin-right: 10px;}
+.pending-price .icon img {height: 36px;width: auto;}
+.pending-price .info {display: block;}
+.pending-price .info .lead {font-size: 14px;line-height: 18px;margin-bottom: 4px;}
+.pending-price .info .val {font-size: 18px;line-height: 22px;color: #ffffff;}
+
+.new-price-confirmer {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.new-price-confirmer .old-price, .new-price-confirmer .new-price{
+    margin-top: -15px;
+}
+.new-price-confirmer .price-box{
+    min-width: 90px;
+    background-color: #313136;
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+}
+.new-price-confirmer .tag{
+    color: #ffffff;
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 8px;
+}
+.new-price-confirmer .joiner{}
+.new-price-confirmer .joiner img{}
+
+
+/*PendingPrice END*/
+
 /*AppForm*/
 .app-form-wrapper{
     height: 100%;

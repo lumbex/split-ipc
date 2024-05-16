@@ -193,12 +193,12 @@ import StoreUtils from "@/utils/baseUtils/StoreUtils";
 
 export default {
   name: "SpotifyReviewBreakdownList",
-    props: {
-        currentSubscriptionServiceData: {
-            type: Object,
-            required: true
-        }
-    },
+  props: {
+    currentSubscriptionServiceData: {
+      type: Object,
+      required: true
+    }
+  },
   computed: {
     createSubscriptionBody() {
       return StoreUtils.rootGetters("subscription/getCreateSubscriptionBody");

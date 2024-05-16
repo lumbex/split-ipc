@@ -65,6 +65,9 @@ export const actions = {
       if (pathName === "validate-subscription") {
         // StoreUtils.dispatch("subscription/fetchCurrentSubscriptionTerms");
       }
+      if (pathName === "edit-subscription") {
+        StoreUtils.dispatch("subscription/fetchCurrentSubscriptionRef");
+      }
       // if(pathName === "setup-join-subscription"){}
     };
 
