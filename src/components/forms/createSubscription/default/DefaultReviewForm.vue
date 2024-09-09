@@ -13,9 +13,11 @@
       <p class="page-title">Review</p>
       <p class="page-sub">Here’s a recap of all your selections.</p>
       <br />
-<!--        <p>cost ==> {{currentSubscriptionServiceData.cost}}</p>-->
-<!--        <p>cost_currency ==> {{currentSubscriptionServiceData.cost_currency}}</p>-->
-      <ReviewBreakdownList :current-subscription-service-data="currentSubscriptionServiceData" />
+      <!--        <p>cost ==> {{currentSubscriptionServiceData.cost}}</p>-->
+      <!--        <p>cost_currency ==> {{currentSubscriptionServiceData.cost_currency}}</p>-->
+      <ReviewBreakdownList
+        :current-subscription-service-data="currentSubscriptionServiceData"
+      />
       <br />
       <div class="space-filler"></div>
 
@@ -58,16 +60,16 @@ export default {
   data() {
     return { checked: false };
   },
-    props: {
-        currentSubscriptionServiceData: {
-            type: Object,
-            required: true
-        },
-        serviceTag: {
-            type: String,
-            defaults: "apple_music"
-        }
+  props: {
+    currentSubscriptionServiceData: {
+      type: Object,
+      required: true
     },
+    serviceTag: {
+      type: String,
+      defaults: "apple_music"
+    }
+  },
   computed: {
     componentLoading() {
       return StoreUtils.rootGetters("loader/getLoader", "component");
@@ -88,7 +90,10 @@ export default {
       StoreUtils.commit("form/DECREASE_FORM_STAGE_BY_ONE");
     },
     submit() {
-      const payload = { ...this.currentSubscriptionServiceData, ...this.createSubscriptionBody };
+      const payload = {
+        ...this.currentSubscriptionServiceData,
+        ...this.createSubscriptionBody
+      };
 
       // console.log("lubbar => ", payload)
       StoreUtils.dispatch("subscription/createSubscriptionDefault", payload);
